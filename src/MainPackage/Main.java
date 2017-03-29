@@ -10,10 +10,13 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("LoginScene.fxml"));
-        primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 300, 275));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ScenePrincipal.fxml"));
+        Parent root = (Parent)loader.load();
+        primaryStage.setTitle("LOG IN - CREATLAFIRA");
+        primaryStage.setScene(new Scene(root, 700, 400));
         primaryStage.show();
+        ControllerLogin controller = (ControllerLogin)loader.getController();
+        controller.init();
     }
 
 
