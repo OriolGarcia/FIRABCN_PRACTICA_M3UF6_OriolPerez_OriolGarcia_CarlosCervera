@@ -137,7 +137,7 @@ public class BDAccessor {
         // Obtenim la configuraciÃ³ de la base de dades
         Properties propietats = null;
         try {
-            propietats = carregarParametres(System.getProperty("user.dir") + "/src/exercicis/database.properties");
+            propietats = carregarParametres(System.getProperty("user.dir") + "/src/MainPackage/Accessor/database.properties");
             url = propietats.getProperty("jdbc.url");
             usuari = propietats.getProperty("jdbc.username");
             contrasenya = propietats.getProperty("jdbc.password");
