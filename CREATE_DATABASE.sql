@@ -59,4 +59,4 @@ PRIMARY KEY (EstandID),
 
 );
 
-INSERT INTO Usuaris VALUES('admin' ,'admin' ,true ,true);
+INSERT INTO Usuaris VALUES('admin','admin',true,true);
