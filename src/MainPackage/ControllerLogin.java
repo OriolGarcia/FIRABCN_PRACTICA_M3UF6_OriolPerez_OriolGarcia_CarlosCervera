@@ -2,7 +2,13 @@ package MainPackage;
 
 import MainPackage.Accessor.BDAccessor;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -35,7 +41,16 @@ public class ControllerLogin {
     }
 
     public void Login(ActionEvent event) {
-
-
     }
+
+    public void handleButtonAction(ActionEvent event) throws IOException{
+
+        Parent AppLoad = FXMLLoader.load(getClass().getResource("AppScene.fxml"));
+        Scene AppScene = new Scene(AppLoad);
+        Stage AppStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        AppStage.setScene(AppScene);
+        AppStage.show();
+    }
+
 }
