@@ -5,8 +5,8 @@ package MainPackage.DAOs;
  */
 public interface UserDAO {
 
-    public boolean AddUser();
-    public boolean UpdateUser();
-    public boolean DeleteUser();
+        public boolean AddUser(String Username,String Password,Boolean permissions, Boolean Active);
+    public boolean UpdateUser(String Username,String Password,Boolean permissions, Boolean Active);
+    public boolean DeleteUser(String Username);
     public boolean LoginUser(String User, String password);
 }

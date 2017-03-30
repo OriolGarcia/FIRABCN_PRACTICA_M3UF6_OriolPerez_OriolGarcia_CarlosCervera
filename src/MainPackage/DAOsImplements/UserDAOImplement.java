@@ -5,9 +5,16 @@ import MainPackage.DAOs.*;
  */
 public class UserDAOImplement implements UserDAO {
 
-    public boolean AddUser(){ return true; }
-    public boolean UpdateUser(){ return true; }
-    public boolean DeleteUser(){ return true; }
-    public boolean LoginUser(String User, String password){ return true; }
+
+    public boolean AddUser(){
+        return true;
+    }
+    public boolean UpdateUser(){ return true;}
+    public boolean DeleteUser(){return true;}
+    public boolean LoginUser(String User, String password){ return true;}
+
+
+
+
 
 }
