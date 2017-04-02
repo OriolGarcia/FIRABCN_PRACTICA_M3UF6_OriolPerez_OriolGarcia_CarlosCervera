@@ -38,7 +38,7 @@ public class Utils {
 
                 tableView.getColumns().addAll(col);
 
-                System.out.println("Column ["+i+"] ");
+
 
             }
 
@@ -54,9 +54,7 @@ public class Utils {
 
                 }
 
-                System.out.println("Row [1] added "+row );
-
-                data.add(row);
+                  data.add(row);
 
             }
 
