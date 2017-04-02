@@ -1,6 +1,8 @@
 package MainPackage.DAOsImplements;
 import MainPackage.Accessor.BDAccessor;
 import MainPackage.DAOs.*;
+import MainPackage.Utils;
+import javafx.scene.control.TableView;
 import sun.security.util.Password;
 
 import java.sql.Connection;
@@ -118,7 +120,7 @@ public class UserDAOImplement implements UserDAO {
             try (ResultSet resultat = pstmt.executeQuery()) {
 
                 while (resultat.next()) {
-                    System.out.println(resultat.getInt(1)+" "+resultat.getString(2)+" "+resultat.getString(3));
+
                     int n=resultat.getInt(1);
                     if (n!=1) return false;
                     else if (!resultat.getString(2).equals(resultat.getString(3)))
@@ -144,6 +146,37 @@ public class UserDAOImplement implements UserDAO {
             }
         }
  }
+    public void findbyUsername(Connection conn,String UsernameSearch,TableView tableView){
+
+        try {
+            String cadenaSQL= "SELECT *  FROM Usuaris WHERE (LENGTH(?) <1 or Username like ?)";
+            pstmt = conn.prepareStatement(cadenaSQL);
+            pstmt.setString(1, UsernameSearch);
+            pstmt.setString(2,"%"+UsernameSearch+"%");
+            System.out.println("1");
+            try (ResultSet resultat = pstmt.executeQuery()) {
+                System.out.println("retorna resultSet");
+                Utils.omplirTableView(tableView,resultat);
+
+            }
+        }catch (SQLException ex){
+            System.out.println(ex.getErrorCode());
+
+        }
+        finally {
+        try{
+                pstmt.clearParameters();
+            }catch (SQLException ex){
+                System.out.println("3");
+
+            }
+        }
+
+
+
+
+
+    }
 
 
 }

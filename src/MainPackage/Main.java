@@ -17,7 +17,7 @@ public class Main extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginScene.fxml"));
         Parent root = loader.load();
         primaryStage.setTitle("LOG IN - CREATLAFIRA");
-        primaryStage.setScene(new Scene(root, 700, 400));
+        primaryStage.setScene(new Scene(root, 560, 200));
         primaryStage.show();
         ControllerLogin controller = loader.getController();
         controller.init();

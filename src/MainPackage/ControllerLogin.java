@@ -48,7 +48,7 @@ public class ControllerLogin {
         }
     }
 
-    public void Login(ActionEvent event) throws IOException{
+    public void Login(ActionEvent event) {
         UserDAOImplement UserDAOImpl = new UserDAOImplement();
         String usuari= txtUser.getText(),pass=txtPassword.getText();
         if( UserDAOImpl.LoginUser(connexio,usuari,pass)){
@@ -64,12 +64,24 @@ public class ControllerLogin {
         }
 
     }
-    private void Logged(ActionEvent event) throws IOException{
-        Parent AppParent = FXMLLoader.load(getClass().getResource("AppScene.fxml"));
-        Scene AppScene = new Scene(AppParent);
-        Stage AppStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        AppStage.setScene(AppScene);
-        AppStage.show();
-    }
+    private void Logged(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("AppScene.fxml"));
+            Parent AppParent = loader.load();
+            Scene AppScene = new Scene(AppParent, 1366, 750);
+            Stage AppStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            AppStage.setMaximized(true);
+            AppStage.setScene(AppScene);
+            AppStage.show();
+            ControllerApp controller =loader.getController();
+            controller.init(connexio,accessor);
+        }catch (IOException ioex){
+            System.out.println("No s'ha trobat el recurs.");
 
+        }
+    }
+    @FXML
+    public void onEnter(ActionEvent ae){
+        Login(ae);
+    }
 }
