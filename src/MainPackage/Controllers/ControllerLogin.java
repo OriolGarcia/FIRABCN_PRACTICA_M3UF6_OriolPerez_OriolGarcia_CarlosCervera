@@ -1,4 +1,4 @@
-package MainPackage;
+package MainPackage.Controllers;
 
 import MainPackage.Accessor.BDAccessor;
 import MainPackage.DAOsImplements.UserDAOImplement;
@@ -9,7 +9,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -66,7 +65,7 @@ public class ControllerLogin {
     }
     private void Logged(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("AppScene.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Scenes/AppScene.fxml"));
             Parent AppParent = loader.load();
             Scene AppScene = new Scene(AppParent, 1366, 750);
             Stage AppStage = (Stage) ((Node) event.getSource()).getScene().getWindow();

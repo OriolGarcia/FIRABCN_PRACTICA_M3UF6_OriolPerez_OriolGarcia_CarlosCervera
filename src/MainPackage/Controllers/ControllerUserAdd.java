@@ -1,4 +1,4 @@
-package MainPackage;
+package MainPackage.Controllers;
 
 import MainPackage.Accessor.BDAccessor;
 import MainPackage.DAOsImplements.UserDAOImplement;
