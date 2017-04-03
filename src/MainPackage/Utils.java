@@ -25,6 +25,8 @@ public class Utils {
      ObservableList<ObservableList> data;
         try{
         data = FXCollections.observableArrayList();
+            tableView.getItems().clear();
+            tableView.getColumns().clear();
         int[] types= new int[rs.getMetaData().getColumnCount()];
             for(int i=0 ; i<rs.getMetaData().getColumnCount(); i++){
 
@@ -69,7 +71,7 @@ public class Utils {
                     } else if(types[i-1] == Types.BIT){
                         if(rs.getString(i).equals("0")){row.add("NO");}
                         else
-                        row.add("SI");
+                        row.add("SÍ");
                     } else {
                         row.add(rs.getString(i));
                     }

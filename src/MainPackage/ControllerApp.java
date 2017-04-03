@@ -11,6 +11,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -74,7 +76,17 @@ public class ControllerApp{
             });
         }catch (IOException ex){}
     }
-    public void eliminarUsuari(ActionEvent event) {}
+    public void eliminarUsuari(ActionEvent event) {
+
+        TablePosition pos = (TablePosition) TbVUsers.getSelectionModel().getSelectedCells().get(0);
+        int index = pos.getRow();
+        String selected = TbVUsers.getItems().get(index).toString();
+       String id = selected.substring(1, selected.indexOf(","));
+        System.out.println(selected);
+        UserDAOImplement UserDAOImpl = new UserDAOImplement();
+        UserDAOImpl.DeleteUser(connection,id);
+        initiailizeTableViewUsers();
+    }
     public void generarContrasenya(ActionEvent event) {}
     public void canviarPermisos(ActionEvent event) {}
     public void canviarContrasenya(ActionEvent event) {}

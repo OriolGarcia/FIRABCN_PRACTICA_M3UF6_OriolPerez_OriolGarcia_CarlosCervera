@@ -101,7 +101,7 @@ public class UserDAOImplement implements UserDAO {
             if (n>0)return true;
             else return false;
         }catch (SQLException ex){
-
+            System.out.println(ex.getErrorCode());
             return false;
         }finally {
             try {
