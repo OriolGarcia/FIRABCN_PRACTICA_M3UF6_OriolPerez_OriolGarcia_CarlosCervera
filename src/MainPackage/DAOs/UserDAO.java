@@ -15,4 +15,5 @@ public interface UserDAO {
     public boolean DeleteUser(Connection conn, String Username);
     public boolean LoginUser(Connection conn, String User, String password);
     public void findbyUsername(Connection conn, String UsernameSearch, TableView tableView);
+    public boolean[] SelectPermisionsActiveFromUser(Connection conn, String User);
 }

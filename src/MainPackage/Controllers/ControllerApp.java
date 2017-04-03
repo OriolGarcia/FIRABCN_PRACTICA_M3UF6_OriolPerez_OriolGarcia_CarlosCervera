@@ -55,7 +55,7 @@ public class ControllerApp{
     public void afegirUsuari(ActionEvent event) {
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Scenes/UserAddScene.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../Scenes/UserAddScene.fxml"));
             Parent root = loader.load();
             Stage secondStage = new Stage();
             secondStage.setScene(new Scene(root, 560, 276));
@@ -83,6 +83,27 @@ public class ControllerApp{
         initiailizeTableViewUsers();
     }
     public void generarContrasenya(ActionEvent event) {}
-    public void canviarPermisos(ActionEvent event) {}
+    public void canviarPermisos(ActionEvent event) {
+        TablePosition pos = (TablePosition) TbVUsers.getSelectionModel().getSelectedCells().get(0);
+        int index = pos.getRow();
+        String selected = TbVUsers.getItems().get(index).toString();
+        String id = selected.substring(1, selected.indexOf(","));
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../Scenes/PermisionsChangeScene.fxml"));
+            Parent root = loader.load();
+            Stage secondStage = new Stage();
+            secondStage.setScene(new Scene(root, 560, 276));
+            secondStage.show();
+            ControllerPermisos controller = loader.getController();
+            controller.init(connection, bdAccessor,id);
+            secondStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                @Override
+                public void handle(WindowEvent we) {
+                    System.out.println("S'ha tancat Modificar permsoss");
+                    initiailizeTableViewUsers();
+                }
+            });
+        }catch (IOException ex){}
+    }
     public void canviarContrasenya(ActionEvent event) {}
 }
