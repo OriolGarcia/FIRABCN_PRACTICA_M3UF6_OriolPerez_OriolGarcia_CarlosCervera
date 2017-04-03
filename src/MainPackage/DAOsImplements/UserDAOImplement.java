@@ -37,11 +37,12 @@ public class UserDAOImplement implements UserDAO {
                             + rs.getInt(1));
                 }
             }
-
+            conn.commit();
+            System.out.println("S'ha afegit " + n + " items");
             if (n>0)return true;
             else return false;
         }catch (SQLException ex){
-
+            System.out.println(ex);
             return false;
         }finally {
             try {
@@ -67,7 +68,7 @@ public class UserDAOImplement implements UserDAO {
                             + rs.getInt(1));
                 }
             }
-
+            conn.commit();
             if (n>0)return true;
             else return false;
         }catch (SQLException ex){
@@ -96,7 +97,7 @@ public class UserDAOImplement implements UserDAO {
                             + rs.getInt(1));
                 }
             }
-
+            conn.commit();
             if (n>0)return true;
             else return false;
         }catch (SQLException ex){

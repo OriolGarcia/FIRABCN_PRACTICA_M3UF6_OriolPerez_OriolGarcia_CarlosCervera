@@ -61,12 +61,14 @@ public class ControllerApp{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("UserAddScene.fxml"));
             Parent root = loader.load();
             Stage secondStage = new Stage();
-            secondStage.setScene(new Scene(root, 560, 200));
+            secondStage.setScene(new Scene(root, 560, 276));
             secondStage.show();
             ControllerUserAdd controller = loader.getController();
             controller.init(connection, bdAccessor);
             secondStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                @Override
                 public void handle(WindowEvent we) {
+                    System.out.println("S'ha tancat Add User");
                     initiailizeTableViewUsers();
                 }
             });
