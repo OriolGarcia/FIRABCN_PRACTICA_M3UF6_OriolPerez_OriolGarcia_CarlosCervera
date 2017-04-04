@@ -18,8 +18,8 @@
       <RowConstraints />
    </rowConstraints>
    <children>
-      <TitledPane animated="false" text="La teva Fira Manager - Log In">
-        <content>
+      <!--<TitledPane animated="false" text="FiresManager - Log In">
+        <content>-->
           <AnchorPane minHeight="180.0" minWidth="560.0" prefHeight="180.0" prefWidth="560.0">
                <children>
                   <Label fx:id="lbusuari" layoutX="135.0" layoutY="49.0" text="Usuari:" />
@@ -29,7 +29,7 @@
                   <Button fx:id="btLogin" layoutX="304.0" layoutY="124.0" mnemonicParsing="false" onAction="#Login" text="Log in" />
                </children>
             </AnchorPane>
-        </content>
-      </TitledPane>
+        <!--</content>
+      </TitledPane>-->
    </children>
 </GridPane>

@@ -49,7 +49,7 @@ public class ControllerLogin {
 
     public void Login(ActionEvent event) {
         UserDAOImplement UserDAOImpl = new UserDAOImplement();
-        String usuari= txtUser.getText(),pass=txtPassword.getText();
+        String usuari = txtUser.getText(),pass = txtPassword.getText();
         if( UserDAOImpl.LoginUser(connexio,usuari,pass)){
 
             System.out.println("Usuari logejat");
