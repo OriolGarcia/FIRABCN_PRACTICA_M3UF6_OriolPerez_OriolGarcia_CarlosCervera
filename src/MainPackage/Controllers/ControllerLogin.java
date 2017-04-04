@@ -49,7 +49,7 @@ public class ControllerLogin {
 
     public void Login(ActionEvent event) {
         UserDAOImplement UserDAOImpl = new UserDAOImplement();
-        String usuari= txtUser.getText(),pass=txtPassword.getText();
+        String usuari = txtUser.getText(),pass = txtPassword.getText();
         if( UserDAOImpl.LoginUser(connexio,usuari,pass)){
 
             System.out.println("Usuari logejat");
@@ -65,7 +65,7 @@ public class ControllerLogin {
     }
     private void Logged(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Scenes/AppScene.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../Scenes/AppScene.fxml"));
             Parent AppParent = loader.load();
             Scene AppScene = new Scene(AppParent, 1366, 750);
             Stage AppStage = (Stage) ((Node) event.getSource()).getScene().getWindow();

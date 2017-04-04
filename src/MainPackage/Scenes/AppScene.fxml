@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
@@ -13,7 +17,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane alignment="center" hgap="10" prefHeight="700.0" prefWidth="1000.0" vgap="10" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainPackage.Controllers.ControllerApp">
+<GridPane alignment="center" hgap="10" prefHeight="700.0" prefWidth="1366.0" vgap="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainPackage.Controllers.ControllerApp">
    <columnConstraints>
       <ColumnConstraints />
    </columnConstraints>
@@ -21,15 +25,46 @@
       <RowConstraints />
    </rowConstraints>
    <children>
-      <TitledPane animated="false" text="FiraManager - App">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="750.0" prefWidth="1366.0">
+     <!--<TitledPane animated="false" text="FiraManager - App">
+        <content>-->
+          <AnchorPane minHeight="750.0" minWidth="1366.0" prefHeight="750.0" prefWidth="1366.0">
                <children>
-                  <TabPane prefHeight="200.0" prefWidth="706.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <TabPane prefHeight="750.0" prefWidth="1500.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <tabs>
-                      <Tab text="Les Fires">
+                      <Tab text="Fires">
                         <content>
-                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                              <children>
+                                  <Pane layoutX="14.0" layoutY="109.0" prefHeight="404.0" prefWidth="771.0">
+                                      <children>
+                                          <TableView fx:id="TbVFires" layoutX="1.0" layoutY="50.0" prefHeight="400.0" prefWidth="350.0" />
+                                          <TableView fx:id="TbVEmpreses" layoutX="371.0" layoutY="49.0" prefHeight="400.0" prefWidth="350.0" />
+
+                                      </children>
+                                  </Pane>
+                                  <Button fx:id="btAfegirFira" layoutX="14.0" layoutY="568.0" mnemonicParsing="false" onAction="#afegirUsuari" prefHeight="25.0" prefWidth="170.0" text="Afegir Fira" />
+                                  <Button fx:id="btEliminarFira" layoutX="194.0" layoutY="568.0" mnemonicParsing="false" onAction="#afegirUsuari" prefHeight="25.0" prefWidth="170.0" text="Eliminar Fira" />
+                                  <Button fx:id="btActualitzarFira" layoutX="109.0" layoutY="609.0" mnemonicParsing="false" onAction="#afegirUsuari" prefHeight="25.0" prefWidth="170.0" text="Actualitzar Fira" />
+                                  <Button fx:id="btAfegirEmpresa" layoutX="385.0" layoutY="568.0" mnemonicParsing="false" onAction="#afegirUsuari" prefHeight="25.0" prefWidth="170.0" text="Afegir Empresa" />
+                                  <Button fx:id="btEliminarEmpresa" layoutX="565.0" layoutY="568.0" mnemonicParsing="false" onAction="#afegirUsuari" prefHeight="25.0" prefWidth="170.0" text="Eliminar Empresa" />
+                                  <Button fx:id="btActualitzarEmpresa" layoutX="470.0" layoutY="609.0" mnemonicParsing="false" onAction="#afegirUsuari" prefHeight="25.0" prefWidth="170.0" text="Actualitzar Empresa" />
+                                  <TableView fx:id="TbVEmpreses1" layoutX="754.0" layoutY="157.0" prefHeight="400.0" prefWidth="350.0" />
+                              <Button fx:id="btAfegirEstand" layoutX="754.0" layoutY="568.0" mnemonicParsing="false" onAction="#afegirUsuari" prefHeight="25.0" prefWidth="170.0" text="Afegir Estand" />
+                              <Button fx:id="btEliminarEstand" layoutX="934.0" layoutY="568.0" mnemonicParsing="false" onAction="#afegirUsuari" prefHeight="25.0" prefWidth="170.0" text="Eliminar Estand" />
+                              <Button fx:id="btActualitzarEstand" layoutX="839.0" layoutY="609.0" mnemonicParsing="false" onAction="#afegirUsuari" prefHeight="25.0" prefWidth="170.0" text="Actualitzar Estand" />
+                              <Label layoutX="753.0" layoutY="20.0" text="Estands:" />
+                                    <Label layoutX="12.0" layoutY="20.0" text="Fires:" />
+                                    <Label layoutX="382.0" layoutY="20.0" text="Empreses:" />
+                              <Label layoutX="29.0" layoutY="56.0" text="Cerca avançada" />
+                              <Label layoutX="48.0" layoutY="88.0" text="Titol:" />
+                              <TextField layoutX="91.0" layoutY="83.0" />
+                              <Label layoutX="401.0" layoutY="86.0" text="Nom" />
+                              <TextField layoutX="444.0" layoutY="81.0" />
+                              <Label layoutX="382.0" layoutY="54.0" text="Cerca avançada" />
+                              <Label layoutX="772.0" layoutY="84.0" text="Nom" />
+                              <Label layoutX="753.0" layoutY="52.0" text="Cerca avançada" />
+                              <TextField layoutX="815.0" layoutY="79.0" />
+                              </children></AnchorPane>
                         </content>
                       </Tab>
                       <Tab text="Usuaris">
@@ -45,22 +80,33 @@
                                                 <Label layoutX="59.0" layoutY="21.0" text="Usuari:" />
                                              </children>
                                           </Pane>
-                                          <TableView fx:id="TbVUsers"  layoutX="36.0" layoutY="91.0" prefHeight="273.0" prefWidth="485.0" />
-                                          <Button fx:id="btAfegirUsuari" onAction="#afegirUsuari" layoutX="537.0" layoutY="91.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="170.0" text="Afegir Usuari" />
-                                          <Button fx:id="btEliminarUsuari" onAction="#eliminarUsuari" layoutX="538.0" layoutY="126.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="174.0" text="Eliminar Usuari" />
-                                          <Button fx:id="btGenerarContrasenya" onAction="#generarContrasenya" layoutX="540.0" layoutY="161.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="171.0" text="Generar nova Contrasenya" />
-                                          <Button fx:id="btCanviarPermisos"  onAction="#canviarPermisos" layoutX="539.0" layoutY="202.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="167.0" text="Canviar Permisos i Activitat" />
+                                          <TableView fx:id="TbVUsers" layoutX="36.0" layoutY="91.0" prefHeight="273.0" prefWidth="485.0" />
+                                          <Button fx:id="btAfegirUsuari" layoutX="537.0" layoutY="91.0" mnemonicParsing="false" onAction="#afegirUsuari" prefHeight="25.0" prefWidth="170.0" text="Afegir Usuari" />
+                                          <Button fx:id="btEliminarUsuari" layoutX="538.0" layoutY="126.0" mnemonicParsing="false" onAction="#eliminarUsuari" prefHeight="25.0" prefWidth="174.0" text="Eliminar Usuari" />
+                                          <Button fx:id="btGenerarContrasenya" layoutX="537.0" layoutY="161.0" mnemonicParsing="false" onAction="#generarContrasenya" prefHeight="25.0" prefWidth="171.0" text="Generar nova Contrasenya" />
+                                          <Button fx:id="btCanviarPermisos" layoutX="539.0" layoutY="202.0" mnemonicParsing="false" onAction="#canviarPermisos" prefHeight="25.0" prefWidth="167.0" text="Canviar Permisos i Activitat" />
                                        </children>
                                     </Pane>
-                                    <Button fx:id="btCanviarContrasenya" onAction="#canviarContrasenya" layoutX="52.0" layoutY="63.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="241.0" text="Canviar la contrasenya del meu Usuari" />
+                                    <Button fx:id="btCanviarContrasenya" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#canviarContrasenya" prefHeight="25.0" prefWidth="241.0" text="Canviar la contrasenya del meu Usuari" />
                                  </children></AnchorPane>
                         </content>
                       </Tab>
+                  <Tab text="Economia">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <TableView layoutX="30.0" layoutY="70.0" prefHeight="400.0" prefWidth="350.0" />
+                              <TableView layoutX="500.0" layoutY="70.0" prefHeight="400.0" prefWidth="350.0" />
+                              <TableView layoutX="30.0" layoutY="490.0" prefHeight="212.0" prefWidth="821.0" />
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </Tab>
                     </tabs>
                   </TabPane>
                </children>
             </AnchorPane>
-        </content>
-      </TitledPane>
+     <!-- </content>
+      </TitledPane>-->
    </children>
 </GridPane>

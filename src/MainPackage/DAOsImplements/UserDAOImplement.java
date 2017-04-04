@@ -81,6 +81,74 @@ public class UserDAOImplement implements UserDAO {
         }
 
     }
+
+    public boolean[] SelectPermisionsActiveFromUser(Connection conn, String User){
+
+
+        try {
+            String cadenaSQL= "SELECT PermisosAdmin,Actiu FROM Usuaris WHERE Username = ?";
+            pstmt = conn.prepareStatement(cadenaSQL);
+            pstmt.setString(1,User);
+
+            try (ResultSet resultat = pstmt.executeQuery()) {
+
+                while (resultat.next()) {
+
+                    return new boolean[]{!resultat.getBoolean(1),!resultat.getBoolean(2)     };
+
+
+
+                }
+                System.out.println("1");
+                return new boolean[]{false,false};
+            }
+        }catch (SQLException ex){
+            System.out.println(ex.getErrorCode());
+            return new boolean[]{false,false};
+        }
+        finally {
+            try{
+                pstmt.clearParameters();
+            }catch (SQLException ex){
+                System.out.println("3");
+
+            }
+        }
+
+    }
+
+
+
+
+    public boolean UpdateUserPermissions(Connection conn, String Username,Boolean permissions, Boolean Active){
+        try {
+            String cadenaSQL = "UPDATE Usuaris SET Username=?,PermisosAdmin=?,Actiu=? WHERE Username=?;";
+            pstmt = conn.prepareStatement(cadenaSQL, PreparedStatement.RETURN_GENERATED_KEYS);
+            pstmt.setString(1,Username);
+            pstmt.setBoolean(2, permissions);
+            pstmt.setBoolean(3,Active);
+            pstmt.setString(4,Username);
+
+            int n = pstmt.executeUpdate();
+            try (ResultSet rs = pstmt.getGeneratedKeys()) {
+                while (rs.next()) {
+                    System.out.println("Codi generat per getGeneratedKeys():"
+                            + rs.getInt(1));
+                }
+            }
+            conn.commit();
+            if (n>0)return true;
+            else return false;
+        }catch (SQLException ex){
+
+            return false;
+        }finally {
+            try {
+                pstmt.clearParameters();
+            }catch (SQLException ex){}
+        }
+
+    }
     public boolean DeleteUser(Connection conn, String Username){
 
 
