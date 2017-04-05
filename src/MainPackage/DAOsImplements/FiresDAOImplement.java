@@ -20,18 +20,19 @@ public class FiresDAOImplement implements FiresDAO {
     private static Connection conn;
     private static PreparedStatement pstmt;
     private static BDAccessor bd= null;
-    public boolean AddFira(Connection conn, String Titol,String Ubicació,float Superficie Date DataInici, Date DataFi){
+    public boolean AddFira(Connection conn, String Titol,String Ubicació,float Superficie, Date DataInici, Date DataFi){
 
 
 
         try {
-            String cadenaSQL = "INSERT INTO Usuaris(Username,Password,PermisosAdmin,Actiu) VALUES(?,MD5(?),?,?);";
+            String cadenaSQL = "INSERT INTO Fires(Titol,Ubicacio,`Superficie Fira`,DataInici,DataFi)"
+            +" VALUES(?,MD5(?),?,?);";
             pstmt = conn.prepareStatement(cadenaSQL, PreparedStatement.RETURN_GENERATED_KEYS);
-            pstmt.setString(1,Username);
-            pstmt.setString(2, Password);
-            pstmt.setBoolean(3, permissions);
-            pstmt.setBoolean(4,Active);
-
+            pstmt.setString(1,Titol);
+            pstmt.setString(2, Ubicació);
+            pstmt.setFloat(3, Superficie);
+            pstmt.setDate(4, new java.sql.Date(DataInici.getTime()));
+            pstmt.setDate(5, new java.sql.Date(DataFi.getTime()));
             int n = pstmt.executeUpdate();
             try (ResultSet rs = pstmt.getGeneratedKeys()) {
                 while (rs.next()) {
@@ -40,7 +41,7 @@ public class FiresDAOImplement implements FiresDAO {
                 }
             }
             conn.commit();
-            System.out.println("S'ha afegit " + n + " items");
+            System.out.println("Fires: S'ha afegit " + n + " items");
             if (n>0)return true;
             else return false;
         }catch (SQLException ex){
@@ -53,16 +54,16 @@ public class FiresDAOImplement implements FiresDAO {
         }
 
     }
-    public boolean UpdateUser(Connection conn, String Username,String Password,Boolean permissions, Boolean Active){
+    public boolean UpdateFira(Connection conn,int id, String Titol,String Ubicació, float Superficie,Date DataInici,Date DataFi){
         try {
-            String cadenaSQL = "UPDATE Usuaris SET Username=?,Password= MD5(?),PermisosAdmin=?,Actiu=? WHERE Username=?;";
+            String cadenaSQL = "UPDATE Fires SET Titol=?,Ubicacio=?,`Superficie Fira`=?,DataInici=?,DataFi=? WHERE FiraID=?;";
             pstmt = conn.prepareStatement(cadenaSQL, PreparedStatement.RETURN_GENERATED_KEYS);
-            pstmt.setString(1,Username);
-            pstmt.setString(2, Password);
-            pstmt.setBoolean(3, permissions);
-            pstmt.setBoolean(4,Active);
-            pstmt.setString(5,Username);
-
+            pstmt.setString(1,Titol);
+            pstmt.setString(2, Ubicació);
+            pstmt.setFloat(3, Superficie);
+            pstmt.setDate(4, new java.sql.Date(DataInici.getTime()));
+            pstmt.setDate(5, new java.sql.Date(DataFi.getTime()));
+            pstmt.setInt(6,id);
             int n = pstmt.executeUpdate();
             try (ResultSet rs = pstmt.getGeneratedKeys()) {
                 while (rs.next()) {
