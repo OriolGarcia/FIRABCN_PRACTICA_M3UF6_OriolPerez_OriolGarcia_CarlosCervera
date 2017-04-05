@@ -81,13 +81,14 @@
                                              </children>
                                           </Pane>
                                           <TableView fx:id="TbVUsers" layoutX="36.0" layoutY="91.0" prefHeight="273.0" prefWidth="485.0" />
-                                          <Button fx:id="btAfegirUsuari" layoutX="537.0" layoutY="91.0" mnemonicParsing="false" onAction="#afegirUsuari" prefHeight="25.0" prefWidth="170.0" text="Afegir Usuari" />
-                                          <Button fx:id="btEliminarUsuari" layoutX="538.0" layoutY="126.0" mnemonicParsing="false" onAction="#eliminarUsuari" prefHeight="25.0" prefWidth="174.0" text="Eliminar Usuari" />
-                                          <Button fx:id="btGenerarContrasenya" layoutX="537.0" layoutY="161.0" mnemonicParsing="false" onAction="#generarContrasenya" prefHeight="25.0" prefWidth="171.0" text="Generar nova Contrasenya" />
-                                          <Button fx:id="btCanviarPermisos" layoutX="539.0" layoutY="202.0" mnemonicParsing="false" onAction="#canviarPermisos" prefHeight="25.0" prefWidth="167.0" text="Canviar Permisos i Activitat" />
+                                          <Button fx:id="btAfegirUsuari" layoutX="537.0" layoutY="91.0" mnemonicParsing="false" onAction="#afegirUsuari" prefHeight="31.0" prefWidth="174.0" text="Afegir Usuari" />
+                                          <Button fx:id="btEliminarUsuari" layoutX="537.0" layoutY="126.0" mnemonicParsing="false" onAction="#eliminarUsuari" prefHeight="25.0" prefWidth="174.0" text="Eliminar Usuari" />
+                                          <Button fx:id="btGenerarContrasenya" layoutX="537.0" layoutY="161.0" mnemonicParsing="false" onAction="#generarContrasenya" prefHeight="31.0" prefWidth="174.0" text="Generar nova Contrasenya" />
+                                          <Button fx:id="btCanviarPermisos" layoutX="537.0" layoutY="196.0" mnemonicParsing="false" onAction="#canviarPermisos" prefHeight="31.0" prefWidth="173.0" text="Canviar Permisos i Activitat" />
                                        </children>
                                     </Pane>
                                     <Button fx:id="btCanviarContrasenya" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#canviarContrasenya" prefHeight="25.0" prefWidth="241.0" text="Canviar la contrasenya del meu Usuari" />
+                              <Label layoutX="33.0" layoutY="85.0" text="Usuaris" />
                                  </children></AnchorPane>
                         </content>
                       </Tab>
