@@ -20,9 +20,9 @@ public class FiresDAOImplement implements FiresDAO {
     private static Connection conn;
     private static PreparedStatement pstmt;
     private static BDAccessor bd= null;
+
+
     public boolean AddFira(Connection conn, String Titol,String Ubicació,float Superficie, Date DataInici, Date DataFi){
-
-
 
         try {
             String cadenaSQL = "INSERT INTO Fires(Titol,Ubicacio,`Superficie Fira`,DataInici,DataFi)"
