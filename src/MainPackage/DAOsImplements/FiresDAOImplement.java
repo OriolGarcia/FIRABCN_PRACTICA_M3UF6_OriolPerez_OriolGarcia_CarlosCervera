@@ -1,7 +1,6 @@
 package MainPackage.DAOsImplements;
 
 import MainPackage.Accessor.BDAccessor;
-
 import MainPackage.DAOs.FiresDAO;
 import MainPackage.DAOs.UserDAO;
 import MainPackage.Utils;
@@ -21,17 +20,19 @@ public class FiresDAOImplement implements FiresDAO {
     private static Connection conn;
     private static PreparedStatement pstmt;
     private static BDAccessor bd= null;
+    public boolean AddFira(Connection conn, String Titol,String Ubicació,float Superficie, Date DataInici, Date DataFi){
 
-    /*public boolean AddFira(Connection conn, String Titol,String Ubicació,float Superficie Date DataInici, Date DataFi){
+
 
         try {
-            String cadenaSQL = "INSERT INTO Usuaris(Username,Password,PermisosAdmin,Actiu) VALUES(?,MD5(?),?,?);";
+            String cadenaSQL = "INSERT INTO Fires(Titol,Ubicacio,`Superficie Fira`,DataInici,DataFi)"
+            +" VALUES(?,MD5(?),?,?);";
             pstmt = conn.prepareStatement(cadenaSQL, PreparedStatement.RETURN_GENERATED_KEYS);
-            pstmt.setString(1,Username);
-            pstmt.setString(2, Password);
-            pstmt.setBoolean(3, permissions);
-            pstmt.setBoolean(4,Active);
-
+            pstmt.setString(1,Titol);
+            pstmt.setString(2, Ubicació);
+            pstmt.setFloat(3, Superficie);
+            pstmt.setDate(4, new java.sql.Date(DataInici.getTime()));
+            pstmt.setDate(5, new java.sql.Date(DataFi.getTime()));
             int n = pstmt.executeUpdate();
             try (ResultSet rs = pstmt.getGeneratedKeys()) {
                 while (rs.next()) {
@@ -40,7 +41,7 @@ public class FiresDAOImplement implements FiresDAO {
                 }
             }
             conn.commit();
-            System.out.println("S'ha afegit " + n + " items");
+            System.out.println("Fires: S'ha afegit " + n + " items");
             if (n>0)return true;
             else return false;
         }catch (SQLException ex){
@@ -53,16 +54,16 @@ public class FiresDAOImplement implements FiresDAO {
         }
 
     }
-    public boolean UpdateUser(Connection conn, String Username,String Password,Boolean permissions, Boolean Active){
+    public boolean UpdateFira(Connection conn,int id, String Titol,String Ubicació, float Superficie,Date DataInici,Date DataFi){
         try {
-            String cadenaSQL = "UPDATE Usuaris SET Username=?,Password= MD5(?),PermisosAdmin=?,Actiu=? WHERE Username=?;";
+            String cadenaSQL = "UPDATE Fires SET Titol=?,Ubicacio=?,`Superficie Fira`=?,DataInici=?,DataFi=? WHERE FiraID=?;";
             pstmt = conn.prepareStatement(cadenaSQL, PreparedStatement.RETURN_GENERATED_KEYS);
-            pstmt.setString(1,Username);
-            pstmt.setString(2, Password);
-            pstmt.setBoolean(3, permissions);
-            pstmt.setBoolean(4,Active);
-            pstmt.setString(5,Username);
-
+            pstmt.setString(1,Titol);
+            pstmt.setString(2, Ubicació);
+            pstmt.setFloat(3, Superficie);
+            pstmt.setDate(4, new java.sql.Date(DataInici.getTime()));
+            pstmt.setDate(5, new java.sql.Date(DataFi.getTime()));
+            pstmt.setInt(6,id);
             int n = pstmt.executeUpdate();
             try (ResultSet rs = pstmt.getGeneratedKeys()) {
                 while (rs.next()) {
@@ -119,6 +120,9 @@ public class FiresDAOImplement implements FiresDAO {
 
     }
 
+
+
+
     public boolean UpdateUserPermissions(Connection conn, String Username,Boolean permissions, Boolean Active){
         try {
             String cadenaSQL = "UPDATE Usuaris SET Username=?,PermisosAdmin=?,Actiu=? WHERE Username=?;";
@@ -147,15 +151,14 @@ public class FiresDAOImplement implements FiresDAO {
             }catch (SQLException ex){}
         }
 
-    }*/
-
-    public boolean DeleteFira(Connection conn, int id){
+    }
+    public boolean DeleteUser(Connection conn, String Username){
 
 
         try {
-            String cadenaSQL = "DELETE from Fires Where FiraID = ?;";
+            String cadenaSQL = "DELETE from Usuaris Where Username=?;";
             pstmt = conn.prepareStatement(cadenaSQL, PreparedStatement.RETURN_GENERATED_KEYS);
-            pstmt.setInt(1,id);
+            pstmt.setString(1,Username);
 
 
             int n = pstmt.executeUpdate();
@@ -178,14 +181,50 @@ public class FiresDAOImplement implements FiresDAO {
         }
 
     }
-
-    public void findbyParams(Connection conn,String TitolSearch,TableView tableView){
+    public boolean LoginUser(Connection conn, String User, String password){
 
         try {
-            String cadenaSQL= "SELECT *  FROM Fira WHERE (LENGTH(?) <1 or Titol like ?)";
+            String cadenaSQL= "SELECT count(Username), MD5(?),Password FROM Usuaris WHERE Username = ?";
             pstmt = conn.prepareStatement(cadenaSQL);
-            pstmt.setString(1, TitolSearch);
-            pstmt.setString(2,"%"+TitolSearch+"%");
+            pstmt.setString(1, password);
+            pstmt.setString(2,User);
+
+            try (ResultSet resultat = pstmt.executeQuery()) {
+
+                while (resultat.next()) {
+
+                    int n=resultat.getInt(1);
+                    if (n!=1) return false;
+                    else if (!resultat.getString(2).equals(resultat.getString(3)))
+                        return false;
+                    else{ return true;}
+
+
+
+                }
+                System.out.println("1");
+                return false;
+            }
+        }catch (SQLException ex){
+            System.out.println(ex.getErrorCode());
+            return false;
+        }
+        finally {
+                try{
+               pstmt.clearParameters();
+            }catch (SQLException ex){
+                    System.out.println("3");
+
+            }
+        }
+ }
+    public void findbyUsername(Connection conn,String UsernameSearch,TableView tableView){
+
+        try {
+            String cadenaSQL= "SELECT *  FROM Usuaris WHERE (LENGTH(?) <1 or Username like ?)";
+            pstmt = conn.prepareStatement(cadenaSQL);
+            pstmt.setString(1, UsernameSearch);
+            pstmt.setString(2,"%"+UsernameSearch+"%");
             System.out.println("1");
             try (ResultSet resultat = pstmt.executeQuery()) {
                 System.out.println("retorna resultSet");
@@ -205,6 +244,11 @@ public class FiresDAOImplement implements FiresDAO {
             }
         }
 
+
+
+
+
     }
+
 
 }
