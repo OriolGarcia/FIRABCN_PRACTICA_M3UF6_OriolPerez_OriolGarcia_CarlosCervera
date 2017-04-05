@@ -16,4 +16,6 @@ public interface FiresDAO {
     public boolean UpdateFira(Connection conn,int id, String Titol,String Ubicació, float Superficie,Date Datainici,Date DataFi);
     public boolean DeleteFira(Connection conn, int id);
     public void findbyParams(Connection conn, String TitolSearch, TableView tableView);
+
+    //
    }

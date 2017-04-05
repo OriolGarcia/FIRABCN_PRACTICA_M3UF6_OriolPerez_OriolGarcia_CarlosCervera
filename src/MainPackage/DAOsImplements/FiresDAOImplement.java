@@ -1,6 +1,7 @@
 package MainPackage.DAOsImplements;
 
 import MainPackage.Accessor.BDAccessor;
+import MainPackage.DAOs.FiresDAO;
 import MainPackage.DAOs.UserDAO;
 import MainPackage.Utils;
 import javafx.scene.control.TableView;
@@ -9,16 +10,17 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 
 /**
  * Created by ogs10_000 on 30/03/2017.
  */
-public class FiresDAOImplement implements UserDAO {
+public class FiresDAOImplement implements FiresDAO {
 
     private static Connection conn;
     private static PreparedStatement pstmt;
     private static BDAccessor bd= null;
-    public boolean AddUser(Connection conn, String Username,String Password,Boolean permissions, Boolean Active){
+    public boolean AddFira(Connection conn, String Titol,String Ubicació,float Superficie Date DataInici, Date DataFi){
 
 
 
