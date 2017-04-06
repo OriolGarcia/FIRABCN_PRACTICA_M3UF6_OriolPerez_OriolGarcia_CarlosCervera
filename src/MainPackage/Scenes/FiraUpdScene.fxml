@@ -37,7 +37,7 @@
                 <Label layoutX="306.0" layoutY="50.0" text="Data Inici:" />
                 <Label layoutX="326.0" layoutY="95.0" text="Data Fi:" />
 
-                <Button fx:id="btUpdFira" layoutX="238.0" layoutY="171.0" mnemonicParsing="false" onAction="#UpdFiraEvent" text="Afegir Fira" />
+                <Button fx:id="btUpdFira" layoutX="238.0" layoutY="171.0" mnemonicParsing="false" onAction="#UpdFiraEvent" text="Actualitzar Fira" />
 
             </children>
         </AnchorPane>

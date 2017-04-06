@@ -148,10 +148,12 @@ public class ControllerApp{
     }
 
     public void actualitzarFira(ActionEvent event){
-        TablePosition pos = (TablePosition) TbVUsers.getSelectionModel().getSelectedCells().get(0);
-        int id = pos.getRow();
-        /*String selected = TbVUsers.getItems().get(index).toString();
-        int id = selected.substring(1, selected.indexOf(","));*/
+        TablePosition pos = (TablePosition) TbVFires.getSelectionModel().getSelectedCells().get(0);
+        int index = pos.getRow();
+        String selected = TbVFires.getItems().get(index).toString();
+        String ids = selected.substring(1, selected.indexOf(","));
+        int id = Integer.parseInt(ids);
+        System.out.println("id: " + id);
         try {
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../Scenes/FiraUpdScene.fxml"));
