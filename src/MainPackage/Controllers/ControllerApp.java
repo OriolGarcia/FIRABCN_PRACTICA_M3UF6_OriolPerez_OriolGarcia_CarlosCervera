@@ -127,4 +127,23 @@ public class ControllerApp{
         FiresDAOImpl.findbyParams(connection,txtFiraSearch.getText(),TbVFires);
 
     }
+    public void afegirFira(ActionEvent event) {
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../Scenes/FiraAddScene.fxml"));
+            Parent root = loader.load();
+            Stage secondStage = new Stage();
+            secondStage.setScene(new Scene(root, 560, 276));
+            secondStage.show();
+            ControllerFiraAdd controller = loader.getController();
+            controller.init(connection, bdAccessor);
+            secondStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                @Override
+                public void handle(WindowEvent we) {
+                    System.out.println("S'ha tancat Add User");
+                    initiailizeTableViewFires();
+                }
+            });
+        }catch (IOException ex){}
+    }
 }

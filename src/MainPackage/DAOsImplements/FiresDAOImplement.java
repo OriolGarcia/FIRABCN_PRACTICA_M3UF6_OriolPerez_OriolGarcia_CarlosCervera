@@ -185,7 +185,7 @@ public class FiresDAOImplement implements FiresDAO {
     public void findbyParams(Connection conn,String TitolSearch,TableView tableView){
 
         try {
-            String cadenaSQL= "SELECT *  FROM Fira WHERE (LENGTH(?) <1 or Titol like ?)";
+            String cadenaSQL= "SELECT *  FROM Fires WHERE (LENGTH(?) <1 or Titol like ?)";
             pstmt = conn.prepareStatement(cadenaSQL);
             pstmt.setString(1, TitolSearch);
             pstmt.setString(2,"%"+TitolSearch+"%");
