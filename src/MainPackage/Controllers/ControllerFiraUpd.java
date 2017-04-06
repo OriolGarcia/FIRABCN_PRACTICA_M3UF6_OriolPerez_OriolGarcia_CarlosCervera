@@ -17,12 +17,14 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 
-/**
- * Created by oriol on 30/03/2017.
- */
-public class ControllerFiraAdd {
+
+
+
+public class ControllerFiraUpd {
     Connection connection;
     BDAccessor bdAccessor;
+    int id;
+
     @FXML
     private TextField txtTitol;
     @FXML
@@ -34,9 +36,10 @@ public class ControllerFiraAdd {
     @FXML
     private DatePicker dtDataFi;
 
-    public void init(Connection conn, BDAccessor bdAccessor) {
-        connection=conn;
-        this.bdAccessor= bdAccessor;
+    public void init(Connection conn, BDAccessor bdAccessor,int id) {
+        connection = conn;
+        this.bdAccessor = bdAccessor;
+        this.id = id;
 
         txtSuperficie.textProperty().addListener(new ChangeListener<String>() {
             @Override
@@ -47,21 +50,21 @@ public class ControllerFiraAdd {
             }
         });
     }
-    public void AddFiraEvent(ActionEvent event) {
+
+    public void UpdFiraEvent(ActionEvent event){
 
         FiresDAOImplement firesDAOImpl = new FiresDAOImplement();
-        Float superficie =  Float.parseFloat(txtSuperficie.getText());
+        Float superficie = Float.parseFloat(txtSuperficie.getText());
         LocalDate localDate1 = dtDataInici.getValue();
         Instant instant = Instant.from(localDate1.atStartOfDay(ZoneId.systemDefault()));
         Date dateInici = Date.from(instant);
         LocalDate localDate2 = dtDataInici.getValue();
         Instant instant2 = Instant.from(localDate2.atStartOfDay(ZoneId.systemDefault()));
         Date dateFi = Date.from(instant2);
-        firesDAOImpl.AddFira(connection, txtTitol.getText(), txtUbicacio.getText(), superficie, dateInici,dateFi);
+        firesDAOImpl.UpdateFira(connection,id,txtTitol.getText(),txtUbicacio.getText(),superficie,dateInici,dateFi);
         final Node source = (Node) event.getSource();
         Stage stage = (Stage) source.getScene().getWindow();
         stage.getOnCloseRequest().handle(null);
         stage.close();
     }
-
 }

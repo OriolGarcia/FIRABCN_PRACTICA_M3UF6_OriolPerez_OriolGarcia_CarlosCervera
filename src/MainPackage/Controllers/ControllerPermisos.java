@@ -24,13 +24,14 @@ public class ControllerPermisos {
     @FXML
     private Label lbusuari;
     UserDAOImplement UserDAOImpl;
+
     public void init(Connection conn, BDAccessor bdAccessor, String Username) {
         connection = conn;
         this.bdAccessor = bdAccessor;
-        this.Username=Username;
-        lbusuari.setText(lbusuari.getText()+"  "+Username);
+        this.Username = Username;
+        lbusuari.setText(lbusuari.getText() + "  " + Username);
          UserDAOImpl = new UserDAOImplement();
-       boolean[] resultats= UserDAOImpl.SelectPermisionsActiveFromUser(connection,Username);
+       boolean[] resultats = UserDAOImpl.SelectPermisionsActiveFromUser(connection,Username);
        chckBPermisos.setSelected(!resultats[0]);
         checkBActiu.setSelected(!resultats[1]);
     }

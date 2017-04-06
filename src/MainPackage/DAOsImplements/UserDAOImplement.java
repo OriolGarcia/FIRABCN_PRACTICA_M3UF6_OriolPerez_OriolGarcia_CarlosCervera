@@ -150,7 +150,6 @@ public class UserDAOImplement implements UserDAO {
 
     public boolean DeleteUser(Connection conn, String Username){
 
-
         try {
             String cadenaSQL = "DELETE from Usuaris Where Username=?;";
             pstmt = conn.prepareStatement(cadenaSQL, PreparedStatement.RETURN_GENERATED_KEYS);

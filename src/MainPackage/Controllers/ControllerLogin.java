@@ -24,6 +24,8 @@ public class ControllerLogin {
     private TextField txtUser;
     @FXML
     private PasswordField txtPassword;
+
+
     public void init() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Missatge d'error");
@@ -79,6 +81,7 @@ public class ControllerLogin {
 
         }
     }
+
     @FXML
     public void onEnter(ActionEvent ae){
         Login(ae);

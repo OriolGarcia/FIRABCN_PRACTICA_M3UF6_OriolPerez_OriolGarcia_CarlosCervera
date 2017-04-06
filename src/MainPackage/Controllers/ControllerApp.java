@@ -146,4 +146,28 @@ public class ControllerApp{
             });
         }catch (IOException ex){}
     }
+
+    public void actualitzarFira(ActionEvent event){
+        TablePosition pos = (TablePosition) TbVUsers.getSelectionModel().getSelectedCells().get(0);
+        int id = pos.getRow();
+        /*String selected = TbVUsers.getItems().get(index).toString();
+        int id = selected.substring(1, selected.indexOf(","));*/
+        try {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../Scenes/FiraUpdScene.fxml"));
+            Parent root = loader.load();
+            Stage secondStage = new Stage();
+            secondStage.setScene(new Scene(root, 560, 276));
+            secondStage.show();
+            ControllerFiraUpd controller = loader.getController();
+            controller.init(connection, bdAccessor,id);
+            secondStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                @Override
+                public void handle(WindowEvent event) {
+                    System.out.println("S'ha tancat Update User");
+                    initiailizeTableViewFires();
+                }
+            });
+        }catch (IOException ex){}
+    }
 }
