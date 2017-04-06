@@ -19,9 +19,9 @@ public class UserDAOImplement implements UserDAO {
     private static Connection conn;
     private static PreparedStatement pstmt;
     private static BDAccessor bd= null;
+
+
     public boolean AddUser(Connection conn, String Username,String Password,Boolean permissions, Boolean Active){
-
-
 
         try {
             String cadenaSQL = "INSERT INTO Usuaris(Username,Password,PermisosAdmin,Actiu) VALUES(?,MD5(?),?,?);";
@@ -118,9 +118,6 @@ public class UserDAOImplement implements UserDAO {
 
     }
 
-
-
-
     public boolean UpdateUserPermissions(Connection conn, String Username,Boolean permissions, Boolean Active){
         try {
             String cadenaSQL = "UPDATE Usuaris SET Username=?,PermisosAdmin=?,Actiu=? WHERE Username=?;";
@@ -150,6 +147,7 @@ public class UserDAOImplement implements UserDAO {
         }
 
     }
+
     public boolean DeleteUser(Connection conn, String Username){
 
 
@@ -179,6 +177,7 @@ public class UserDAOImplement implements UserDAO {
         }
 
     }
+
     public boolean LoginUser(Connection conn, String User, String password){
 
         try {
@@ -215,7 +214,8 @@ public class UserDAOImplement implements UserDAO {
 
             }
         }
- }
+    }
+
     public void findbyUsername(Connection conn,String UsernameSearch,TableView tableView){
 
         try {
@@ -234,7 +234,7 @@ public class UserDAOImplement implements UserDAO {
 
         }
         finally {
-        try{
+            try{
                 pstmt.clearParameters();
             }catch (SQLException ex){
                 System.out.println("3");
@@ -242,11 +242,5 @@ public class UserDAOImplement implements UserDAO {
             }
         }
 
-
-
-
-
     }
-
-
 }
