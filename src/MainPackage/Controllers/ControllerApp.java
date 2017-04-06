@@ -1,6 +1,7 @@
 package MainPackage.Controllers;
 
 import MainPackage.Accessor.BDAccessor;
+import MainPackage.DAOsImplements.FiresDAOImplement;
 import MainPackage.DAOsImplements.UserDAOImplement;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -28,14 +29,19 @@ public class ControllerApp{
     TextField txtUserSearch;
     @FXML
     TableView TbVUsers;
+    @FXML
+    TextField txtFiraSearch;
+    @FXML
+    TableView TbVFires;
 
     Connection connection;
     BDAccessor bdAccessor;
 
     public void init(Connection conn, BDAccessor bdAccessor) {
         connection=conn;
-       this.bdAccessor= bdAccessor;
+        this.bdAccessor= bdAccessor;
         initiailizeTableViewUsers();
+        initiailizeTableViewFires();
 
         txtUserSearch.textProperty().addListener(new ChangeListener<String>() {
             @Override
@@ -44,12 +50,19 @@ public class ControllerApp{
                 initiailizeTableViewUsers();
             }
         });
+        txtFiraSearch.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable,
+                                String oldValue, String newValue) {
+                initiailizeTableViewFires();
+            }
+        });
     }
     private void initiailizeTableViewUsers(){
 
         UserDAOImplement UserDAOImpl = new UserDAOImplement();
 
-       UserDAOImpl.findbyUsername(connection,txtUserSearch.getText(),TbVUsers);
+        UserDAOImpl.findbyUsername(connection,txtUserSearch.getText(),TbVUsers);
 
     }
     public void afegirUsuari(ActionEvent event) {
@@ -76,7 +89,7 @@ public class ControllerApp{
         TablePosition pos = (TablePosition) TbVUsers.getSelectionModel().getSelectedCells().get(0);
         int index = pos.getRow();
         String selected = TbVUsers.getItems().get(index).toString();
-       String id = selected.substring(1, selected.indexOf(","));
+        String id = selected.substring(1, selected.indexOf(","));
         System.out.println(selected);
         UserDAOImplement UserDAOImpl = new UserDAOImplement();
         UserDAOImpl.DeleteUser(connection,id);
@@ -107,29 +120,11 @@ public class ControllerApp{
     }
     public void canviarContrasenya(ActionEvent event) {}
 
+    private void initiailizeTableViewFires(){
 
-    public void afegirFira(ActionEvent event) {
+        FiresDAOImplement FiresDAOImpl = new FiresDAOImplement();
 
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../Scenes/FiraAddScene.fxml"));
-            Parent root = loader.load();
-            Stage secondStage = new Stage();
-            secondStage.setScene(new Scene(root, 560, 276));
-            secondStage.show();
-            ControllerFiraAdd controller = loader.getController();
-            controller.init(connection, bdAccessor);
-            secondStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-                @Override
-                public void handle(WindowEvent we) {
-                    System.out.println("S'ha tancat Add Fira");
-                   // initiailizeTableViewFires();
-                }
-            });
-        }catch (IOException ex){}
+        FiresDAOImpl.findbyParams(connection,txtFiraSearch.getText(),TbVFires);
+
     }
-
-
-
-
-
 }
