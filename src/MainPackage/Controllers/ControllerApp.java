@@ -38,8 +38,9 @@ public class ControllerApp{
     BDAccessor bdAccessor;
 
     public void init(Connection conn, BDAccessor bdAccessor) {
-        connection=conn;
-        this.bdAccessor= bdAccessor;
+        connection = conn;
+        this.bdAccessor = bdAccessor;
+
         initiailizeTableViewUsers();
         initiailizeTableViewFires();
 
@@ -85,38 +86,54 @@ public class ControllerApp{
         }catch (IOException ex){}
     }
     public void eliminarUsuari(ActionEvent event) {
-
-        TablePosition pos = (TablePosition) TbVUsers.getSelectionModel().getSelectedCells().get(0);
-        int index = pos.getRow();
-        String selected = TbVUsers.getItems().get(index).toString();
-        String id = selected.substring(1, selected.indexOf(","));
-        System.out.println(selected);
-        UserDAOImplement UserDAOImpl = new UserDAOImplement();
-        UserDAOImpl.DeleteUser(connection,id);
-        initiailizeTableViewUsers();
+        try {
+            TablePosition pos = (TablePosition) TbVUsers.getSelectionModel().getSelectedCells().get(0);
+            int index = pos.getRow();
+            String selected = TbVUsers.getItems().get(index).toString();
+            String id = selected.substring(1, selected.indexOf(","));
+            System.out.println(selected);
+            UserDAOImplement UserDAOImpl = new UserDAOImplement();
+            UserDAOImpl.DeleteUser(connection,id);
+            initiailizeTableViewUsers();
+        }catch (Exception e){
+            System.out.println("Error: " + e.getMessage());
+        }
     }
     public void generarContrasenya(ActionEvent event) {}
     public void canviarPermisos(ActionEvent event) {
-        TablePosition pos = (TablePosition) TbVUsers.getSelectionModel().getSelectedCells().get(0);
-        int index = pos.getRow();
-        String selected = TbVUsers.getItems().get(index).toString();
-        String id = selected.substring(1, selected.indexOf(","));
+        String id = "";
+        boolean accs = true;
+
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../Scenes/PermisionsChangeScene.fxml"));
-            Parent root = loader.load();
-            Stage secondStage = new Stage();
-            secondStage.setScene(new Scene(root, 560, 276));
-            secondStage.show();
-            ControllerPermisos controller = loader.getController();
-            controller.init(connection, bdAccessor,id);
-            secondStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-                @Override
-                public void handle(WindowEvent we) {
-                    System.out.println("S'ha tancat Modificar permsoss");
-                    initiailizeTableViewUsers();
-                }
-            });
-        }catch (IOException ex){}
+            TablePosition pos = (TablePosition) TbVUsers.getSelectionModel().getSelectedCells().get(0);
+            int index = pos.getRow();
+            String selected = TbVUsers.getItems().get(index).toString();
+            id = selected.substring(1, selected.indexOf(","));
+        }catch (Exception e){
+            System.out.println("Error: " + e.getMessage());
+            accs = false;
+        }
+
+        if (accs) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../Scenes/PermisionsChangeScene.fxml"));
+                Parent root = loader.load();
+                Stage secondStage = new Stage();
+                secondStage.setScene(new Scene(root, 560, 276));
+                secondStage.show();
+                ControllerPermisos controller = loader.getController();
+                controller.init(connection, bdAccessor, id);
+                secondStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                    @Override
+                    public void handle(WindowEvent we) {
+                        System.out.println("S'ha tancat Modificar permsoss");
+                        initiailizeTableViewUsers();
+                    }
+                });
+            } catch (IOException ex) {
+                System.out.println("Error: " + ex.getMessage());
+            }
+        }
     }
     public void canviarContrasenya(ActionEvent event) {}
 
@@ -141,35 +158,48 @@ public class ControllerApp{
                 @Override
                 public void handle(WindowEvent we) {
                     System.out.println("S'ha tancat Add User");
-                    initiailizeTableViewFires();
+                    afegirFira(event);
                 }
             });
-        }catch (IOException ex){}
+        }catch (IOException ex){
+            System.out.println("Error: " + ex.getMessage());
+        }
     }
 
     public void actualitzarFira(ActionEvent event){
-        TablePosition pos = (TablePosition) TbVFires.getSelectionModel().getSelectedCells().get(0);
-        int index = pos.getRow();
-        String selected = TbVFires.getItems().get(index).toString();
-        String ids = selected.substring(1, selected.indexOf(","));
-        int id = Integer.parseInt(ids);
-        System.out.println("id: " + id);
+        int id = 0;
+        boolean accs = true;
         try {
+            TablePosition pos = (TablePosition) TbVFires.getSelectionModel().getSelectedCells().get(0);
+            int index = pos.getRow();
+            String selected = TbVFires.getItems().get(index).toString();
+            String ids = selected.substring(1, selected.indexOf(","));
+            id = Integer.parseInt(ids);
+            System.out.println("id: " + id);
+        }catch (Exception e){
+            System.out.println("Error: " + e.getMessage());
+            accs = false;
+        }
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../Scenes/FiraUpdScene.fxml"));
-            Parent root = loader.load();
-            Stage secondStage = new Stage();
-            secondStage.setScene(new Scene(root, 560, 276));
-            secondStage.show();
-            ControllerFiraUpd controller = loader.getController();
-            controller.init(connection, bdAccessor,id);
-            secondStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-                @Override
-                public void handle(WindowEvent event) {
-                    System.out.println("S'ha tancat Update User");
-                    initiailizeTableViewFires();
-                }
-            });
-        }catch (IOException ex){}
+        if(accs) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../Scenes/FiraUpdScene.fxml"));
+                Parent root = loader.load();
+                Stage secondStage = new Stage();
+                secondStage.setScene(new Scene(root, 560, 276));
+                secondStage.show();
+                ControllerFiraUpd controller = loader.getController();
+                controller.init(connection, bdAccessor, id);
+                secondStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                    @Override
+                    public void handle(WindowEvent event) {
+                        System.out.println("S'ha tancat Update User");
+                        initiailizeTableViewFires();
+                    }
+                });
+            } catch (IOException ex) {
+                System.out.println("Error: " + ex.getMessage());
+            }
+        }
     }
 }

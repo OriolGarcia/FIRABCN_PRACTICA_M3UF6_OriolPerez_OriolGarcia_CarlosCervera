@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane alignment="center" hgap="10" prefHeight="253.0" prefWidth="601.0" vgap="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainPackage.Controllers.ControllerFiraUpd">
+<GridPane alignment="center" hgap="10" prefHeight="253.0" prefWidth="618.0" vgap="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainPackage.Controllers.ControllerFiraUpd">
     <columnConstraints>
         <ColumnConstraints />
     </columnConstraints>
@@ -23,7 +23,7 @@
     <children>
         <!--<TitledPane animated="false" prefHeight="554.0" prefWidth="562.0" text="La teva Fira Manager - Afegir Usuari">
           <content>-->
-        <AnchorPane minHeight="180.0" minWidth="560.0" prefHeight="243.0" prefWidth="605.0">
+        <AnchorPane minHeight="180.0" minWidth="560.0" prefHeight="243.0" prefWidth="647.0">
             <children>
                 <Label fx:id="lbTitol" layoutX="14.0" layoutY="49.0" text="Titol de la fira:" />
                 <Label fx:id="lbtitol" layoutX="48.0" layoutY="84.0" text="Ubicació:" />
@@ -38,6 +38,7 @@
                 <Label layoutX="326.0" layoutY="95.0" text="Data Fi:" />
 
                 <Button fx:id="btUpdFira" layoutX="238.0" layoutY="171.0" mnemonicParsing="false" onAction="#UpdFiraEvent" text="Actualitzar Fira" />
+            <Label fx:id="lbErrorUpdFira" layoutX="241.0" layoutY="208.0" text="Hi ha algun error" textFill="#fc0000" visible="false" />
 
             </children>
         </AnchorPane>

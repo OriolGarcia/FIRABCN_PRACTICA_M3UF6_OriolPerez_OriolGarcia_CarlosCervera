@@ -35,6 +35,8 @@ public class ControllerFiraUpd {
     private DatePicker dtDataInici;
     @FXML
     private DatePicker dtDataFi;
+    @FXML
+    private Label lbErrorUpdFira;
 
     public void init(Connection conn, BDAccessor bdAccessor,int id) {
         connection = conn;
@@ -53,18 +55,23 @@ public class ControllerFiraUpd {
 
     public void UpdFiraEvent(ActionEvent event){
 
-        FiresDAOImplement firesDAOImpl = new FiresDAOImplement();
-        Float superficie = Float.parseFloat(txtSuperficie.getText());
-        LocalDate localDate1 = dtDataInici.getValue();
-        Instant instant = Instant.from(localDate1.atStartOfDay(ZoneId.systemDefault()));
-        Date dateInici = Date.from(instant);
-        LocalDate localDate2 = dtDataInici.getValue();
-        Instant instant2 = Instant.from(localDate2.atStartOfDay(ZoneId.systemDefault()));
-        Date dateFi = Date.from(instant2);
-        firesDAOImpl.UpdateFira(connection,id,txtTitol.getText(),txtUbicacio.getText(),superficie,dateInici,dateFi);
-        final Node source = (Node) event.getSource();
-        Stage stage = (Stage) source.getScene().getWindow();
-        stage.getOnCloseRequest().handle(null);
-        stage.close();
+        try {
+            FiresDAOImplement firesDAOImpl = new FiresDAOImplement();
+            Float superficie = Float.parseFloat(txtSuperficie.getText());
+            LocalDate localDate1 = dtDataInici.getValue();
+            Instant instant = Instant.from(localDate1.atStartOfDay(ZoneId.systemDefault()));
+            Date dateInici = Date.from(instant);
+            LocalDate localDate2 = dtDataInici.getValue();
+            Instant instant2 = Instant.from(localDate2.atStartOfDay(ZoneId.systemDefault()));
+            Date dateFi = Date.from(instant2);
+            firesDAOImpl.UpdateFira(connection, id, txtTitol.getText(), txtUbicacio.getText(), superficie, dateInici, dateFi);
+            final Node source = (Node) event.getSource();
+            Stage stage = (Stage) source.getScene().getWindow();
+            stage.getOnCloseRequest().handle(null);
+            stage.close();
+        }catch (Exception e){
+            System.out.println("Error: " + e.getMessage());
+            lbErrorUpdFira.setVisible(true);
+        }
     }
 }
