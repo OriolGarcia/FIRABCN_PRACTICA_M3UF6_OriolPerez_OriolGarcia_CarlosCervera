@@ -26,7 +26,7 @@ public class FiresDAOImplement implements FiresDAO {
 
         try {
             String cadenaSQL = "INSERT INTO Fires(Titol,Ubicacio,`Superficie Fira`,DataInici,DataFi)"
-            +" VALUES(?,MD5(?),?,?);";
+            +" VALUES(?,?,?,?,?);";
             pstmt = conn.prepareStatement(cadenaSQL, PreparedStatement.RETURN_GENERATED_KEYS);
             pstmt.setString(1,Titol);
             pstmt.setString(2, Ubicació);

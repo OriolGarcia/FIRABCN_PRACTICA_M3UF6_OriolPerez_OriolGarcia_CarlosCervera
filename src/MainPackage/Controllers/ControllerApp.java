@@ -106,4 +106,30 @@ public class ControllerApp{
         }catch (IOException ex){}
     }
     public void canviarContrasenya(ActionEvent event) {}
+
+
+    public void afegirFira(ActionEvent event) {
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../Scenes/FiraAddScene.fxml"));
+            Parent root = loader.load();
+            Stage secondStage = new Stage();
+            secondStage.setScene(new Scene(root, 560, 276));
+            secondStage.show();
+            ControllerFiraAdd controller = loader.getController();
+            controller.init(connection, bdAccessor);
+            secondStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                @Override
+                public void handle(WindowEvent we) {
+                    System.out.println("S'ha tancat Add Fira");
+                   // initiailizeTableViewFires();
+                }
+            });
+        }catch (IOException ex){}
+    }
+
+
+
+
+
 }
