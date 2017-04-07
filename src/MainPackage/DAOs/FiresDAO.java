@@ -1,5 +1,6 @@
 package MainPackage.DAOs;
 
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -19,5 +20,5 @@ public interface FiresDAO {
     public boolean DeleteFira(Connection conn, int id);
     public void findbyParams(Connection conn, String TitolSearch, TableView tableView);
     public void omplirCamps(Connection conn, int id, TextField txtFielTitolFira, TextField Ubicació, TextField Superificie, DatePicker DataInici,DatePicker DataFi);
-    //
+    public void omplirComboBox(Connection conn, ComboBox comboBox);//
    }

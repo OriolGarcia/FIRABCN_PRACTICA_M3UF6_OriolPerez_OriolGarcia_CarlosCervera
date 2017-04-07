@@ -4,6 +4,11 @@ import MainPackage.Accessor.BDAccessor;
 import MainPackage.DAOs.FiresDAO;
 import MainPackage.DAOs.UserDAO;
 import MainPackage.Utils;
+import javafx.beans.InvalidationListener;
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -12,7 +17,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
+import java.util.*;
 
 /**
  * Created by ogs10_000 on 30/03/2017.
@@ -178,6 +183,36 @@ public class FiresDAOImplement implements FiresDAO {
             }
         }
 
+
+    }
+    public  void omplirComboBox(Connection conn, ComboBox comboBox){
+
+        try {
+            String cadenaSQL= "SELECT FiraID, Titol from Fires";
+            pstmt = conn.prepareStatement(cadenaSQL);
+              try (ResultSet resultat = pstmt.executeQuery()) {
+                  ObservableList<Item> model= FXCollections.observableArrayList();
+
+
+                  while (resultat.next()) {
+
+                    model.add( new Item(resultat.getInt(1), resultat.getString(2)) );
+                }
+
+               comboBox.getItems().addAll(model);
+                 }
+        }catch (SQLException ex){
+            System.out.println(ex.getMessage());
+
+        }
+        finally {
+            try{
+                pstmt.clearParameters();
+            }catch (SQLException ex){
+                System.out.println("3");
+
+            }
+        }
 
     }
 

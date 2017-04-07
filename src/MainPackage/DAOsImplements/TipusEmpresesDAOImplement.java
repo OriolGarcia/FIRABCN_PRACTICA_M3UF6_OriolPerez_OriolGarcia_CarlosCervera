@@ -3,6 +3,9 @@ package MainPackage.DAOsImplements;
 import MainPackage.Accessor.BDAccessor;
 import MainPackage.DAOs.*;
 import MainPackage.Utils;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableView;
 import sun.security.util.Password;
 
@@ -22,7 +25,7 @@ public class TipusEmpresesDAOImplement implements TipusEmpresesDAO {
         private static BDAccessor bd= null;
         public boolean AddTipusEmpreses(Connection conn, String Username, String Password, Boolean permissions, Boolean Active) {
 
-
+/*
             try {
                 String cadenaSQL = "INSERT INTO TipusEmpreses";
                 pstmt = conn.prepareStatement(cadenaSQL, PreparedStatement.RETURN_GENERATED_KEYS);
@@ -51,7 +54,7 @@ public class TipusEmpresesDAOImplement implements TipusEmpresesDAO {
                     pstmt.clearParameters();
                 } catch (SQLException ex) {
                 }
-            }
+            }*/ return false;
         }
 
 
@@ -66,5 +69,32 @@ public class TipusEmpresesDAOImplement implements TipusEmpresesDAO {
             return true;
         }
 
+    public  void omplirComboBox(Connection conn, ComboBox comboBox) {
 
+        try {
+            String cadenaSQL = "SELECT TipusID, TitolTipus from TipusEmpresa";
+            pstmt = conn.prepareStatement(cadenaSQL);
+            try (ResultSet resultat = pstmt.executeQuery()) {
+                ObservableList<Item> model = FXCollections.observableArrayList();
+
+
+                while (resultat.next()) {
+
+                    model.add(new Item(resultat.getInt(1), resultat.getString(2)));
+                }
+
+                comboBox.getItems().addAll(model);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+
+        } finally {
+            try {
+                pstmt.clearParameters();
+            } catch (SQLException ex) {
+                System.out.println("3");
+
+            }
+        }
+    }
 }

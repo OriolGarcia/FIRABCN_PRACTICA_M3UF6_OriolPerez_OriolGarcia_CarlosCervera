@@ -45,9 +45,9 @@
                                   <Button fx:id="btAfegirFira" layoutX="14.0" layoutY="568.0" mnemonicParsing="false" onAction="#afegirFira" prefHeight="25.0" prefWidth="170.0" text="Afegir Fira" />
                                   <Button fx:id="btEliminarFira" layoutX="194.0" layoutY="568.0" mnemonicParsing="false" onAction="#eliminarFira" prefHeight="25.0" prefWidth="170.0" text="Eliminar Fira" />
                                   <Button fx:id="btActualitzarFira" layoutX="109.0" layoutY="609.0" mnemonicParsing="false" onAction="#actualitzarFira" prefHeight="25.0" prefWidth="170.0" text="Actualitzar Fira" />
-                                  <Button fx:id="btAfegirEmpresa" layoutX="385.0" layoutY="568.0" mnemonicParsing="false" onAction="#afegirUsuari" prefHeight="25.0" prefWidth="170.0" text="Afegir Empresa" />
-                                  <Button fx:id="btEliminarEmpresa" layoutX="565.0" layoutY="568.0" mnemonicParsing="false" onAction="#afegirUsuari" prefHeight="25.0" prefWidth="170.0" text="Eliminar Empresa" />
-                                  <Button fx:id="btActualitzarEmpresa" layoutX="470.0" layoutY="609.0" mnemonicParsing="false" onAction="#afegirUsuari" prefHeight="25.0" prefWidth="170.0" text="Actualitzar Empresa" />
+                                  <Button fx:id="btAfegirEmpresa" layoutX="385.0" layoutY="568.0" mnemonicParsing="false" onAction="#afegirEmpresa" prefHeight="25.0" prefWidth="170.0" text="Afegir Empresa" />
+                                  <Button fx:id="btEliminarEmpresa" layoutX="565.0" layoutY="568.0" mnemonicParsing="false" onAction="#eliminarEmpresa" prefHeight="25.0" prefWidth="170.0" text="Eliminar Empresa" />
+                                  <Button fx:id="btActualitzarEmpresa" layoutX="470.0" layoutY="609.0" mnemonicParsing="false" onAction="#actualitzarEmpresa" prefHeight="25.0" prefWidth="170.0" text="Actualitzar Empresa" />
 
                                   <TableView fx:id="TbVEstands" layoutX="754.0" layoutY="157.0" prefHeight="400.0" prefWidth="350.0" />
                               <Button fx:id="btAfegirEstand" layoutX="754.0" layoutY="568.0" mnemonicParsing="false" onAction="#afegirUsuari" prefHeight="25.0" prefWidth="170.0" text="Afegir Estand" />

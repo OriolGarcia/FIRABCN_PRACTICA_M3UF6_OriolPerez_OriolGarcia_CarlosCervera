@@ -1,7 +1,90 @@
 package MainPackage.DAOsImplements;
 
+import MainPackage.Accessor.BDAccessor;
+import MainPackage.Utils;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 /**
  * Created by Carlos on 3/04/17.
  */
 public class EmpresesDAOImplement {
+
+    private static Connection conn;
+    private static PreparedStatement pstmt;
+    private static BDAccessor bd= null;
+    public boolean AddEmpresa(Connection conn, String Nom, String CIF, String PersonaContacte, String Telefon, int Tipus, int Fira){
+        try {
+            String cadenaSQL = "INSERT INTO Empreses(Nom,CIF,`Persona de contacte`,Telefon,Tipus,Fira)"
+                    +" VALUES(?,?,?,?,?,?);";
+            pstmt = conn.prepareStatement(cadenaSQL, PreparedStatement.RETURN_GENERATED_KEYS);
+            pstmt.setString(1,Nom);
+            pstmt.setString(2, CIF);
+            pstmt.setString(3, PersonaContacte);
+            pstmt.setString(4, Telefon);
+            pstmt.setInt(5,Tipus);
+            pstmt.setInt(6, Fira);
+            int n = pstmt.executeUpdate();
+            try (ResultSet rs = pstmt.getGeneratedKeys()) {
+                while (rs.next()) {
+                    System.out.println("Codi generat per getGeneratedKeys():"
+                            + rs.getInt(1));
+                }
+            }
+            conn.commit();
+            System.out.println("Empreses: S'ha afegit " + n + " items");
+            if (n>0)return true;
+            else return false;
+        }catch (SQLException ex){
+            System.out.println(ex.getMessage());
+            return false;
+        }finally {
+            try {
+                pstmt.clearParameters();
+            }catch (SQLException ex){}
+        }
+    }
+    public boolean UpdateEmpresa(Connection conn, String Nom, String CIF, String PersonaContacte, String Telefon, int Tipus, int Fira){
+        return true;
+    }
+    public boolean DeleteEmpresa(Connection conn, int id){ return true;}
+    public void findbyParams(Connection conn, String NomSearch, int Fira, TableView tableView){
+        try {
+            String cadenaSQL= "SELECT EmpresaID,Nom,CIF,`Persona de contacte`,Telefon,Fires.Titol, TipusEmpresa.TitolTipus as `Tipus de empresa` "
+                    +" FROM Empreses"
+                    +" INNER JOIN Fires ON Fires.FiraID=Empreses.Fira"
+                    +" INNER JOIN TipusEmpresa ON TipusEmpresa.TipusID=Empreses.Tipus"
+                    +" WHERE ((LENGTH(?) <1 or Nom like ?) and Fira=?)";
+            pstmt = conn.prepareStatement(cadenaSQL);
+            pstmt.setString(1, NomSearch);
+            pstmt.setString(2,"%"+NomSearch+"%");
+            pstmt.setInt(3,Fira);
+            System.out.println("1");
+            try (ResultSet resultat = pstmt.executeQuery()) {
+                System.out.println("retorna resultSet");
+                Utils.omplirTableView(tableView,resultat);
+
+            }
+        }catch (SQLException ex){
+            System.out.println(ex.getMessage());
+
+        }
+        finally {
+            try{
+                pstmt.clearParameters();
+            }catch (SQLException ex){
+
+            }
+        }
+
+    }
+    public void omplirCamps(Connection conn, int id, TextField txtFielNomEmpresa, TextField txtFieldCIF, TextField txtPersonaContacte, TextField txtTelefon){
+
+    }
+    //
 }
