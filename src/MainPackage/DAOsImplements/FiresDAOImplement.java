@@ -4,7 +4,9 @@ import MainPackage.Accessor.BDAccessor;
 import MainPackage.DAOs.FiresDAO;
 import MainPackage.DAOs.UserDAO;
 import MainPackage.Utils;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -85,73 +87,8 @@ public class FiresDAOImplement implements FiresDAO {
 
     }
 
-    public boolean[] SelectPermisionsActiveFromUser(Connection conn, String User){
 
 
-        try {
-            String cadenaSQL= "SELECT PermisosAdmin,Actiu FROM Usuaris WHERE Username = ?";
-            pstmt = conn.prepareStatement(cadenaSQL);
-            pstmt.setString(1,User);
-
-            try (ResultSet resultat = pstmt.executeQuery()) {
-
-                while (resultat.next()) {
-
-                    return new boolean[]{!resultat.getBoolean(1),!resultat.getBoolean(2)     };
-
-
-
-                }
-                System.out.println("1");
-                return new boolean[]{false,false};
-            }
-        }catch (SQLException ex){
-            System.out.println(ex.getErrorCode());
-            return new boolean[]{false,false};
-        }
-        finally {
-            try{
-                pstmt.clearParameters();
-            }catch (SQLException ex){
-                System.out.println("3");
-
-            }
-        }
-
-    }
-
-
-
-
-    public boolean UpdateUserPermissions(Connection conn, String Username,Boolean permissions, Boolean Active){
-        try {
-            String cadenaSQL = "UPDATE Usuaris SET Username=?,PermisosAdmin=?,Actiu=? WHERE Username=?;";
-            pstmt = conn.prepareStatement(cadenaSQL, PreparedStatement.RETURN_GENERATED_KEYS);
-            pstmt.setString(1,Username);
-            pstmt.setBoolean(2, permissions);
-            pstmt.setBoolean(3,Active);
-            pstmt.setString(4,Username);
-
-            int n = pstmt.executeUpdate();
-            try (ResultSet rs = pstmt.getGeneratedKeys()) {
-                while (rs.next()) {
-                    System.out.println("Codi generat per getGeneratedKeys():"
-                            + rs.getInt(1));
-                }
-            }
-            conn.commit();
-            if (n>0)return true;
-            else return false;
-        }catch (SQLException ex){
-
-            return false;
-        }finally {
-            try {
-                pstmt.clearParameters();
-            }catch (SQLException ex){}
-        }
-
-    }
     public boolean DeleteFira(Connection conn, int id){
 
 
@@ -207,6 +144,40 @@ public class FiresDAOImplement implements FiresDAO {
 
             }
         }
+
+    }
+    public void omplirCamps(Connection conn, int id, TextField txtFielTitolFira, TextField txtFieldUbicació, TextField txtFieldSuperificie, DatePicker DataInici, DatePicker DataFi){
+
+        try {
+            String cadenaSQL= "SELECT Titol,Ubicacio,`Superficie Fira`,DataInici,DataFi FROM Fires WHERE FiraID = ?";
+            pstmt = conn.prepareStatement(cadenaSQL);
+            pstmt.setInt(1,id);
+
+            try (ResultSet resultat = pstmt.executeQuery()) {
+
+                while (resultat.next()) {
+
+                            txtFielTitolFira.setText(resultat.getString(1));
+                            txtFieldUbicació.setText(resultat.getString(2));
+                            txtFieldSuperificie.setText(resultat.getString(3));
+                            DataInici.setValue(resultat.getDate(4).toLocalDate());
+                            DataFi.setValue(resultat.getDate(5).toLocalDate());
+                }
+                System.out.println("1");
+            }
+        }catch (SQLException ex){
+            System.out.println(ex.getErrorCode());
+
+        }
+        finally {
+            try{
+                pstmt.clearParameters();
+            }catch (SQLException ex){
+                System.out.println("3");
+
+            }
+        }
+
 
     }
 

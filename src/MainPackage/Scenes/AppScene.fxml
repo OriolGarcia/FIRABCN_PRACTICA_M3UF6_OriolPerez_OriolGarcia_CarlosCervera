@@ -43,9 +43,8 @@
                                       </children>
                                   </Pane>
                                   <Button fx:id="btAfegirFira" layoutX="14.0" layoutY="568.0" mnemonicParsing="false" onAction="#afegirFira" prefHeight="25.0" prefWidth="170.0" text="Afegir Fira" />
-                                  <Button fx:id="btEliminarFira" layoutX="194.0" layoutY="568.0" mnemonicParsing="false" onAction="#eliminarUsuari" prefHeight="25.0" prefWidth="170.0" text="Eliminar Fira" />
+                                  <Button fx:id="btEliminarFira" layoutX="194.0" layoutY="568.0" mnemonicParsing="false" onAction="#eliminarFira" prefHeight="25.0" prefWidth="170.0" text="Eliminar Fira" />
                                   <Button fx:id="btActualitzarFira" layoutX="109.0" layoutY="609.0" mnemonicParsing="false" onAction="#actualitzarFira" prefHeight="25.0" prefWidth="170.0" text="Actualitzar Fira" />
-
                                   <Button fx:id="btAfegirEmpresa" layoutX="385.0" layoutY="568.0" mnemonicParsing="false" onAction="#afegirUsuari" prefHeight="25.0" prefWidth="170.0" text="Afegir Empresa" />
                                   <Button fx:id="btEliminarEmpresa" layoutX="565.0" layoutY="568.0" mnemonicParsing="false" onAction="#afegirUsuari" prefHeight="25.0" prefWidth="170.0" text="Eliminar Empresa" />
                                   <Button fx:id="btActualitzarEmpresa" layoutX="470.0" layoutY="609.0" mnemonicParsing="false" onAction="#afegirUsuari" prefHeight="25.0" prefWidth="170.0" text="Actualitzar Empresa" />

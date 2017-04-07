@@ -38,7 +38,7 @@
                 <Label layoutX="326.0" layoutY="95.0" text="Data Fi:" />
 
                 <Button fx:id="btUpdFira" layoutX="238.0" layoutY="171.0" mnemonicParsing="false" onAction="#UpdFiraEvent" text="Actualitzar Fira" />
-            <Label fx:id="lbErrorUpdFira" layoutX="241.0" layoutY="208.0" text="Hi ha algun error" textFill="#fc0000" visible="false" />
+            <Label fx:id="lbErrorUpdFira" layoutX="241.0" layoutY="208.0" text="Hi ha algun error. Avís: Els camps no poden estar buits." textFill="#fc0000" visible="false" />
 
             </children>
         </AnchorPane>

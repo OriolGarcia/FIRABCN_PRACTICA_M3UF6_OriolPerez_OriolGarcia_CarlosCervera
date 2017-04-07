@@ -157,9 +157,10 @@ public class ControllerApp{
             secondStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
                 @Override
                 public void handle(WindowEvent we) {
-                    System.out.println("S'ha tancat Add User");
-                    afegirFira(event);
-                }
+                    System.out.println("S'ha tancat Add Fira");
+                    initiailizeTableViewFires();
+
+                              }
             });
         }catch (IOException ex){
             System.out.println("Error: " + ex.getMessage());
@@ -201,5 +202,17 @@ public class ControllerApp{
                 System.out.println("Error: " + ex.getMessage());
             }
         }
+    }
+
+    public void eliminarFira(ActionEvent event) {
+
+        TablePosition pos = (TablePosition) TbVFires.getSelectionModel().getSelectedCells().get(0);
+        int index = pos.getRow();
+        String selected = TbVFires.getItems().get(index).toString();
+        int id =Integer.parseInt( selected.substring(1, selected.indexOf(",")));
+        System.out.println(selected);
+        FiresDAOImplement firesDAOImpl = new FiresDAOImplement();
+        firesDAOImpl.DeleteFira(connection,id);
+        initiailizeTableViewFires();
     }
 }

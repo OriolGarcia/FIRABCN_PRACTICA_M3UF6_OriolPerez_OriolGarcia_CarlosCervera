@@ -37,12 +37,12 @@ public class ControllerFiraUpd {
     private DatePicker dtDataFi;
     @FXML
     private Label lbErrorUpdFira;
-
+    FiresDAOImplement firesDAOImpl;
     public void init(Connection conn, BDAccessor bdAccessor,int id) {
         connection = conn;
         this.bdAccessor = bdAccessor;
         this.id = id;
-
+      firesDAOImpl = new FiresDAOImplement();
         txtSuperficie.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
@@ -51,12 +51,12 @@ public class ControllerFiraUpd {
                 }
             }
         });
+        firesDAOImpl.omplirCamps(conn,id,txtTitol,txtUbicacio,txtSuperficie,dtDataInici,dtDataFi);
     }
 
     public void UpdFiraEvent(ActionEvent event){
 
         try {
-            FiresDAOImplement firesDAOImpl = new FiresDAOImplement();
             Float superficie = Float.parseFloat(txtSuperficie.getText());
             LocalDate localDate1 = dtDataInici.getValue();
             Instant instant = Instant.from(localDate1.atStartOfDay(ZoneId.systemDefault()));

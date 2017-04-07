@@ -33,8 +33,10 @@ CIF VARCHAR(20),
 `Persona de contacte` VARCHAR (200),
 Telefon VARCHAR(15),
 Tipus INT,
+Fira INT,
 PRIMARY KEY (EmpresaID),
- foreign key (Tipus) references TipusEmpresa(`TipusID`)
+ foreign key (Tipus) references TipusEmpresa(`TipusID`),
+  foreign key (Fira) references Fires(`FiraID`)
 );
 CREATE TABLE ECONOMIAFIRA(
 FiraID INT,
@@ -52,13 +54,12 @@ SuperficieEstand DECIMAL,
 QuotaEstand DECIMAL,
 DataInici DATE,
 DataFi DATE,
-Fira INT,
+Empresa INT,
 PRIMARY KEY (EstandID),
- foreign key (Fira) references Fires(`FiraID`)
+ foreign key (Empresa) references Empreses(`EmpresaID`)
 
 
 );
 
 INSERT INTO Usuaris VALUES('admin',MD5('admin'),true,true);
-SELECT count(Username), MD5('admin'),Password FROM Usuaris WHERE Username = admin
-
+SELECT count(Username), MD5('admin'),Password FROM Usuaris WHERE Username = admin;
