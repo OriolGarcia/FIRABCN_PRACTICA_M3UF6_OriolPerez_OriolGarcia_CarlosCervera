@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<GridPane alignment="center" hgap="10" prefHeight="253.0" prefWidth="620.0" vgap="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainPackage.Controllers.ControllerEstandAdd">
+    <columnConstraints>
+        <ColumnConstraints />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints />
+    </rowConstraints>
+    <children>
+      <!--<TitledPane animated="false" prefHeight="554.0" prefWidth="562.0" text="La teva Fira Manager - Afegir Usuari">
+        <content>-->
+        <AnchorPane minHeight="180.0" minWidth="560.0" prefHeight="243.0" prefWidth="635.0">
+            <children>
+                <Label fx:id="lbNomEmpresa" layoutX="14.0" layoutY="49.0" text="Nom de l'Estand:" />
+                <Label fx:id="lbCIF" layoutX="337.0" layoutY="52.0" text="Quota:" />
+                <TextField fx:id="txtNomEstand" layoutX="135.0" layoutY="47.0" />
+                <TextField fx:id="txtQuota" layoutX="397.0" layoutY="47.0" />
+                <TextField fx:id="txtSuperficie" layoutX="135.0" layoutY="83.0" />
+                <Label layoutX="50.0" layoutY="90.0" prefHeight="21.0" prefWidth="77.0" text="Superfície:" />
+                <Label layoutX="92.0" layoutY="123.0" text="Fira:" />
+                <Label layoutX="327.0" layoutY="90.0" text="Data Inici:" />
+                <Label fx:id="lbErrorAdd" layoutX="226.0" layoutY="208.0" text="Hi ha algun error" textFill="RED" visible="false" />
+                <ComboBox fx:id="ComBFires" layoutX="135.0" layoutY="118.0" prefWidth="150.0" />
+                <ComboBox fx:id="ComBTipus" layoutX="135.0" layoutY="149.0" prefWidth="150.0" />
+                <Label layoutX="15.0" layoutY="154.0" text="Tipus d'empresa:" />
+               <Button fx:id="btAddEstand" layoutX="231.0" layoutY="188.0" mnemonicParsing="false" onAction="#AddEstandEvent" text="Afegir Estand" />
+            <DatePicker fx:id="dtDataInici" layoutX="396.0" layoutY="85.0" prefHeight="31.0" prefWidth="187.0" />
+            <DatePicker fx:id="dtDataFi" layoutX="396.0" layoutY="118.0" prefHeight="31.0" prefWidth="187.0" />
+            <Label layoutX="339.0" layoutY="123.0" text="Data Fi:" />
+            </children>
+        </AnchorPane>
+        <!--</content>
+      </TitledPane>-->
+    </children>
+</GridPane>

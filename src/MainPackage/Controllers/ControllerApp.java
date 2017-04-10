@@ -407,4 +407,47 @@ public class ControllerApp{
             TbVEmpreses.getColumns().clear();
         }
     }
+    public void afegirEstand(ActionEvent event) {
+
+        int id = 0;
+        boolean accs = true;
+        try {
+            TablePosition pos = (TablePosition) TbVEmpreses.getSelectionModel().getSelectedCells().get(0);
+            int index = pos.getRow();
+            String selected = TbVEmpreses.getItems().get(index).toString();
+            String ids = selected.substring(1, selected.indexOf(","));
+            id = Integer.parseInt(ids);
+            System.out.println("id: " + id);
+        }catch (Exception e){
+            System.out.println("Error: " + e.getMessage());
+            accs = false;
+        }
+        if(accs){
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../Scenes/EstandAddScene.fxml"));
+                Parent root = loader.load();
+                Stage secondStage = new Stage();
+                secondStage.setScene(new Scene(root, 560, 276));
+                secondStage.show();
+                ControllerEstandAdd controller = loader.getController();
+                controller.init(connection, bdAccessor,id);
+                secondStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                    @Override
+                    public void handle(WindowEvent we) {
+                        System.out.println("S'ha tancat Add Empresa");
+                        initiailizeTableViewEstands();
+
+                    }
+                });
+            }catch (IOException ex){
+                System.out.println("Error: " + ex.getMessage());
+            }}
+        else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Unselected");
+            alert.setHeaderText("Fira no seleccionada.");
+            alert.setContentText("Selecciona la fira on vols inserir l'empresa.");
+            alert.showAndWait();
+        }
+    }
 }

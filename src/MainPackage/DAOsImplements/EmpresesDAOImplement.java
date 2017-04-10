@@ -25,11 +25,11 @@ public class EmpresesDAOImplement implements EmpresesDAO {
             String cadenaSQL = "INSERT INTO Empreses(Nom,CIF,`Persona de contacte`,Telefon,Tipus,Fira)"
                     +" VALUES(?,?,?,?,?,?);";
             pstmt = conn.prepareStatement(cadenaSQL, PreparedStatement.RETURN_GENERATED_KEYS);
-            pstmt.setString(1,Nom);
+            pstmt.setString(1, Nom);
             pstmt.setString(2, CIF);
             pstmt.setString(3, PersonaContacte);
             pstmt.setString(4, Telefon);
-            pstmt.setInt(5,Tipus);
+            pstmt.setInt(5, Tipus);
             pstmt.setInt(6, Fira);
             int n = pstmt.executeUpdate();
             try (ResultSet rs = pstmt.getGeneratedKeys()) {

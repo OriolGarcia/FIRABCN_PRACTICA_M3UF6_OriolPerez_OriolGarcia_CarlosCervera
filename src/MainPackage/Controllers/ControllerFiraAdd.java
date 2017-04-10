@@ -56,6 +56,7 @@ public class ControllerFiraAdd {
 
         try {
             FiresDAOImplement firesDAOImpl = new FiresDAOImplement();
+
             Float superficie = Float.parseFloat(txtSuperficie.getText());
             LocalDate localDate1 = dtDataInici.getValue();
             Instant instant = Instant.from(localDate1.atStartOfDay(ZoneId.systemDefault()));
@@ -63,6 +64,7 @@ public class ControllerFiraAdd {
             LocalDate localDate2 = dtDataInici.getValue();
             Instant instant2 = Instant.from(localDate2.atStartOfDay(ZoneId.systemDefault()));
             Date dateFi = Date.from(instant2);
+
             firesDAOImpl.AddFira(connection, txtTitol.getText(), txtUbicacio.getText(), superficie, dateInici, dateFi);
             final Node source = (Node) event.getSource();
             Stage stage = (Stage) source.getScene().getWindow();
