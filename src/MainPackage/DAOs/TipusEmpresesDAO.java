@@ -12,9 +12,8 @@ import java.sql.ResultSet;
 
 
 public interface TipusEmpresesDAO {
-
         public boolean AddTipusEmpreses(Connection conn, String Username, String Password, Boolean Permissions, Boolean Active);
         public boolean UpdateTipusEmpreses(Connection conn, String Username, String Password, Boolean Permissions, Boolean Active);
         public boolean DeleteTipusEmpreses(Connection conn, String Username);
-        public  void omplirComboBox(Connection conn, ComboBox comboBox);
+        public void omplirComboBox(Connection conn, ComboBox comboBox);
 }

@@ -17,6 +17,7 @@ public class ControllerPermisos {
     Connection connection;
     BDAccessor bdAccessor;
     String Username;
+
     @FXML
     private CheckBox chckBPermisos;
     @FXML
@@ -30,23 +31,21 @@ public class ControllerPermisos {
         this.bdAccessor = bdAccessor;
         this.Username = Username;
         lbusuari.setText(lbusuari.getText() + "  " + Username);
-         UserDAOImpl = new UserDAOImplement();
-       boolean[] resultats = UserDAOImpl.SelectPermisionsActiveFromUser(connection,Username);
-       chckBPermisos.setSelected(!resultats[0]);
+        UserDAOImpl = new UserDAOImplement();
+        boolean[] resultats = UserDAOImpl.SelectPermisionsActiveFromUser(connection,Username);
+        chckBPermisos.setSelected(!resultats[0]);
         checkBActiu.setSelected(!resultats[1]);
     }
 
     public void ModPermisosEvent(ActionEvent event) {
 
-                UserDAOImplement UserDAOImpl = new UserDAOImplement();
+        UserDAOImplement UserDAOImpl = new UserDAOImplement();
 
-                UserDAOImpl.UpdateUserPermissions(connection,Username,chckBPermisos.isSelected(),checkBActiu.isSelected());
-                final Node source = (Node) event.getSource();
-                Stage stage = (Stage) source.getScene().getWindow();
-                stage.getOnCloseRequest().handle(null);
-                stage.close();
+        UserDAOImpl.UpdateUserPermissions(connection,Username,chckBPermisos.isSelected(),checkBActiu.isSelected());
+        final Node source = (Node) event.getSource();
+        Stage stage = (Stage) source.getScene().getWindow();
+        stage.getOnCloseRequest().handle(null);
+        stage.close();
     }
-
-
 
 }

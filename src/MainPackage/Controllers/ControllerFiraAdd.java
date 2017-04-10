@@ -24,6 +24,7 @@ import java.util.Date;
 public class ControllerFiraAdd {
     Connection connection;
     BDAccessor bdAccessor;
+
     @FXML
     private TextField txtTitol;
     @FXML
@@ -50,6 +51,7 @@ public class ControllerFiraAdd {
             }
         });
     }
+
     public void AddFiraEvent(ActionEvent event) {
 
         try {

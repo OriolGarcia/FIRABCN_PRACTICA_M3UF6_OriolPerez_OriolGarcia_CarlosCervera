@@ -41,6 +41,7 @@ public class ControllerApp{
     TableView TbVEstands;
     @FXML
     TextField txtEmpresaSearch;
+
     Connection connection;
     BDAccessor bdAccessor;
 
@@ -58,6 +59,7 @@ public class ControllerApp{
                 initiailizeTableViewUsers();
             }
         });
+
         txtFiraSearch.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable,
@@ -65,6 +67,7 @@ public class ControllerApp{
                 initiailizeTableViewFires();
             }
         });
+
         txtEmpresaSearch.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable,
@@ -72,12 +75,14 @@ public class ControllerApp{
                 initiailizeTableViewEmpreses();
             }
         });
+
         TbVFires.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
                 initiailizeTableViewEmpreses();
             }
         });
     }
+
     private void initiailizeTableViewUsers(){
 
         UserDAOImplement UserDAOImpl = new UserDAOImplement();
@@ -85,6 +90,7 @@ public class ControllerApp{
         UserDAOImpl.findbyUsername(connection,txtUserSearch.getText(),TbVUsers);
 
     }
+
     public void afegirUsuari(ActionEvent event) {
 
         try {
@@ -104,6 +110,7 @@ public class ControllerApp{
             });
         }catch (IOException ex){}
     }
+
     public void eliminarUsuari(ActionEvent event) {
         try {
             TablePosition pos = (TablePosition) TbVUsers.getSelectionModel().getSelectedCells().get(0);
@@ -118,7 +125,9 @@ public class ControllerApp{
             System.out.println("Error: " + e.getMessage());
         }
     }
+
     public void generarContrasenya(ActionEvent event) {}
+
     public void canviarPermisos(ActionEvent event) {
         String id = "";
         boolean accs = true;
@@ -154,6 +163,7 @@ public class ControllerApp{
             }
         }
     }
+
     public void canviarContrasenya(ActionEvent event) {}
 
     private void initiailizeTableViewFires(){
@@ -163,6 +173,7 @@ public class ControllerApp{
         FiresDAOImpl.findbyParams(connection,txtFiraSearch.getText(),TbVFires);
 
     }
+
     public void afegirFira(ActionEvent event) {
 
         try {
@@ -179,7 +190,7 @@ public class ControllerApp{
                     System.out.println("S'ha tancat Add Fira");
                     initiailizeTableViewFires();
 
-                              }
+                }
             });
         }catch (IOException ex){
             System.out.println("Error: " + ex.getMessage());
@@ -226,15 +237,16 @@ public class ControllerApp{
     public void eliminarFira(ActionEvent event) {
         int id = 0;
         boolean accs = true;
+
         try{
-        TablePosition pos = (TablePosition) TbVFires.getSelectionModel().getSelectedCells().get(0);
-        int index = pos.getRow();
-        String selected = TbVFires.getItems().get(index).toString();
-        id =Integer.parseInt( selected.substring(1, selected.indexOf(",")));
-        System.out.println(selected);
-        FiresDAOImplement firesDAOImpl = new FiresDAOImplement();
-        firesDAOImpl.DeleteFira(connection,id);
-        initiailizeTableViewFires();
+            TablePosition pos = (TablePosition) TbVFires.getSelectionModel().getSelectedCells().get(0);
+            int index = pos.getRow();
+            String selected = TbVFires.getItems().get(index).toString();
+            id = Integer.parseInt( selected.substring(1, selected.indexOf(",")));
+            System.out.println(selected);
+            FiresDAOImplement firesDAOImpl = new FiresDAOImplement();
+            firesDAOImpl.DeleteFira(connection,id);
+            initiailizeTableViewFires();
         }catch (Exception e){
             System.out.println("Error: " + e.getMessage());
             accs = false;
@@ -261,7 +273,6 @@ public class ControllerApp{
         }
     }
     public void afegirEmpresa(ActionEvent event) {
-
 
         int id = 0;
         boolean accs = true;
@@ -309,9 +320,9 @@ public class ControllerApp{
         int id = 0;
         boolean accs = true;
         try {
-            TablePosition pos = (TablePosition) TbVFires.getSelectionModel().getSelectedCells().get(0);
+            TablePosition pos = (TablePosition) TbVEmpreses.getSelectionModel().getSelectedCells().get(0);
             int index = pos.getRow();
-            String selected = TbVFires.getItems().get(index).toString();
+            String selected = TbVEmpreses.getItems().get(index).toString();
             String ids = selected.substring(1, selected.indexOf(","));
             id = Integer.parseInt(ids);
             System.out.println("id: " + id);
@@ -322,18 +333,18 @@ public class ControllerApp{
 
         if(accs) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("../Scenes/FiraUpdScene.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../Scenes/EmpresaUpdScene.fxml"));
                 Parent root = loader.load();
                 Stage secondStage = new Stage();
                 secondStage.setScene(new Scene(root, 560, 276));
                 secondStage.show();
-                ControllerFiraUpd controller = loader.getController();
+                ControllerEmpresaUpd controller = loader.getController();
                 controller.init(connection, bdAccessor, id);
                 secondStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
                     @Override
                     public void handle(WindowEvent event) {
-                        System.out.println("S'ha tancat Update User");
-                        initiailizeTableViewFires();
+                        System.out.println("S'ha tancat Update Empresa");
+                        initiailizeTableViewEmpreses();
                     }
                 });
             } catch (IOException ex) {
@@ -346,14 +357,14 @@ public class ControllerApp{
         int id = 0;
         boolean accs = true;
         try{
-            TablePosition pos = (TablePosition) TbVFires.getSelectionModel().getSelectedCells().get(0);
+            TablePosition pos = (TablePosition) TbVEmpreses.getSelectionModel().getSelectedCells().get(0);
             int index = pos.getRow();
-            String selected = TbVFires.getItems().get(index).toString();
-            id =Integer.parseInt( selected.substring(1, selected.indexOf(",")));
+            String selected = TbVEmpreses.getItems().get(index).toString();
+            id = Integer.parseInt( selected.substring(1, selected.indexOf(",")));
             System.out.println(selected);
-            FiresDAOImplement firesDAOImpl = new FiresDAOImplement();
-            firesDAOImpl.DeleteFira(connection,id);
-            initiailizeTableViewFires();
+            EmpresesDAOImplement empDAOImpl = new EmpresesDAOImplement();
+            empDAOImpl.DeleteEmpresa(connection,id);
+            initiailizeTableViewEmpreses();
         }catch (Exception e){
             System.out.println("Error: " + e.getMessage());
             accs = false;

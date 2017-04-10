@@ -20,9 +20,7 @@ public class UserDAOImplement implements UserDAO {
     private static PreparedStatement pstmt;
     private static BDAccessor bd= null;
 
-
     public boolean AddUser(Connection conn, String Username,String Password,Boolean permissions, Boolean Active){
-
         try {
             String cadenaSQL = "INSERT INTO Usuaris(Username,Password,PermisosAdmin,Actiu) VALUES(?,MD5(?),?,?);";
             pstmt = conn.prepareStatement(cadenaSQL, PreparedStatement.RETURN_GENERATED_KEYS);
@@ -84,8 +82,6 @@ public class UserDAOImplement implements UserDAO {
     }
 
     public boolean[] SelectPermisionsActiveFromUser(Connection conn, String User){
-
-
         try {
             String cadenaSQL= "SELECT PermisosAdmin,Actiu FROM Usuaris WHERE Username = ?";
             pstmt = conn.prepareStatement(cadenaSQL);
@@ -96,8 +92,6 @@ public class UserDAOImplement implements UserDAO {
                 while (resultat.next()) {
 
                     return new boolean[]{!resultat.getBoolean(1),!resultat.getBoolean(2)     };
-
-
 
                 }
                 System.out.println("1");
@@ -149,7 +143,6 @@ public class UserDAOImplement implements UserDAO {
     }
 
     public boolean DeleteUser(Connection conn, String Username){
-
         try {
             String cadenaSQL = "DELETE from Usuaris Where Username=?;";
             pstmt = conn.prepareStatement(cadenaSQL, PreparedStatement.RETURN_GENERATED_KEYS);
@@ -178,7 +171,6 @@ public class UserDAOImplement implements UserDAO {
     }
 
     public boolean LoginUser(Connection conn, String User, String password){
-
         try {
             String cadenaSQL= "SELECT count(Username), MD5(?),Password FROM Usuaris WHERE Username = ?";
             pstmt = conn.prepareStatement(cadenaSQL);
@@ -195,8 +187,6 @@ public class UserDAOImplement implements UserDAO {
                         return false;
                     else{ return true;}
 
-
-
                 }
                 System.out.println("1");
                 return false;
@@ -206,17 +196,15 @@ public class UserDAOImplement implements UserDAO {
             return false;
         }
         finally {
-                try{
-               pstmt.clearParameters();
+            try{
+                pstmt.clearParameters();
             }catch (SQLException ex){
-                    System.out.println("3");
-
+                System.out.println("3");
             }
         }
     }
 
     public void findbyUsername(Connection conn,String UsernameSearch,TableView tableView){
-
         try {
             String cadenaSQL= "SELECT *  FROM Usuaris WHERE (LENGTH(?) <1 or Username like ?)";
             pstmt = conn.prepareStatement(cadenaSQL);

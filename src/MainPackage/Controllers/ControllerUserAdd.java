@@ -32,10 +32,12 @@ public class ControllerUserAdd {
     private CheckBox chckBPermisos;
     @FXML
     private CheckBox checkBActiu;
+
     public void init(Connection conn, BDAccessor bdAccessor) {
         connection=conn;
         this.bdAccessor= bdAccessor;
     }
+
     public void AddUserEvent(ActionEvent event) {
         if(!txtUser.getText().isEmpty()&&!txtPassword.getText().isEmpty()&&!txtPasswordRepeat.getText().isEmpty())
         if(txtPassword.getText().equals(txtPasswordRepeat.getText())){

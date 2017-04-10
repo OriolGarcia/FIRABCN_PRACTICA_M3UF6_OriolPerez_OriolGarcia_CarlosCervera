@@ -18,8 +18,9 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 public class ControllerLogin {
-    BDAccessor accessor= new BDAccessor();
+    BDAccessor accessor = new BDAccessor();
     Connection connexio;
+
     @FXML
     private TextField txtUser;
     @FXML
@@ -54,7 +55,7 @@ public class ControllerLogin {
         String usuari = txtUser.getText(),pass = txtPassword.getText();
         if( UserDAOImpl.LoginUser(connexio,usuari,pass)){
 
-            System.out.println("Usuari logejat");
+            System.out.println("Usuari loguejat");
             Logged(event);
         } else{
             Alert alert = new Alert(Alert.AlertType.INFORMATION);

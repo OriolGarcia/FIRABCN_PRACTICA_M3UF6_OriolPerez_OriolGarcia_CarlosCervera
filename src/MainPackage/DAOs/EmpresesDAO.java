@@ -13,7 +13,7 @@ import java.util.Date;
  */
 public interface EmpresesDAO {
     public boolean AddEmpresa(Connection conn, String Nom, String CIF, String PersonaContacte, String Telefon, int Tipus, int Fira);
-    public boolean UpdateEmpresa(Connection conn, String Nom, String CIF, String PersonaContacte, String Telefon, int Tipus, int Fira);
+    public boolean UpdateEmpresa(Connection conn, int id, String Nom, String CIF, String PersonaContacte, String Telefon, int Tipus, int Fira);
     public boolean DeleteEmpresa(Connection conn, int id);
     public void findbyParams(Connection conn, String NomSearch, int Fira, TableView tableView);
     public void omplirCamps(Connection conn, int id, TextField txtFielNomEmpresa, TextField txtFieldCIF, TextField txtPersonaContacte,TextField txtTelefon);

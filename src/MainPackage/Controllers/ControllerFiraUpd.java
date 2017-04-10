@@ -10,15 +10,11 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-
 import java.sql.Connection;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
-
-
-
 
 public class ControllerFiraUpd {
     Connection connection;
@@ -38,11 +34,14 @@ public class ControllerFiraUpd {
     @FXML
     private Label lbErrorUpdFira;
     FiresDAOImplement firesDAOImpl;
+
+
     public void init(Connection conn, BDAccessor bdAccessor,int id) {
         connection = conn;
         this.bdAccessor = bdAccessor;
         this.id = id;
-      firesDAOImpl = new FiresDAOImplement();
+        firesDAOImpl = new FiresDAOImplement();
+
         txtSuperficie.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {

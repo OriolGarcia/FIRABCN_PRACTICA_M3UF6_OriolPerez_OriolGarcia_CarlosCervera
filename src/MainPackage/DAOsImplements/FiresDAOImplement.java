@@ -92,11 +92,7 @@ public class FiresDAOImplement implements FiresDAO {
 
     }
 
-
-
     public boolean DeleteFira(Connection conn, int id){
-
-
         try {
             String cadenaSQL = "DELETE from Fires Where FiraID = ?;";
             pstmt = conn.prepareStatement(cadenaSQL, PreparedStatement.RETURN_GENERATED_KEYS);
@@ -162,11 +158,11 @@ public class FiresDAOImplement implements FiresDAO {
 
                 while (resultat.next()) {
 
-                            txtFielTitolFira.setText(resultat.getString(1));
-                            txtFieldUbicació.setText(resultat.getString(2));
-                            txtFieldSuperificie.setText(resultat.getString(3));
-                            DataInici.setValue(resultat.getDate(4).toLocalDate());
-                            DataFi.setValue(resultat.getDate(5).toLocalDate());
+                    txtFielTitolFira.setText(resultat.getString(1));
+                    txtFieldUbicació.setText(resultat.getString(2));
+                    txtFieldSuperificie.setText(resultat.getString(3));
+                    DataInici.setValue(resultat.getDate(4).toLocalDate());
+                    DataFi.setValue(resultat.getDate(5).toLocalDate());
                 }
                 System.out.println("1");
             }
@@ -183,9 +179,9 @@ public class FiresDAOImplement implements FiresDAO {
             }
         }
 
-
     }
-    public  void omplirComboBox(Connection conn, ComboBox comboBox){
+
+    public void omplirComboBox(Connection conn, ComboBox comboBox){
 
         try {
             String cadenaSQL= "SELECT FiraID, Titol from Fires";

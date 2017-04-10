@@ -19,11 +19,11 @@ import java.sql.SQLException;
  */
 public class TipusEmpresesDAOImplement implements TipusEmpresesDAO {
 
+    private static Connection conn;
+    private static PreparedStatement pstmt;
+    private static BDAccessor bd = null;
 
-        private static Connection conn;
-        private static PreparedStatement pstmt;
-        private static BDAccessor bd= null;
-        public boolean AddTipusEmpreses(Connection conn, String Username, String Password, Boolean permissions, Boolean Active) {
+    public boolean AddTipusEmpreses(Connection conn, String Username, String Password, Boolean permissions, Boolean Active) {
 
 /*
             try {
@@ -54,20 +54,16 @@ public class TipusEmpresesDAOImplement implements TipusEmpresesDAO {
                     pstmt.clearParameters();
                 } catch (SQLException ex) {
                 }
-            }*/ return false;
-        }
+            }*/
+        return false;
+    }
 
-
-
-
-
-
-        public boolean UpdateTipusEmpreses(Connection conn, String Username, String Password, Boolean Permissions, Boolean Active){
-            return true;
-        }
-        public boolean DeleteTipusEmpreses(Connection conn, String Username){
-            return true;
-        }
+    public boolean UpdateTipusEmpreses(Connection conn, String Username, String Password, Boolean Permissions, Boolean Active){
+        return true;
+    }
+    public boolean DeleteTipusEmpreses(Connection conn, String Username){
+        return true;
+    }
 
     public  void omplirComboBox(Connection conn, ComboBox comboBox) {
 

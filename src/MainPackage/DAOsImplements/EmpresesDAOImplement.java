@@ -1,6 +1,7 @@
 package MainPackage.DAOsImplements;
 
 import MainPackage.Accessor.BDAccessor;
+import MainPackage.DAOs.EmpresesDAO;
 import MainPackage.Utils;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -13,11 +14,12 @@ import java.sql.SQLException;
 /**
  * Created by Carlos on 3/04/17.
  */
-public class EmpresesDAOImplement {
+public class EmpresesDAOImplement implements EmpresesDAO {
 
     private static Connection conn;
     private static PreparedStatement pstmt;
-    private static BDAccessor bd= null;
+    private static BDAccessor bd = null;
+
     public boolean AddEmpresa(Connection conn, String Nom, String CIF, String PersonaContacte, String Telefon, int Tipus, int Fira){
         try {
             String cadenaSQL = "INSERT INTO Empreses(Nom,CIF,`Persona de contacte`,Telefon,Tipus,Fira)"
@@ -49,22 +51,81 @@ public class EmpresesDAOImplement {
             }catch (SQLException ex){}
         }
     }
-    public boolean UpdateEmpresa(Connection conn, String Nom, String CIF, String PersonaContacte, String Telefon, int Tipus, int Fira){
-        return true;
+    public boolean UpdateEmpresa(Connection conn, int id, String Nom, String CIF, String PersonaContacte, String Telefon, int Tipus, int Fira){
+        try {
+            String cadenaSQL = "UPDATE Empreses SET Nom=?,CIF=?,`Persona de contacte`=?,Telefon=?,Tipus=?,Fira=? WHERE EmpresaID=?;";
+            pstmt = conn.prepareStatement(cadenaSQL, PreparedStatement.RETURN_GENERATED_KEYS);
+            pstmt.setString(1, Nom);
+            pstmt.setString(2, CIF);
+            pstmt.setString(3, PersonaContacte);
+            pstmt.setString(4, Telefon);
+            pstmt.setInt(5, Tipus);
+            pstmt.setInt(6, Fira);
+            pstmt.setInt(7, id);
+            int n = pstmt.executeUpdate();
+            try (ResultSet rs = pstmt.getGeneratedKeys()) {
+                while (rs.next()) {
+                    System.out.println("Codi generat per getGeneratedKeys():"
+                            + rs.getInt(1));
+                }
+            }
+            conn.commit();
+            if (n>0)return true;
+            else return false;
+        }catch (SQLException ex){
+
+            return false;
+        }finally {
+            try {
+                pstmt.clearParameters();
+            }catch (SQLException ex){}
+        }
+
     }
-    public boolean DeleteEmpresa(Connection conn, int id){ return true;}
+
+    public boolean DeleteEmpresa(Connection conn, int id){
+        try {
+            String cadenaSQL = "DELETE from Empreses Where EmpresaID = ?;";
+            pstmt = conn.prepareStatement(cadenaSQL, PreparedStatement.RETURN_GENERATED_KEYS);
+            pstmt.setInt(1,id);
+
+
+            int n = pstmt.executeUpdate();
+            try (ResultSet rs = pstmt.getGeneratedKeys()) {
+                while (rs.next()) {
+                    System.out.println("Codi generat per getGeneratedKeys():"
+                            + rs.getInt(1));
+                }
+            }
+            conn.commit();
+
+            if (n>0)return true;
+            else return false;
+        }catch (SQLException ex){
+            System.out.println(ex.getErrorCode());
+            return false;
+        }finally {
+            try {
+                pstmt.clearParameters();
+            }catch (SQLException ex){}
+        }
+
+    }
+
     public void findbyParams(Connection conn, String NomSearch, int Fira, TableView tableView){
         try {
             String cadenaSQL= "SELECT EmpresaID,Nom,CIF,`Persona de contacte`,Telefon,Fires.Titol, TipusEmpresa.TitolTipus as `Tipus de empresa` "
                     +" FROM Empreses"
-                    +" INNER JOIN Fires ON Fires.FiraID=Empreses.Fira"
-                    +" INNER JOIN TipusEmpresa ON TipusEmpresa.TipusID=Empreses.Tipus"
+                    +" INNER JOIN Fires ON Fires.FiraID = Empreses.Fira"
+                    +" INNER JOIN TipusEmpresa ON TipusEmpresa.TipusID = Empreses.Tipus"
                     +" WHERE ((LENGTH(?) <1 or Nom like ?) and Fira=?)";
+
             pstmt = conn.prepareStatement(cadenaSQL);
             pstmt.setString(1, NomSearch);
             pstmt.setString(2,"%"+NomSearch+"%");
             pstmt.setInt(3,Fira);
             System.out.println("1");
+
             try (ResultSet resultat = pstmt.executeQuery()) {
                 System.out.println("retorna resultSet");
                 Utils.omplirTableView(tableView,resultat);
@@ -84,7 +145,35 @@ public class EmpresesDAOImplement {
 
     }
     public void omplirCamps(Connection conn, int id, TextField txtFielNomEmpresa, TextField txtFieldCIF, TextField txtPersonaContacte, TextField txtTelefon){
+        try {
+            String cadenaSQL= "SELECT Nom,CIF,`Persona de contacte`,Telefon,Tipus FROM Empreses WHERE EmpresaID = ?";
+            pstmt = conn.prepareStatement(cadenaSQL);
+            pstmt.setInt(1,id);
 
+            try (ResultSet resultat = pstmt.executeQuery()) {
+
+                while (resultat.next()) {
+
+                    txtFielNomEmpresa.setText(resultat.getString(1));
+                    txtFieldCIF.setText(resultat.getString(2));
+                    txtPersonaContacte.setText(resultat.getString(3));
+                    txtTelefon.setText(resultat.getString(4));
+                    //DataFi.setValue(resultat.getDate(5).toLocalDate());
+                }
+                System.out.println("1");
+            }
+        }catch (SQLException ex){
+            System.out.println(ex.getErrorCode());
+
+        }
+        finally {
+            try{
+                pstmt.clearParameters();
+            }catch (SQLException ex){
+                System.out.println("3");
+
+            }
+        }
     }
     //
 }

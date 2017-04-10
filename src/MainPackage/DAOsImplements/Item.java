@@ -6,18 +6,19 @@ package MainPackage.DAOsImplements;
 public class Item {
     int id;
     String value;
-   public Item(int id , String value){
-        this.id=id;
-        this.value= value;
 
+    public Item(int id , String value){
+        this.id = id;
+        this.value = value;
     }
     public int getId(){
         return id;
     }
-public String getValue(){
+
+    public String getValue(){
 
         return value;
-}
+    }
 
     @Override
     public String toString() {
@@ -26,13 +27,14 @@ public String getValue(){
 
     @Override
     public boolean equals(Object obj) {
-    if(obj instanceof Item){
 
-       if( getId()==((Item)obj).getId()){
+        if(obj instanceof Item){
 
-           return true;
-       }
-    }
+           if(getId() == ((Item)obj).getId()){
+
+               return true;
+           }
+        }
         return false;
     }
 }

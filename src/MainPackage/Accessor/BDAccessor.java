@@ -29,8 +29,7 @@ public class BDAccessor {
      * @param contrasenya
      *
      */
-    public BDAccessor(String url, String usuari,
-                      String contrasenya) {
+    public BDAccessor(String url, String usuari, String contrasenya) {
         this.url = url;
         this.usuari = usuari;
         this.contrasenya = contrasenya;
@@ -44,9 +43,7 @@ public class BDAccessor {
      * @throws SQLException Si no pot obtenir la connexiÃ³ a BD.
      * @throws ClassNotFoundException Si no troba la classe del driver de BD
      */
-    public Connection obtenirConnexio() throws SQLException, IOException,
-            ClassNotFoundException {
-
+    public Connection obtenirConnexio() throws SQLException, IOException, ClassNotFoundException {
         Connection conn = null;
         // Llegeix el fitxer de configuraciÃ³ de la BD o els paramÃ¨tres del constructor.
         try {
@@ -83,8 +80,6 @@ public class BDAccessor {
      * @param conn ConnexiÃ³ a la BD.
      */
     public static void tancarConnexio(Connection conn) {
-
-
         if (conn != null) {
             try {
                 conn.close();
@@ -120,7 +115,6 @@ public class BDAccessor {
      * @throws IOException Si no troba el fitxer
      */
     private static Properties carregarParametres(String fitxer) throws IOException {
-
         Properties propietats = new Properties();
         try (FileInputStream fitxerEntrada = new FileInputStream(fitxer)) {
             propietats.load(fitxerEntrada);

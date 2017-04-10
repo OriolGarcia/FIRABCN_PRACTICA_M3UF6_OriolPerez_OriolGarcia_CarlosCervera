@@ -29,6 +29,7 @@ import java.util.Date;
 public class ControllerEmpresaAdd {
     Connection connection;
     BDAccessor bdAccessor;
+
     @FXML
     private TextField txtNomEmpresa;
     @FXML
@@ -45,8 +46,8 @@ public class ControllerEmpresaAdd {
     private Label lbErrorAdd;
 
     public void init(Connection conn, BDAccessor bdAccessor, int FiraID) {
-        connection=conn;
-        this.bdAccessor= bdAccessor;
+        connection = conn;
+        this.bdAccessor = bdAccessor;
         FiresDAOImplement firesDAOImplement= new FiresDAOImplement();
         firesDAOImplement.omplirComboBox(connection,ComBFires);
         ComBFires.getSelectionModel().select(new Item(FiraID,""));
@@ -54,6 +55,7 @@ public class ControllerEmpresaAdd {
         tipusEmpresesDAO.omplirComboBox(connection,ComBTipus);
         ComBTipus.getSelectionModel().select(0);
     }
+
     public void AddEmpresaEvent(ActionEvent event) {
 
         try {
