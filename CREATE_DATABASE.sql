@@ -4,7 +4,7 @@ CREATE USER 'Fira_Manager'@'localhost' IDENTIFIED BY 'Fira_Manager';
 GRANT ALL PRIVILEGES ON Fira_DB.* TO 'Fira_Manager'@'localhost';
 GRANT ALL PRIVILEGES ON Fira_DB.* TO 'root'@'localhost';
 
-Use Fira_DB;
+USE Fira_DB;
 
 CREATE TABLE Usuaris(
 Username VARCHAR(100),
@@ -61,8 +61,10 @@ QuotaEstand DECIMAL,
 DataInici DATE,
 DataFi DATE,
 Fira INT,
+Empresa INT,
 PRIMARY KEY (EstandID),
-FOREIGN KEY(Fira) REFERENCES Fires(`FiraID`)
+FOREIGN KEY(Fira) REFERENCES Fires(`FiraID`),
+FOREIGN KEY(Empresa) REFERENCES Empreses(`EmpresaID`)
 );
 
 INSERT INTO Usuaris VALUES('admin',MD5('admin'),true,true);
@@ -76,3 +78,6 @@ INSERT INTO TipusEmpresa VALUES (NULL,'Informatica','Informatica');
 
 ALTER TABLE Empreses ADD Fira INT;
 ALTER TABLE Empreses ADD CONSTRAINT FOREIGN KEY(Fira) REFERENCES Fires(`FiraID`);
+
+ALTER TABLE Estands ADD Empresa INT;
+ALTER TABLE Estands ADD CONSTRAINT FOREIGN KEY(Empresa) REFERENCES Empreses(`EmpresaID`);

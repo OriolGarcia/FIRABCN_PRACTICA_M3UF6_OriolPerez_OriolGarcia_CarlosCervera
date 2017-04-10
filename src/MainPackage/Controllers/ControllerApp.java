@@ -2,6 +2,7 @@ package MainPackage.Controllers;
 
 import MainPackage.Accessor.BDAccessor;
 import MainPackage.DAOsImplements.EmpresesDAOImplement;
+import MainPackage.DAOsImplements.EstandsDAOImplement;
 import MainPackage.DAOsImplements.FiresDAOImplement;
 import MainPackage.DAOsImplements.UserDAOImplement;
 import javafx.beans.value.ChangeListener;
@@ -42,6 +43,9 @@ public class ControllerApp{
     @FXML
     TextField txtEmpresaSearch;
 
+    @FXML
+    TextField txtEstandSearch;
+
     Connection connection;
     BDAccessor bdAccessor;
 
@@ -76,9 +80,23 @@ public class ControllerApp{
             }
         });
 
+        txtEstandSearch.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable,
+                                String oldValue, String newValue) {
+                initiailizeTableViewEstands();
+            }
+        });
+
         TbVFires.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
                 initiailizeTableViewEmpreses();
+            }
+        });
+
+        TbVEstands.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                initiailizeTableViewEstands();
             }
         });
     }
@@ -257,21 +275,21 @@ public class ControllerApp{
         int id = 0;
         boolean accs = true;
         try{
-        TablePosition pos = (TablePosition) TbVFires.getSelectionModel().getSelectedCells().get(0);
-        int index = pos.getRow();
-        String selected = TbVFires.getItems().get(index).toString();
-        id =Integer.parseInt( selected.substring(1, selected.indexOf(",")));
+            TablePosition pos = (TablePosition) TbVFires.getSelectionModel().getSelectedCells().get(0);
+            int index = pos.getRow();
+            String selected = TbVFires.getItems().get(index).toString();
+            id = Integer.parseInt( selected.substring(1, selected.indexOf(",")));
 
+            EmpresesDAOImplement empresesDAOImpl = new EmpresesDAOImplement();
 
-        EmpresesDAOImplement empresesDAOImpl = new EmpresesDAOImplement();
-
-        empresesDAOImpl.findbyParams(connection,txtEmpresaSearch.getText(),id,TbVEmpreses);
+            empresesDAOImpl.findbyParams(connection,txtEmpresaSearch.getText(),id,TbVEmpreses);
         }catch (Exception e){
             System.out.println("Error: " + e.getMessage());
             TbVEmpreses.getItems().clear();
             TbVEmpreses.getColumns().clear();
         }
     }
+
     public void afegirEmpresa(ActionEvent event) {
 
         int id = 0;
@@ -368,6 +386,25 @@ public class ControllerApp{
         }catch (Exception e){
             System.out.println("Error: " + e.getMessage());
             accs = false;
+        }
+    }
+
+    private void initiailizeTableViewEstands(){
+        int id = 0;
+        boolean accs = true;
+        try{
+            TablePosition pos = (TablePosition) TbVEmpreses.getSelectionModel().getSelectedCells().get(0);
+            int index = pos.getRow();
+            String selected = TbVEmpreses.getItems().get(index).toString();
+            id = Integer.parseInt( selected.substring(1, selected.indexOf(",")));
+
+            EstandsDAOImplement estDAOImpl = new EstandsDAOImplement();
+
+            estDAOImpl.findbyParams(connection,txtEstandSearch.getText(),id,TbVEstands);
+        }catch (Exception e){
+            System.out.println("Error: " + e.getMessage());
+            TbVEmpreses.getItems().clear();
+            TbVEmpreses.getColumns().clear();
         }
     }
 }
