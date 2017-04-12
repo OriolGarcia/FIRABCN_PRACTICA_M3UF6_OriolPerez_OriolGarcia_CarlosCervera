@@ -2,9 +2,10 @@ package MainPackage.Controllers;
 
 import MainPackage.Accessor.BDAccessor;
 import MainPackage.DAOs.EmpresesDAO;
-import MainPackage.DAOs.EstandsDAO;
-import MainPackage.DAOs.TipusEmpresesDAO;
-import MainPackage.DAOsImplements.*;
+import MainPackage.DAOsImplements.EmpresesDAOImplement;
+import MainPackage.DAOsImplements.EstandsDAOImplement;
+import MainPackage.DAOsImplements.FiresDAOImplement;
+import MainPackage.DAOsImplements.Item;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -19,14 +20,14 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
-//import java.sql.Date;
 
 /**
- * Created by oriol on 10/04/2017.
+ * Created by oriol on 12/04/2017.
  */
-public class ControllerEstandAdd {
+public class ControllerEstandUpd {
     Connection connection;
     BDAccessor bdAccessor;
+    int id;
 
     @FXML
     TextField txtNomEstand;
@@ -45,19 +46,25 @@ public class ControllerEstandAdd {
     @FXML
     Label lbErrorAdd;
 
-    public void init(Connection conn, BDAccessor bdAccessor, int FiraID) {
+    EstandsDAOImplement estDAOImpl;
+
+    public void init(Connection conn, BDAccessor bdAccessor, int id) {
         connection = conn;
         this.bdAccessor = bdAccessor;
+        this.id = id;
+        estDAOImpl = new EstandsDAOImplement();
 
         FiresDAOImplement firesDAOImplement = new FiresDAOImplement();
         firesDAOImplement.omplirComboBox(connection,ComBFires);
-        ComBFires.getSelectionModel().select(new Item(FiraID,""));
+        ComBFires.getSelectionModel().select(new Item(id,""));
         EmpresesDAO empDAO = new EmpresesDAOImplement();
         empDAO.omplirComboBox(connection,ComBTipus);
         ComBTipus.getSelectionModel().select(0);
+
+        estDAOImpl.omplirCamps(conn,id,txtNomEstand,txtSuperficie,txtQuota,dtDataInici,dtDataFi);
     }
 
-    public void AddEstandEvent(ActionEvent event) {
+    public void UpdEstandEvent(ActionEvent event) {
         try {
             EstandsDAOImplement estandsDAOImpl = new EstandsDAOImplement();
             Float superficie = Float.parseFloat(txtSuperficie.getText());
@@ -69,7 +76,7 @@ public class ControllerEstandAdd {
             Instant instant2 = Instant.from(localDate2.atStartOfDay(ZoneId.systemDefault()));
             Date dateFi = Date.from(instant2);
 
-            estandsDAOImpl.AddEstand(connection, txtNomEstand.getText(),superficie,quota,dateInici,dateFi,ComBFires.getValue().getId(),ComBTipus.getValue().getId());
+            estandsDAOImpl.UpdateEstand(connection,id, txtNomEstand.getText(),superficie,quota,dateInici,dateFi,ComBFires.getValue().getId(),ComBTipus.getValue().getId());
             final Node source = (Node) event.getSource();
             Stage stage = (Stage) source.getScene().getWindow();
             stage.getOnCloseRequest().handle(null);
