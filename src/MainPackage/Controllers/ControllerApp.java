@@ -13,6 +13,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import javafx.event.ActionEvent;
@@ -60,7 +61,8 @@ public class ControllerApp{
     Button btEliminarEstand;
     @FXML
     Button btActualitzarEstand;
-
+   @FXML
+   Pane AdminUsuaris;
 
 
     Connection connection;
@@ -87,7 +89,7 @@ public class ControllerApp{
            btAfegirEstand.setVisible(false);
            btEliminarEstand.setVisible(false);
            btActualitzarEstand.setVisible(false);
-
+            AdminUsuaris.setVisible(false);
 
        };
         txtUserSearch.textProperty().addListener(new ChangeListener<String>() {

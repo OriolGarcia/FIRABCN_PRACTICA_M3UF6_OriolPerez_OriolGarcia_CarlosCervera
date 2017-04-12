@@ -3,8 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/MainPackage/Controllers/ControllerLogin.java" afterPath="$PROJECT_DIR$/src/MainPackage/Controllers/ControllerLogin.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/MainPackage/DAOsImplements/UserDAOImplement.java" afterPath="$PROJECT_DIR$/src/MainPackage/DAOsImplements/UserDAOImplement.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/MainPackage/Controllers/ControllerApp.java" afterPath="$PROJECT_DIR$/src/MainPackage/Controllers/ControllerApp.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/MainPackage/Scenes/AppScene.fxml" afterPath="$PROJECT_DIR$/src/MainPackage/Scenes/AppScene.fxml" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -87,21 +87,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ControllerApp.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ControllerApp.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/MainPackage/Controllers/ControllerApp.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="863">
-              <caret line="88" column="48" lean-forward="false" selection-start-line="88" selection-start-column="48" selection-end-line="88" selection-end-column="48" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BDAccessor.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/MainPackage/Accessor/BDAccessor.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-374">
-              <caret line="116" column="84" lean-forward="false" selection-start-line="116" selection-start-column="84" selection-end-line="116" selection-end-column="84" />
+            <state relative-caret-position="285">
+              <caret line="91" column="41" lean-forward="false" selection-start-line="91" selection-start-column="41" selection-end-line="91" selection-end-column="41" />
               <folding />
             </state>
           </provider>
@@ -117,15 +107,28 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UserDAOImplement.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="UserDAOImplement.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/MainPackage/DAOsImplements/UserDAOImplement.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-310">
+            <state relative-caret-position="2342">
               <caret line="238" column="35" lean-forward="false" selection-start-line="238" selection-start-column="35" selection-end-line="238" selection-end-column="35" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
             </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserAddScene.fxml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/MainPackage/Scenes/UserAddScene.fxml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="544">
+              <caret line="47" column="0" lean-forward="true" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+          <provider editor-type-id="JavaFX-Scene-Builder">
+            <state />
           </provider>
         </entry>
       </file>
@@ -152,10 +155,8 @@
       <file leaf-file-name="AppScene.fxml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/MainPackage/Scenes/AppScene.fxml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="95">
-              <caret line="53" column="55" lean-forward="false" selection-start-line="53" selection-start-column="55" selection-end-line="53" selection-end-column="74" />
-              <caret line="52" column="55" lean-forward="false" selection-start-line="52" selection-start-column="55" selection-end-line="52" selection-end-column="74" />
-              <caret line="51" column="55" lean-forward="false" selection-start-line="51" selection-start-column="55" selection-end-line="51" selection-end-column="74" />
+            <state relative-caret-position="44">
+              <caret line="75" column="53" lean-forward="false" selection-start-line="75" selection-start-column="53" selection-end-line="75" selection-end-column="65" />
               <folding />
             </state>
           </provider>
@@ -254,10 +255,10 @@
         <option value="$PROJECT_DIR$/src/MainPackage/Controllers/ControllerEstandUpd.java" />
         <option value="$PROJECT_DIR$/src/MainPackage/Controllers/ControllerEstandAdd.java" />
         <option value="$PROJECT_DIR$/src/MainPackage/Utils.java" />
-        <option value="$PROJECT_DIR$/src/MainPackage/Scenes/AppScene.fxml" />
-        <option value="$PROJECT_DIR$/src/MainPackage/Controllers/ControllerApp.java" />
         <option value="$PROJECT_DIR$/src/MainPackage/Controllers/ControllerLogin.java" />
         <option value="$PROJECT_DIR$/src/MainPackage/DAOsImplements/UserDAOImplement.java" />
+        <option value="$PROJECT_DIR$/src/MainPackage/Scenes/AppScene.fxml" />
+        <option value="$PROJECT_DIR$/src/MainPackage/Controllers/ControllerApp.java" />
       </list>
     </option>
   </component>
@@ -925,7 +926,14 @@
       <option name="project" value="LOCAL" />
       <updated>1491997191030</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="Usuaris inactius">
+      <created>1492000731215</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1492000731215</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -1030,7 +1038,8 @@
     <MESSAGE value="Estand Add (funcional)" />
     <MESSAGE value="Estands seleccions" />
     <MESSAGE value="Visualització visistant" />
-    <option name="LAST_COMMIT_MESSAGE" value="Visualització visistant" />
+    <MESSAGE value="Usuaris inactius" />
+    <option name="LAST_COMMIT_MESSAGE" value="Usuaris inactius" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1065,17 +1074,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-66">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="37" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/MainPackage/Scenes/UserAddScene.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="549">
-          <caret line="47" column="0" lean-forward="true" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1352,39 +1350,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/MainPackage/Controllers/ControllerApp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="863">
-          <caret line="88" column="48" lean-forward="false" selection-start-line="88" selection-start-column="48" selection-end-line="88" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/MainPackage/Scenes/AppScene.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="53" column="55" lean-forward="false" selection-start-line="53" selection-start-column="55" selection-end-line="53" selection-end-column="74" />
-          <caret line="52" column="55" lean-forward="false" selection-start-line="52" selection-start-column="55" selection-end-line="52" selection-end-column="74" />
-          <caret line="51" column="55" lean-forward="false" selection-start-line="51" selection-start-column="55" selection-end-line="51" selection-end-column="74" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/MainPackage/Utils.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="339">
           <caret line="66" column="27" lean-forward="false" selection-start-line="66" selection-start-column="27" selection-end-line="66" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/MainPackage/Controllers/ControllerUserAdd.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="11">
-          <caret line="39" column="0" lean-forward="false" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1417,11 +1386,49 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/MainPackage/DAOsImplements/UserDAOImplement.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-310">
+        <state relative-caret-position="2342">
           <caret line="238" column="35" lean-forward="false" selection-start-line="238" selection-start-column="35" selection-end-line="238" selection-end-column="35" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MainPackage/Scenes/UserAddScene.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="47" column="0" lean-forward="true" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MainPackage/Scenes/AppScene.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="44">
+          <caret line="75" column="53" lean-forward="false" selection-start-line="75" selection-start-column="53" selection-end-line="75" selection-end-column="65" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MainPackage/Controllers/ControllerUserAdd.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="11">
+          <caret line="39" column="0" lean-forward="false" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MainPackage/Controllers/ControllerApp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="91" column="41" lean-forward="false" selection-start-line="91" selection-start-column="41" selection-end-line="91" selection-end-column="41" />
+          <folding />
         </state>
       </provider>
     </entry>

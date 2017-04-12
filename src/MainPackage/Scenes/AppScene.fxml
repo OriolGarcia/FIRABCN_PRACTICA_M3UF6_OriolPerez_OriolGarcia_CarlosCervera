@@ -73,7 +73,7 @@
                             <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                     <children>
-                                        <Pane layoutY="106.0" prefHeight="404.0" prefWidth="771.0">
+                                        <Pane fx:id="AdminUsuaris" layoutY="106.0" prefHeight="404.0" prefWidth="771.0">
                                             <children>
                                                 <Pane layoutX="43.0" layoutY="33.0" prefHeight="58.0" prefWidth="347.0">
                                                     <children>
