@@ -19,8 +19,8 @@
         <RowConstraints/>
     </rowConstraints>
     <children>
-        <TitledPane animated="false" text="La teva Fira Manager - Canviar Permisos">
-            <content>
+        <!--<TitledPane animated="false" text="La teva Fira Manager - Canviar Permisos">
+            <content>-->
                 <AnchorPane minHeight="180.0" minWidth="560.0" prefHeight="276.0" prefWidth="560.0">
                     <children>
                         <Label fx:id="lbusuari" layoutX="135.0" layoutY="49.0" text="Usuari:"/>
@@ -32,7 +32,7 @@
                                 onAction="#ModPermisosEvent" text="Modificar Permisos"/>
                     </children>
                 </AnchorPane>
-            </content>
-        </TitledPane>
+            <!--</content>
+        </TitledPane>-->
     </children>
 </GridPane>

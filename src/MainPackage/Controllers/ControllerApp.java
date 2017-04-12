@@ -25,7 +25,7 @@ import java.sql.Connection;
 /**
  * Created by oriol on 30/03/2017.
  */
-public class ControllerApp{
+public class ControllerApp {
     @FXML
     TextField txtUserSearch;
     @FXML
@@ -39,10 +39,15 @@ public class ControllerApp{
     @FXML
     TableView TbVEstands;
     @FXML
-    TextField txtEmpresaSearch;
+    TableView TbVFiresEco;
 
     @FXML
+    TextField txtEmpresaSearch;
+    @FXML
     TextField txtEstandSearch;
+    @FXML
+    TextField txtFiraEcoSearch;
+
     @FXML
     Button btAfegirFira;
     @FXML
@@ -61,15 +66,15 @@ public class ControllerApp{
     Button btEliminarEstand;
     @FXML
     Button btActualitzarEstand;
-   @FXML
-   Pane AdminUsuaris;
+    @FXML
+    Pane AdminUsuaris;
 
 
     Connection connection;
     BDAccessor bdAccessor;
     //int idFira;
 
-    public void init(Connection conn, BDAccessor bdAccessor,String usuari,String pass) {
+    public void init(Connection conn, BDAccessor bdAccessor, String usuari, String pass) {
         connection = conn;
         this.bdAccessor = bdAccessor;
 
@@ -77,21 +82,23 @@ public class ControllerApp{
         initiailizeTableViewFires();
         initiailizeTableViewEmpreses();
         initiailizeTableViewEstands();
+        initiailizeTableViewFiresEconomia();
         UserDAOImplement UserDAOImpl = new UserDAOImplement();
 
-       if( !UserDAOImpl.getPermissions(connection,usuari)){
-           btAfegirFira.setVisible(false);
-           btEliminarFira.setVisible(false);
-           btActualitzarFira.setVisible(false);
-           btAfegirEmpresa.setVisible(false);
-           btEliminarEmpresa.setVisible(false);
-           btActualitzarEmpresa.setVisible(false);
-           btAfegirEstand.setVisible(false);
-           btEliminarEstand.setVisible(false);
-           btActualitzarEstand.setVisible(false);
+        if (!UserDAOImpl.getPermissions(connection, usuari)) {
+            btAfegirFira.setVisible(false);
+            btEliminarFira.setVisible(false);
+            btActualitzarFira.setVisible(false);
+            btAfegirEmpresa.setVisible(false);
+            btEliminarEmpresa.setVisible(false);
+            btActualitzarEmpresa.setVisible(false);
+            btAfegirEstand.setVisible(false);
+            btEliminarEstand.setVisible(false);
+            btActualitzarEstand.setVisible(false);
             AdminUsuaris.setVisible(false);
 
-       };
+        }
+
         txtUserSearch.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable,
@@ -124,6 +131,14 @@ public class ControllerApp{
             }
         });
 
+        txtFiraEcoSearch.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable,
+                                String oldValue, String newValue) {
+                initiailizeTableViewFiresEconomia();
+            }
+        });
+
         TbVFires.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
                 initiailizeTableViewEmpreses();
@@ -137,11 +152,11 @@ public class ControllerApp{
         });
     }
 
-    private void initiailizeTableViewUsers(){
+    private void initiailizeTableViewUsers() {
 
         UserDAOImplement UserDAOImpl = new UserDAOImplement();
 
-        UserDAOImpl.findbyUsername(connection,txtUserSearch.getText(),TbVUsers);
+        UserDAOImpl.findbyUsername(connection, txtUserSearch.getText(), TbVUsers);
 
     }
 
@@ -162,7 +177,8 @@ public class ControllerApp{
                     initiailizeTableViewUsers();
                 }
             });
-        }catch (IOException ex){}
+        } catch (IOException ex) {
+        }
     }
 
     public void eliminarUsuari(ActionEvent event) {
@@ -173,14 +189,15 @@ public class ControllerApp{
             String id = selected.substring(1, selected.indexOf(","));
             System.out.println(selected);
             UserDAOImplement UserDAOImpl = new UserDAOImplement();
-            UserDAOImpl.DeleteUser(connection,id);
+            UserDAOImpl.DeleteUser(connection, id);
             initiailizeTableViewUsers();
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
     }
 
-    public void generarContrasenya(ActionEvent event) {}
+    public void generarContrasenya(ActionEvent event) {
+    }
 
     public void canviarPermisos(ActionEvent event) {
         String id = "";
@@ -191,7 +208,7 @@ public class ControllerApp{
             int index = pos.getRow();
             String selected = TbVUsers.getItems().get(index).toString();
             id = selected.substring(1, selected.indexOf(","));
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
             accs = false;
         }
@@ -218,13 +235,14 @@ public class ControllerApp{
         }
     }
 
-    public void canviarContrasenya(ActionEvent event) {}
+    public void canviarContrasenya(ActionEvent event) {
+    }
 
-    private void initiailizeTableViewFires(){
+    private void initiailizeTableViewFires() {
 
         FiresDAOImplement FiresDAOImpl = new FiresDAOImplement();
 
-        FiresDAOImpl.findbyParams(connection,txtFiraSearch.getText(),TbVFires);
+        FiresDAOImpl.findbyParams(connection, txtFiraSearch.getText(), TbVFires);
 
     }
 
@@ -246,12 +264,12 @@ public class ControllerApp{
 
                 }
             });
-        }catch (IOException ex){
+        } catch (IOException ex) {
             System.out.println("Error: " + ex.getMessage());
         }
     }
 
-    public void actualitzarFira(ActionEvent event){
+    public void actualitzarFira(ActionEvent event) {
         int id = 0;
         boolean accs = true;
         try {
@@ -261,12 +279,12 @@ public class ControllerApp{
             String ids = selected.substring(1, selected.indexOf(","));
             id = Integer.parseInt(ids);
             System.out.println("id: " + id);
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
             accs = false;
         }
 
-        if(accs) {
+        if (accs) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("../Scenes/FiraUpdScene.fxml"));
                 Parent root = loader.load();
@@ -285,7 +303,7 @@ public class ControllerApp{
             } catch (IOException ex) {
                 System.out.println("Error: " + ex.getMessage());
             }
-        }else {
+        } else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Unselected");
             alert.setHeaderText("Fira no seleccionada.");
@@ -298,34 +316,34 @@ public class ControllerApp{
         int id = 0;
         boolean accs = true;
 
-        try{
+        try {
             TablePosition pos = (TablePosition) TbVFires.getSelectionModel().getSelectedCells().get(0);
             int index = pos.getRow();
             String selected = TbVFires.getItems().get(index).toString();
-            id = Integer.parseInt( selected.substring(1, selected.indexOf(",")));
+            id = Integer.parseInt(selected.substring(1, selected.indexOf(",")));
             System.out.println(selected);
             FiresDAOImplement firesDAOImpl = new FiresDAOImplement();
-            firesDAOImpl.DeleteFira(connection,id);
+            firesDAOImpl.DeleteFira(connection, id);
             initiailizeTableViewFires();
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
             accs = false;
         }
     }
 
-    private void initiailizeTableViewEmpreses(){
+    private void initiailizeTableViewEmpreses() {
         int id = 0;
         boolean accs = true;
-        try{
+        try {
             TablePosition pos = (TablePosition) TbVFires.getSelectionModel().getSelectedCells().get(0);
             int index = pos.getRow();
             String selected = TbVFires.getItems().get(index).toString();
-            id = Integer.parseInt( selected.substring(1, selected.indexOf(",")));
+            id = Integer.parseInt(selected.substring(1, selected.indexOf(",")));
 
             EmpresesDAOImplement empresesDAOImpl = new EmpresesDAOImplement();
 
-            empresesDAOImpl.findbyParams(connection,txtEmpresaSearch.getText(),id,TbVEmpreses);
-        }catch (Exception e){
+            empresesDAOImpl.findbyParams(connection, txtEmpresaSearch.getText(), id, TbVEmpreses);
+        } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
             TbVEmpreses.getItems().clear();
             TbVEmpreses.getColumns().clear();
@@ -342,11 +360,11 @@ public class ControllerApp{
             String ids = selected.substring(1, selected.indexOf(","));
             id = Integer.parseInt(ids);
             System.out.println("id: " + id);
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
             accs = false;
         }
-        if(accs){
+        if (accs) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("../Scenes/EmpresaAddScene.fxml"));
                 Parent root = loader.load();
@@ -354,7 +372,7 @@ public class ControllerApp{
                 secondStage.setScene(new Scene(root, 560, 276));
                 secondStage.show();
                 ControllerEmpresaAdd controller = loader.getController();
-                controller.init(connection, bdAccessor,id);
+                controller.init(connection, bdAccessor, id);
                 secondStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
                     @Override
                     public void handle(WindowEvent we) {
@@ -363,10 +381,10 @@ public class ControllerApp{
 
                     }
                 });
-            }catch (IOException ex){
+            } catch (IOException ex) {
                 System.out.println("Error: " + ex.getMessage());
             }
-        }else {
+        } else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Unselected");
             alert.setHeaderText("Fira no seleccionada.");
@@ -375,7 +393,7 @@ public class ControllerApp{
         }
     }
 
-    public void actualitzarEmpresa(ActionEvent event){
+    public void actualitzarEmpresa(ActionEvent event) {
         int id = 0;
         boolean accs = true;
         try {
@@ -385,12 +403,12 @@ public class ControllerApp{
             String ids = selected.substring(1, selected.indexOf(","));
             id = Integer.parseInt(ids);
             System.out.println("id: " + id);
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
             accs = false;
         }
 
-        if(accs) {
+        if (accs) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("../Scenes/EmpresaUpdScene.fxml"));
                 Parent root = loader.load();
@@ -409,7 +427,7 @@ public class ControllerApp{
             } catch (IOException ex) {
                 System.out.println("Error: " + ex.getMessage());
             }
-        }else {
+        } else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Unselected");
             alert.setHeaderText("Empresa no seleccionada.");
@@ -421,39 +439,40 @@ public class ControllerApp{
     public void eliminarEmpresa(ActionEvent event) {
         int id = 0;
         boolean accs = true;
-        try{
+        try {
             TablePosition pos = (TablePosition) TbVEmpreses.getSelectionModel().getSelectedCells().get(0);
             int index = pos.getRow();
             String selected = TbVEmpreses.getItems().get(index).toString();
-            id = Integer.parseInt( selected.substring(1, selected.indexOf(",")));
+            id = Integer.parseInt(selected.substring(1, selected.indexOf(",")));
             System.out.println(selected);
             EmpresesDAOImplement empDAOImpl = new EmpresesDAOImplement();
-            empDAOImpl.DeleteEmpresa(connection,id);
+            empDAOImpl.DeleteEmpresa(connection, id);
             initiailizeTableViewEmpreses();
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
             accs = false;
         }
     }
 
-    private void initiailizeTableViewEstands(){
+    private void initiailizeTableViewEstands() {
         int id = 0;
         boolean accs = true;
-        try{
+        try {
             TablePosition pos = (TablePosition) TbVEmpreses.getSelectionModel().getSelectedCells().get(0);
             int index = pos.getRow();
             String selected = TbVEmpreses.getItems().get(index).toString();
-            id = Integer.parseInt( selected.substring(1, selected.indexOf(",")));
+            id = Integer.parseInt(selected.substring(1, selected.indexOf(",")));
 
             EstandsDAOImplement estDAOImpl = new EstandsDAOImplement();
 
-            estDAOImpl.findbyParams(connection,txtEstandSearch.getText(),id,TbVEstands);
-        }catch (Exception e){
+            estDAOImpl.findbyParams(connection, txtEstandSearch.getText(), id, TbVEstands);
+        } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
             TbVEstands.getItems().clear();
             TbVEstands.getColumns().clear();
         }
     }
+
     public void afegirEstand(ActionEvent event) {
 
         int id = 0;
@@ -465,7 +484,7 @@ public class ControllerApp{
             String ids = selected.substring(1, selected.indexOf(","));
             id = Integer.parseInt(ids);
             System.out.println("id: " + id);
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
             accs = false;
         }
@@ -478,11 +497,11 @@ public class ControllerApp{
             String ids = selected.substring(1, selected.indexOf(","));
             idFira = Integer.parseInt(ids);
             System.out.println("id: " + id);
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
             accsFira = false;
         }
-        if(accs&&accsFira){
+        if (accs && accsFira) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("../Scenes/EstandAddScene.fxml"));
                 Parent root = loader.load();
@@ -492,7 +511,7 @@ public class ControllerApp{
                 secondStage.show();
 
                 ControllerEstandAdd controller = loader.getController();
-                controller.init(connection, bdAccessor,id,idFira);
+                controller.init(connection, bdAccessor, id, idFira);
 
                 secondStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
                     @Override
@@ -502,10 +521,10 @@ public class ControllerApp{
 
                     }
                 });
-            }catch (IOException ex){
+            } catch (IOException ex) {
                 System.out.println("Error: " + ex.getMessage());
-            }}
-        else {
+            }
+        } else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Unselected");
             alert.setHeaderText("Empresa no seleccionada.");
@@ -517,8 +536,8 @@ public class ControllerApp{
     public void actualitzarEstand(ActionEvent event) {
 
         int id = 0;
-        int FiraID=0;
-        int EmpresaID=0;
+        int FiraID = 0;
+        int EmpresaID = 0;
         boolean accs = true;
         try {
             TablePosition pos = (TablePosition) TbVEstands.getSelectionModel().getSelectedCells().get(0);
@@ -526,16 +545,16 @@ public class ControllerApp{
             String selected = TbVEstands.getItems().get(index).toString();
             String ids = selected.substring(1, selected.indexOf(","));
             id = Integer.parseInt(ids);
-             ids = selected.substring(ordinalIndexOf( selected, ",", 7)+2,ordinalIndexOf( selected, ",", 8));
+            ids = selected.substring(ordinalIndexOf(selected, ",", 7) + 2, ordinalIndexOf(selected, ",", 8));
             EmpresaID = Integer.parseInt(ids);
-            ids= selected.substring(ordinalIndexOf( selected, ",", 8)+2, selected.length()-1);
+            ids = selected.substring(ordinalIndexOf(selected, ",", 8) + 2, selected.length() - 1);
             FiraID = Integer.parseInt(ids);
             System.out.println("id: " + id);
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
             accs = false;
         }
-        if(accs){
+        if (accs) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("../Scenes/EstandUpdScene.fxml"));
                 Parent root = loader.load();
@@ -545,7 +564,7 @@ public class ControllerApp{
                 secondStage.show();
 
                 ControllerEstandUpd controller = loader.getController();
-                controller.init(connection, bdAccessor,id,FiraID,EmpresaID);
+                controller.init(connection, bdAccessor, id, FiraID, EmpresaID);
 
                 secondStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
                     @Override
@@ -555,10 +574,10 @@ public class ControllerApp{
 
                     }
                 });
-            }catch (IOException ex){
+            } catch (IOException ex) {
                 System.out.println("Error: " + ex.getMessage());
-            }}
-        else {
+            }
+        } else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Unselected");
             alert.setHeaderText("Estand no seleccionat.");
@@ -570,16 +589,16 @@ public class ControllerApp{
     public void eliminarEstand(ActionEvent event) {
         int id = 0;
         boolean accs = true;
-        try{
+        try {
             TablePosition pos = (TablePosition) TbVEstands.getSelectionModel().getSelectedCells().get(0);
             int index = pos.getRow();
             String selected = TbVEstands.getItems().get(index).toString();
-            id = Integer.parseInt( selected.substring(1, selected.indexOf(",")));
+            id = Integer.parseInt(selected.substring(1, selected.indexOf(",")));
             System.out.println(selected);
             EstandsDAOImplement estDAOImpl = new EstandsDAOImplement();
-            estDAOImpl.DeleteEstand(connection,id);
+            estDAOImpl.DeleteEstand(connection, id);
             initiailizeTableViewEstands();
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
             accs = false;
         }
@@ -590,5 +609,13 @@ public class ControllerApp{
         while (--n > 0 && pos != -1)
             pos = str.indexOf(substr, pos + 1);
         return pos;
+    }
+
+    private void initiailizeTableViewFiresEconomia() {
+
+        FiresDAOImplement FiresDAOImpl = new FiresDAOImplement();
+
+        FiresDAOImpl.findbyParams(connection, txtFiraSearch.getText(), TbVFiresEco);
+
     }
 }
