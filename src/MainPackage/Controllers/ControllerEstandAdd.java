@@ -1,6 +1,8 @@
 package MainPackage.Controllers;
 
 import MainPackage.Accessor.BDAccessor;
+import MainPackage.DAOs.EmpresesDAO;
+import MainPackage.DAOs.EstandsDAO;
 import MainPackage.DAOs.TipusEmpresesDAO;
 import MainPackage.DAOsImplements.*;
 import javafx.event.ActionEvent;
@@ -17,6 +19,7 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
+//import java.sql.Date;
 
 /**
  * Created by oriol on 10/04/2017.
@@ -34,7 +37,7 @@ public class ControllerEstandAdd {
     @FXML
     DatePicker dtDataInici;
     @FXML
-    DatePicker dtDataDi;
+    DatePicker dtDataFi;
     @FXML
     ComboBox<Item> ComBFires;
     @FXML
@@ -46,11 +49,11 @@ public class ControllerEstandAdd {
         connection = conn;
         this.bdAccessor = bdAccessor;
 
-        FiresDAOImplement firesDAOImplement= new FiresDAOImplement();
+        FiresDAOImplement firesDAOImplement = new FiresDAOImplement();
         firesDAOImplement.omplirComboBox(connection,ComBFires);
         ComBFires.getSelectionModel().select(new Item(FiraID,""));
-        TipusEmpresesDAO tipusEmpresesDAO= new TipusEmpresesDAOImplement();
-        tipusEmpresesDAO.omplirComboBox(connection,ComBTipus);
+        EmpresesDAO empDAO = new EmpresesDAOImplement();
+        empDAO.omplirComboBox(connection,ComBTipus);
         ComBTipus.getSelectionModel().select(0);
     }
 
@@ -61,10 +64,10 @@ public class ControllerEstandAdd {
             Float quota = Float.parseFloat(txtQuota.getText());
             LocalDate localDate1 = dtDataInici.getValue();
             Instant instant = Instant.from(localDate1.atStartOfDay(ZoneId.systemDefault()));
-            Date dateInici = Date.from(instant);
+            Date dateInici = (Date) Date.from(instant);
             LocalDate localDate2 = dtDataInici.getValue();
             Instant instant2 = Instant.from(localDate2.atStartOfDay(ZoneId.systemDefault()));
-            Date dateFi = Date.from(instant2);
+            Date dateFi = (Date) Date.from(instant2);
 
             estandsDAOImpl.AddEstand(connection, txtNomEstand.getText(),superficie,quota,dateInici,dateFi,ComBFires.getValue().getId(),ComBTipus.getValue().getId());
             final Node source = (Node) event.getSource();

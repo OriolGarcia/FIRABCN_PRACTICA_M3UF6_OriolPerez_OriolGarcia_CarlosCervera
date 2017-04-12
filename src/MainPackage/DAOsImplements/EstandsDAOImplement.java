@@ -20,6 +20,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
+
+
 /**
  * Created by oriol on 10/04/2017.
  */
@@ -28,10 +30,12 @@ public class EstandsDAOImplement implements EstandsDAO {
     private static PreparedStatement pstmt;
     private static BDAccessor bd = null;
 
+
     public boolean AddEstand(Connection conn, String Nom, Float Superficie, Float Quota, Date DataInici, Date DataFi, int Fira, int Empresa){
         try {
+            System.out.println("e4");
             String cadenaSQL = "INSERT INTO Estands(Nom,SuperficieEstand,QuotaEstand,DataInici,DataFi,Fira,Empresa)"
-                    +" VALUES(?,?,?,?,?,?);";
+                    +" VALUES(?,?,?,?,?,?,?);";
             pstmt = conn.prepareStatement(cadenaSQL, PreparedStatement.RETURN_GENERATED_KEYS);
             pstmt.setString(1, Nom);
             pstmt.setFloat(2, Superficie);
@@ -46,22 +50,36 @@ public class EstandsDAOImplement implements EstandsDAO {
                     System.out.println("Codi generat per getGeneratedKeys():"
                             + rs.getInt(1));
                 }
+            }catch (Exception e){
+                System.out.println("Error: " + e.getMessage());
             }
             conn.commit();
             System.out.println("Estand: S'ha afegit " + n + " items");
             if (n>0)return true;
             else return false;
         }catch (SQLException ex){
-            System.out.println(ex.getMessage());
+            System.out.println("Error: " + ex.getMessage());
             return false;
         }finally {
             try {
                 pstmt.clearParameters();
-            }catch (SQLException ex){}
+            }catch (SQLException ex){
+                System.out.println("Error: " + ex.getMessage());
+            }
         }
     }
 
+    public boolean UpdateEstand(Connection conn, String Nom, Float Superficie, Float Quota, Date DataInici, Date DataFi, int Fira, int Empresa) {
+        return false;
+    }
 
+    public boolean DeleteEstand(Connection conn, int id){
+        return true;
+    }
+
+    public void omplirCamps(Connection conn, int id, TextField txtFieldNomEstand, TextField txtFieldSuperficie, TextField txtFieldQuota, TextField txtFieldDtInici, TextField txtFieldDtFi){
+
+    }
 
     public void findbyParams(Connection conn, String NomSearch, int Fira, TableView tableView){
         try {
@@ -95,4 +113,5 @@ public class EstandsDAOImplement implements EstandsDAO {
         }
 
     }
+
 }

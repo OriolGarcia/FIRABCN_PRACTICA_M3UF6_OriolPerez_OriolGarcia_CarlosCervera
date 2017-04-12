@@ -48,6 +48,7 @@ public class ControllerApp{
 
     Connection connection;
     BDAccessor bdAccessor;
+    //int idFira;
 
     public void init(Connection conn, BDAccessor bdAccessor) {
         connection = conn;
@@ -56,6 +57,8 @@ public class ControllerApp{
         initiailizeTableViewUsers();
         initiailizeTableViewFires();
         initiailizeTableViewEmpreses();
+        initiailizeTableViewEstands();
+
         txtUserSearch.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable,
@@ -94,7 +97,7 @@ public class ControllerApp{
             }
         });
 
-        TbVEstands.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+        TbVEmpreses.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
                 initiailizeTableViewEstands();
             }
@@ -426,15 +429,18 @@ public class ControllerApp{
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("../Scenes/EstandAddScene.fxml"));
                 Parent root = loader.load();
+                System.out.println("e1");
                 Stage secondStage = new Stage();
                 secondStage.setScene(new Scene(root, 560, 276));
                 secondStage.show();
+                System.out.println("e2");
                 ControllerEstandAdd controller = loader.getController();
                 controller.init(connection, bdAccessor,id);
+                System.out.println("e3");
                 secondStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
                     @Override
                     public void handle(WindowEvent we) {
-                        System.out.println("S'ha tancat Add Empresa");
+                        System.out.println("S'ha tancat Add Estand");
                         initiailizeTableViewEstands();
 
                     }
@@ -445,8 +451,8 @@ public class ControllerApp{
         else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Unselected");
-            alert.setHeaderText("Fira no seleccionada.");
-            alert.setContentText("Selecciona la fira on vols inserir l'empresa.");
+            alert.setHeaderText("Empresa no seleccionada.");
+            alert.setContentText("Selecciona la empresa on vols inserir l'estand.");
             alert.showAndWait();
         }
     }

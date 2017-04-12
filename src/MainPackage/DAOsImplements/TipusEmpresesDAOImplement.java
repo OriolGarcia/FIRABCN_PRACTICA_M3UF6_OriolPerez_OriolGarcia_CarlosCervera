@@ -65,14 +65,13 @@ public class TipusEmpresesDAOImplement implements TipusEmpresesDAO {
         return true;
     }
 
-    public  void omplirComboBox(Connection conn, ComboBox comboBox) {
+    public void omplirComboBox(Connection conn, ComboBox comboBox) {
 
         try {
             String cadenaSQL = "SELECT TipusID, TitolTipus from TipusEmpresa";
             pstmt = conn.prepareStatement(cadenaSQL);
             try (ResultSet resultat = pstmt.executeQuery()) {
                 ObservableList<Item> model = FXCollections.observableArrayList();
-
 
                 while (resultat.next()) {
 
@@ -82,7 +81,7 @@ public class TipusEmpresesDAOImplement implements TipusEmpresesDAO {
                 comboBox.getItems().addAll(model);
             }
         } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
+            System.out.println("Error: " + ex.getMessage());
 
         } finally {
             try {

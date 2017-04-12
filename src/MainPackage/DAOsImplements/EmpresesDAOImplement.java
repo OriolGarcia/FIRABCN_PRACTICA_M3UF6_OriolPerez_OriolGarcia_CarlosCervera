@@ -3,6 +3,9 @@ package MainPackage.DAOsImplements;
 import MainPackage.Accessor.BDAccessor;
 import MainPackage.DAOs.EmpresesDAO;
 import MainPackage.Utils;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
@@ -175,5 +178,30 @@ public class EmpresesDAOImplement implements EmpresesDAO {
             }
         }
     }
-    //
+    public void omplirComboBox (Connection conn, ComboBox comboBox){
+        try {
+            String cadenaSQL = "SELECT EmpresaID, Nom from Empreses";
+            pstmt = conn.prepareStatement(cadenaSQL);
+            try (ResultSet resultat = pstmt.executeQuery()) {
+                ObservableList<Item> model = FXCollections.observableArrayList();
+
+                while (resultat.next()) {
+
+                    model.add(new Item(resultat.getInt(1), resultat.getString(2)));
+                }
+
+                comboBox.getItems().addAll(model);
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error: " + ex.getMessage());
+
+        } finally {
+            try {
+                pstmt.clearParameters();
+            } catch (SQLException ex) {
+                System.out.println("3");
+
+            }
+        }
+    }
 }

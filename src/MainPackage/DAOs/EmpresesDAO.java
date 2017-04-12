@@ -17,5 +17,5 @@ public interface EmpresesDAO {
     public boolean DeleteEmpresa(Connection conn, int id);
     public void findbyParams(Connection conn, String NomSearch, int Fira, TableView tableView);
     public void omplirCamps(Connection conn, int id, TextField txtFielNomEmpresa, TextField txtFieldCIF, TextField txtPersonaContacte,TextField txtTelefon);
-    //
+    public void omplirComboBox(Connection conn, ComboBox comboBox);
 }
