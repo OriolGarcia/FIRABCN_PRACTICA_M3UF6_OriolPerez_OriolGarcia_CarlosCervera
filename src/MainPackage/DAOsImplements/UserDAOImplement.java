@@ -230,18 +230,45 @@ public class UserDAOImplement implements UserDAO {
     }
     public Boolean getPermissions(Connection conn,String UsernameSearch){
         try {
-            String cadenaSQL= "SELECT PermisosAdmin  FROM Usuaris WHERE  Username = ?)";
+            String cadenaSQL= "SELECT PermisosAdmin  FROM Usuaris WHERE  Username = ?";
             pstmt = conn.prepareStatement(cadenaSQL);
             pstmt.setString(1, UsernameSearch);
             try (ResultSet resultat = pstmt.executeQuery()) {
-                System.out.println("retorna resultSet");
-                return resultat.getBoolean(1);
-
+                if (resultat.next()) {
+                    return resultat.getBoolean(1);
+                }else return false;
             }
 
         }catch (SQLException ex){
             System.out.println(ex.getErrorCode());
                 return  false;
+        }
+        finally {
+            try{
+                pstmt.clearParameters();
+            }catch (SQLException ex){
+                System.out.println("3");
+
+            }
+        }
+
+    }
+    public Boolean getActiu(Connection conn,String Username){
+        try {
+            String cadenaSQL= "SELECT Actiu  FROM Usuaris WHERE  Username = ?";
+            pstmt = conn.prepareStatement(cadenaSQL);
+            pstmt.setString(1, Username);
+            try (ResultSet resultat = pstmt.executeQuery()) {
+                if (resultat.next()) {
+                    System.out.println(resultat.getBoolean("Actiu"));
+                    return resultat.getBoolean(1);
+                }
+                else return false;
+            }
+
+        }catch (SQLException ex){
+            System.out.println(ex.getMessage());
+            return  false;
         }
         finally {
             try{

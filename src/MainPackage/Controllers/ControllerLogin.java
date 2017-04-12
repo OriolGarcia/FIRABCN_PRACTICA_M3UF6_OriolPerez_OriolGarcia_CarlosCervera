@@ -54,9 +54,17 @@ public class ControllerLogin {
         UserDAOImplement UserDAOImpl = new UserDAOImplement();
         usuari = txtUser.getText();pass = txtPassword.getText();
         if( UserDAOImpl.LoginUser(connexio,usuari,pass)){
-
-            System.out.println("Usuari loguejat");
-            Logged(event);
+            if(!UserDAOImpl.getActiu(connexio,usuari)){
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Usuari existent No Actiu");
+                alert.setHeaderText("Aquest usuari no està actiu actualment.");
+                alert.setContentText("Demani al administrador que activi el seu usuari.");
+                alert.showAndWait();
+            }
+            else {
+                System.out.println("Usuari loguejat");
+                Logged(event);
+            }
         } else{
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Loggin Failed");
