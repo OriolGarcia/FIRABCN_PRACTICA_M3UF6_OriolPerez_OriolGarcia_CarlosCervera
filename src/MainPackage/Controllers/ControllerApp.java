@@ -252,6 +252,12 @@ public class ControllerApp{
             } catch (IOException ex) {
                 System.out.println("Error: " + ex.getMessage());
             }
+        }else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Unselected");
+            alert.setHeaderText("Fira no seleccionada.");
+            alert.setContentText("Selecciona la fira que vols actualitzar.");
+            alert.showAndWait();
         }
     }
 
@@ -294,7 +300,6 @@ public class ControllerApp{
     }
 
     public void afegirEmpresa(ActionEvent event) {
-
         int id = 0;
         boolean accs = true;
         try {
@@ -309,26 +314,26 @@ public class ControllerApp{
             accs = false;
         }
         if(accs){
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../Scenes/EmpresaAddScene.fxml"));
-            Parent root = loader.load();
-            Stage secondStage = new Stage();
-            secondStage.setScene(new Scene(root, 560, 276));
-            secondStage.show();
-            ControllerEmpresaAdd controller = loader.getController();
-            controller.init(connection, bdAccessor,id);
-            secondStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-                @Override
-                public void handle(WindowEvent we) {
-                    System.out.println("S'ha tancat Add Empresa");
-                    initiailizeTableViewEmpreses();
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../Scenes/EmpresaAddScene.fxml"));
+                Parent root = loader.load();
+                Stage secondStage = new Stage();
+                secondStage.setScene(new Scene(root, 560, 276));
+                secondStage.show();
+                ControllerEmpresaAdd controller = loader.getController();
+                controller.init(connection, bdAccessor,id);
+                secondStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                    @Override
+                    public void handle(WindowEvent we) {
+                        System.out.println("S'ha tancat Add Empresa");
+                        initiailizeTableViewEmpreses();
 
-                }
-            });
-        }catch (IOException ex){
-            System.out.println("Error: " + ex.getMessage());
-        }}
-        else {
+                    }
+                });
+            }catch (IOException ex){
+                System.out.println("Error: " + ex.getMessage());
+            }
+        }else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Unselected");
             alert.setHeaderText("Fira no seleccionada.");
@@ -371,6 +376,12 @@ public class ControllerApp{
             } catch (IOException ex) {
                 System.out.println("Error: " + ex.getMessage());
             }
+        }else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Unselected");
+            alert.setHeaderText("Empresa no seleccionada.");
+            alert.setContentText("Selecciona l'empresa que vols actualitzar.");
+            alert.showAndWait();
         }
     }
 
@@ -406,8 +417,8 @@ public class ControllerApp{
             estDAOImpl.findbyParams(connection,txtEstandSearch.getText(),id,TbVEstands);
         }catch (Exception e){
             System.out.println("Error: " + e.getMessage());
-            TbVEmpreses.getItems().clear();
-            TbVEmpreses.getColumns().clear();
+            TbVEstands.getItems().clear();
+            TbVEstands.getColumns().clear();
         }
     }
     public void afegirEstand(ActionEvent event) {
@@ -429,14 +440,14 @@ public class ControllerApp{
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("../Scenes/EstandAddScene.fxml"));
                 Parent root = loader.load();
-                System.out.println("e1");
+
                 Stage secondStage = new Stage();
                 secondStage.setScene(new Scene(root, 560, 276));
                 secondStage.show();
-                System.out.println("e2");
+
                 ControllerEstandAdd controller = loader.getController();
                 controller.init(connection, bdAccessor,id);
-                System.out.println("e3");
+
                 secondStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
                     @Override
                     public void handle(WindowEvent we) {
@@ -454,6 +465,71 @@ public class ControllerApp{
             alert.setHeaderText("Empresa no seleccionada.");
             alert.setContentText("Selecciona la empresa on vols inserir l'estand.");
             alert.showAndWait();
+        }
+    }
+
+    public void actualitzarEstand(ActionEvent event) {
+
+        int id = 0;
+        boolean accs = true;
+        try {
+            TablePosition pos = (TablePosition) TbVEstands.getSelectionModel().getSelectedCells().get(0);
+            int index = pos.getRow();
+            String selected = TbVEstands.getItems().get(index).toString();
+            String ids = selected.substring(1, selected.indexOf(","));
+            id = Integer.parseInt(ids);
+            System.out.println("id: " + id);
+        }catch (Exception e){
+            System.out.println("Error: " + e.getMessage());
+            accs = false;
+        }
+        if(accs){
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../Scenes/EstandUpdScene.fxml"));
+                Parent root = loader.load();
+
+                Stage secondStage = new Stage();
+                secondStage.setScene(new Scene(root, 560, 276));
+                secondStage.show();
+
+                ControllerEstandUpd controller = loader.getController();
+                controller.init(connection, bdAccessor,id);
+
+                secondStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                    @Override
+                    public void handle(WindowEvent we) {
+                        System.out.println("S'ha tancat Upd Estand");
+                        initiailizeTableViewEstands();
+
+                    }
+                });
+            }catch (IOException ex){
+                System.out.println("Error: " + ex.getMessage());
+            }}
+        else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Unselected");
+            alert.setHeaderText("Estand no seleccionat.");
+            alert.setContentText("Selecciona l'estand que vols actualitzar.");
+            alert.showAndWait();
+        }
+    }
+
+    public void eliminarEstand(ActionEvent event) {
+        int id = 0;
+        boolean accs = true;
+        try{
+            TablePosition pos = (TablePosition) TbVEstands.getSelectionModel().getSelectedCells().get(0);
+            int index = pos.getRow();
+            String selected = TbVEstands.getItems().get(index).toString();
+            id = Integer.parseInt( selected.substring(1, selected.indexOf(",")));
+            System.out.println(selected);
+            EstandsDAOImplement estDAOImpl = new EstandsDAOImplement();
+            estDAOImpl.DeleteEstand(connection,id);
+            initiailizeTableViewEstands();
+        }catch (Exception e){
+            System.out.println("Error: " + e.getMessage());
+            accs = false;
         }
     }
 }
