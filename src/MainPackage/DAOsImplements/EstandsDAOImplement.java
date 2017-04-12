@@ -81,19 +81,19 @@ public class EstandsDAOImplement implements EstandsDAO {
 
     }
 
-    public void findbyParams(Connection conn, String NomSearch, int Fira, TableView tableView){
+    public void findbyParams(Connection conn, String NomSearch, int Empresa, TableView tableView){
         try {
             String cadenaSQL= "SELECT EstandID,Estands.Nom,SuperficieEstand,QuotaEstand,Estands.DataInici,Estands.DataFi,Fires.Titol, Empreses.EmpresaID as `Empresa` "
                     +" FROM Estands"
                     +" INNER JOIN Fires ON Fires.FiraID = Estands.Fira"
                     +" INNER JOIN Empreses ON Empreses.EmpresaID = Estands.Empresa"
-                    +" WHERE ((LENGTH(?) <1 or Estands.Nom like ?) and Empresa = ?)";
+                    +" WHERE ((LENGTH(?) <1 or Estands.Nom like ?) and Estands.Empresa = ?)";
 
             pstmt = conn.prepareStatement(cadenaSQL);
             pstmt.setString(1, NomSearch);
             pstmt.setString(2,"%"+NomSearch+"%");
-            pstmt.setInt(3,Fira);
-            System.out.println("1");
+            pstmt.setInt(3,Empresa);
+
 
             try (ResultSet resultat = pstmt.executeQuery()) {
                 System.out.println("retorna resultSet");
