@@ -20,7 +20,7 @@ import java.sql.SQLException;
 public class ControllerLogin {
     BDAccessor accessor = new BDAccessor();
     Connection connexio;
-
+    private String usuari,pass;
     @FXML
     private TextField txtUser;
     @FXML
@@ -52,7 +52,7 @@ public class ControllerLogin {
 
     public void Login(ActionEvent event) {
         UserDAOImplement UserDAOImpl = new UserDAOImplement();
-        String usuari = txtUser.getText(),pass = txtPassword.getText();
+        usuari = txtUser.getText();pass = txtPassword.getText();
         if( UserDAOImpl.LoginUser(connexio,usuari,pass)){
 
             System.out.println("Usuari loguejat");
@@ -76,7 +76,7 @@ public class ControllerLogin {
             AppStage.setScene(AppScene);
             AppStage.show();
             ControllerApp controller =loader.getController();
-            controller.init(connexio,accessor);
+            controller.init(connexio,accessor,usuari,pass);
         }catch (IOException ioex){
             System.out.println("No s'ha trobat el recurs.");
 

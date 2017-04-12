@@ -12,10 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TablePosition;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import javafx.event.ActionEvent;
@@ -45,12 +42,32 @@ public class ControllerApp{
 
     @FXML
     TextField txtEstandSearch;
+    @FXML
+    Button btAfegirFira;
+    @FXML
+    Button btEliminarFira;
+    @FXML
+    Button btActualitzarFira;
+    @FXML
+    Button btAfegirEmpresa;
+    @FXML
+    Button btEliminarEmpresa;
+    @FXML
+    Button btActualitzarEmpresa;
+    @FXML
+    Button btAfegirEstand;
+    @FXML
+    Button btEliminarEstand;
+    @FXML
+    Button btActualitzarEstand;
+
+
 
     Connection connection;
     BDAccessor bdAccessor;
     //int idFira;
 
-    public void init(Connection conn, BDAccessor bdAccessor) {
+    public void init(Connection conn, BDAccessor bdAccessor,String usuari,String pass) {
         connection = conn;
         this.bdAccessor = bdAccessor;
 
@@ -58,7 +75,21 @@ public class ControllerApp{
         initiailizeTableViewFires();
         initiailizeTableViewEmpreses();
         initiailizeTableViewEstands();
+        UserDAOImplement UserDAOImpl = new UserDAOImplement();
 
+       if( !UserDAOImpl.getPermissions(connection,usuari)){
+           btAfegirFira.setVisible(false);
+           btEliminarFira.setVisible(false);
+           btActualitzarFira.setVisible(false);
+           btAfegirEmpresa.setVisible(false);
+           btEliminarEmpresa.setVisible(false);
+           btActualitzarEmpresa.setVisible(false);
+           btAfegirEstand.setVisible(false);
+           btEliminarEstand.setVisible(false);
+           btActualitzarEstand.setVisible(false);
+
+
+       };
         txtUserSearch.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable,

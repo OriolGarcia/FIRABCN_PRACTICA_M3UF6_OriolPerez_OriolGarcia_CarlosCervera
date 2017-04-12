@@ -188,7 +188,6 @@ public class UserDAOImplement implements UserDAO {
                     else{ return true;}
 
                 }
-                System.out.println("1");
                 return false;
             }
         }catch (SQLException ex){
@@ -210,7 +209,6 @@ public class UserDAOImplement implements UserDAO {
             pstmt = conn.prepareStatement(cadenaSQL);
             pstmt.setString(1, UsernameSearch);
             pstmt.setString(2,"%"+UsernameSearch+"%");
-            System.out.println("1");
             try (ResultSet resultat = pstmt.executeQuery()) {
                 System.out.println("retorna resultSet");
                 Utils.omplirTableView(tableView,resultat);
@@ -219,6 +217,31 @@ public class UserDAOImplement implements UserDAO {
         }catch (SQLException ex){
             System.out.println(ex.getErrorCode());
 
+        }
+        finally {
+            try{
+                pstmt.clearParameters();
+            }catch (SQLException ex){
+                System.out.println("3");
+
+            }
+        }
+
+    }
+    public Boolean getPermissions(Connection conn,String UsernameSearch){
+        try {
+            String cadenaSQL= "SELECT PermisosAdmin  FROM Usuaris WHERE  Username = ?)";
+            pstmt = conn.prepareStatement(cadenaSQL);
+            pstmt.setString(1, UsernameSearch);
+            try (ResultSet resultat = pstmt.executeQuery()) {
+                System.out.println("retorna resultSet");
+                return resultat.getBoolean(1);
+
+            }
+
+        }catch (SQLException ex){
+            System.out.println(ex.getErrorCode());
+                return  false;
         }
         finally {
             try{
