@@ -48,7 +48,7 @@ public class ControllerEstandUpd {
 
     EstandsDAOImplement estDAOImpl;
 
-    public void init(Connection conn, BDAccessor bdAccessor, int id) {
+    public void init(Connection conn, BDAccessor bdAccessor, int id,int FiraID, int EmpresaID) {
         connection = conn;
         this.bdAccessor = bdAccessor;
         this.id = id;
@@ -56,10 +56,10 @@ public class ControllerEstandUpd {
 
         FiresDAOImplement firesDAOImplement = new FiresDAOImplement();
         firesDAOImplement.omplirComboBox(connection,ComBFires);
-        ComBFires.getSelectionModel().select(new Item(id,""));
+        ComBFires.getSelectionModel().select(new Item(FiraID,""));
         EmpresesDAO empDAO = new EmpresesDAOImplement();
         empDAO.omplirComboBox(connection,ComBTipus);
-        ComBTipus.getSelectionModel().select(0);
+        ComBTipus.getSelectionModel().select(new Item(EmpresaID,""));
 
         estDAOImpl.omplirCamps(conn,id,txtNomEstand,txtSuperficie,txtQuota,dtDataInici,dtDataFi);
     }

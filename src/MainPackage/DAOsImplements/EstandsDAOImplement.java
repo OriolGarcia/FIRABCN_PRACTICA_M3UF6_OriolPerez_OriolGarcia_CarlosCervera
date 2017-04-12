@@ -133,7 +133,7 @@ public class EstandsDAOImplement implements EstandsDAO {
 
     public void findbyParams(Connection conn, String NomSearch, int Fira, TableView tableView){
         try {
-            String cadenaSQL= "SELECT EstandID,Estands.Nom,SuperficieEstand,QuotaEstand,Estands.DataInici,Estands.DataFi,Fires.Titol, Empreses.EmpresaID as `Empresa` "
+            String cadenaSQL= "SELECT EstandID,Estands.Nom,SuperficieEstand,QuotaEstand,Estands.DataInici,Estands.DataFi,Fires.Titol, Empreses.EmpresaID as `Empresa`,Estands.Fira "
                     +" FROM Estands"
                     +" INNER JOIN Fires ON Fires.FiraID = Estands.Fira"
                     +" INNER JOIN Empreses ON Empreses.EmpresaID = Estands.Empresa"

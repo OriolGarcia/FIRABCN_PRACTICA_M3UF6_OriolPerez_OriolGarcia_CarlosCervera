@@ -45,7 +45,7 @@ public class ControllerEstandAdd {
     @FXML
     Label lbErrorAdd;
 
-    public void init(Connection conn, BDAccessor bdAccessor, int FiraID) {
+    public void init(Connection conn, BDAccessor bdAccessor, int EmpresaID,int FiraID) {
         connection = conn;
         this.bdAccessor = bdAccessor;
 
@@ -54,7 +54,7 @@ public class ControllerEstandAdd {
         ComBFires.getSelectionModel().select(new Item(FiraID,""));
         EmpresesDAO empDAO = new EmpresesDAOImplement();
         empDAO.omplirComboBox(connection,ComBTipus);
-        ComBTipus.getSelectionModel().select(0);
+        ComBTipus.getSelectionModel().select(new Item(EmpresaID,""));
     }
 
     public void AddEstandEvent(ActionEvent event) {

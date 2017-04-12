@@ -436,7 +436,20 @@ public class ControllerApp{
             System.out.println("Error: " + e.getMessage());
             accs = false;
         }
-        if(accs){
+        int idFira = 0;
+        boolean accsFira = true;
+        try {
+            TablePosition pos = (TablePosition) TbVFires.getSelectionModel().getSelectedCells().get(0);
+            int index = pos.getRow();
+            String selected = TbVFires.getItems().get(index).toString();
+            String ids = selected.substring(1, selected.indexOf(","));
+            idFira = Integer.parseInt(ids);
+            System.out.println("id: " + id);
+        }catch (Exception e){
+            System.out.println("Error: " + e.getMessage());
+            accsFira = false;
+        }
+        if(accs&&accsFira){
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("../Scenes/EstandAddScene.fxml"));
                 Parent root = loader.load();
@@ -446,7 +459,7 @@ public class ControllerApp{
                 secondStage.show();
 
                 ControllerEstandAdd controller = loader.getController();
-                controller.init(connection, bdAccessor,id);
+                controller.init(connection, bdAccessor,id,idFira);
 
                 secondStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
                     @Override
@@ -471,6 +484,8 @@ public class ControllerApp{
     public void actualitzarEstand(ActionEvent event) {
 
         int id = 0;
+        int FiraID=0;
+        int EmpresaID=0;
         boolean accs = true;
         try {
             TablePosition pos = (TablePosition) TbVEstands.getSelectionModel().getSelectedCells().get(0);
@@ -478,6 +493,10 @@ public class ControllerApp{
             String selected = TbVEstands.getItems().get(index).toString();
             String ids = selected.substring(1, selected.indexOf(","));
             id = Integer.parseInt(ids);
+             ids = selected.substring(ordinalIndexOf( selected, ",", 7)+2,ordinalIndexOf( selected, ",", 8));
+            EmpresaID = Integer.parseInt(ids);
+            ids= selected.substring(ordinalIndexOf( selected, ",", 8)+2, selected.length()-1);
+            FiraID = Integer.parseInt(ids);
             System.out.println("id: " + id);
         }catch (Exception e){
             System.out.println("Error: " + e.getMessage());
@@ -493,7 +512,7 @@ public class ControllerApp{
                 secondStage.show();
 
                 ControllerEstandUpd controller = loader.getController();
-                controller.init(connection, bdAccessor,id);
+                controller.init(connection, bdAccessor,id,FiraID,EmpresaID);
 
                 secondStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
                     @Override
@@ -531,5 +550,12 @@ public class ControllerApp{
             System.out.println("Error: " + e.getMessage());
             accs = false;
         }
+    }
+
+    public static int ordinalIndexOf(String str, String substr, int n) {
+        int pos = str.indexOf(substr);
+        while (--n > 0 && pos != -1)
+            pos = str.indexOf(substr, pos + 1);
+        return pos;
     }
 }
