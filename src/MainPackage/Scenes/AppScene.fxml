@@ -100,11 +100,14 @@
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                     <children>
                                         <TableView fx:id="TbVFiresEco" layoutX="30.0" layoutY="70.0" prefHeight="400.0" prefWidth="350.0" />
-                                        <TableView layoutX="500.0" layoutY="70.0" prefHeight="400.0" prefWidth="350.0" />
+                                        <TableView fx:id="TbVEconomia" layoutX="500.0" layoutY="70.0" prefHeight="400.0" prefWidth="350.0" />
                                         <TableView layoutX="30.0" layoutY="490.0" prefHeight="212.0" prefWidth="821.0" />
                               <Label layoutX="30.0" layoutY="14.0" text="Fires:" />
                               <Label layoutX="72.0" layoutY="35.0" text="Cerca avançada: " />
                               <TextField fx:id="txtFiraEcoSearch" layoutX="193.0" layoutY="30.0" />
+                              <Label layoutX="500.0" layoutY="12.0" text="Economia:" />
+                              <TextField fx:id="txtEconomiaSearch" layoutX="663.0" layoutY="28.0" />
+                              <Label layoutX="542.0" layoutY="33.0" text="Cerca avançada: " />
                                     </children>
                                 </AnchorPane>
                             </content>

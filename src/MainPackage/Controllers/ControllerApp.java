@@ -1,10 +1,7 @@
 package MainPackage.Controllers;
 
 import MainPackage.Accessor.BDAccessor;
-import MainPackage.DAOsImplements.EmpresesDAOImplement;
-import MainPackage.DAOsImplements.EstandsDAOImplement;
-import MainPackage.DAOsImplements.FiresDAOImplement;
-import MainPackage.DAOsImplements.UserDAOImplement;
+import MainPackage.DAOsImplements.*;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
@@ -27,11 +24,7 @@ import java.sql.Connection;
  */
 public class ControllerApp {
     @FXML
-    TextField txtUserSearch;
-    @FXML
     TableView TbVUsers;
-    @FXML
-    TextField txtFiraSearch;
     @FXML
     TableView TbVFires;
     @FXML
@@ -40,13 +33,21 @@ public class ControllerApp {
     TableView TbVEstands;
     @FXML
     TableView TbVFiresEco;
+    @FXML
+    TableView TbVEconomia;
 
+    @FXML
+    TextField txtUserSearch;
+    @FXML
+    TextField txtFiraSearch;
     @FXML
     TextField txtEmpresaSearch;
     @FXML
     TextField txtEstandSearch;
     @FXML
     TextField txtFiraEcoSearch;
+    @FXML
+    TextField txtEconomiaSearch;
 
     @FXML
     Button btAfegirFira;
@@ -66,6 +67,7 @@ public class ControllerApp {
     Button btEliminarEstand;
     @FXML
     Button btActualitzarEstand;
+
     @FXML
     Pane AdminUsuaris;
 
@@ -83,6 +85,7 @@ public class ControllerApp {
         initiailizeTableViewEmpreses();
         initiailizeTableViewEstands();
         initiailizeTableViewFiresEconomia();
+        initiailizeTableViewEconomia();
         UserDAOImplement UserDAOImpl = new UserDAOImplement();
 
         if (!UserDAOImpl.getPermissions(connection, usuari)) {
@@ -139,6 +142,14 @@ public class ControllerApp {
             }
         });
 
+        txtEconomiaSearch.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable,
+                                String oldValue, String newValue) {
+                initiailizeTableViewEconomia();
+            }
+        });
+
         TbVFires.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
                 initiailizeTableViewEmpreses();
@@ -148,6 +159,11 @@ public class ControllerApp {
         TbVEmpreses.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
                 initiailizeTableViewEstands();
+            }
+        });
+        TbVFiresEco.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                initiailizeTableViewEconomia();
             }
         });
     }
@@ -488,6 +504,7 @@ public class ControllerApp {
             System.out.println("Error: " + e.getMessage());
             accs = false;
         }
+
         int idFira = 0;
         boolean accsFira = true;
         try {
@@ -501,6 +518,7 @@ public class ControllerApp {
             System.out.println("Error: " + e.getMessage());
             accsFira = false;
         }
+
         if (accs && accsFira) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("../Scenes/EstandAddScene.fxml"));
@@ -534,7 +552,6 @@ public class ControllerApp {
     }
 
     public void actualitzarEstand(ActionEvent event) {
-
         int id = 0;
         int FiraID = 0;
         int EmpresaID = 0;
@@ -617,5 +634,24 @@ public class ControllerApp {
 
         FiresDAOImpl.findbyParams(connection, txtFiraSearch.getText(), TbVFiresEco);
 
+    }
+
+    private void initiailizeTableViewEconomia(){
+        int id = 0;
+        boolean accs = true;
+        try {
+            TablePosition pos = (TablePosition) TbVFiresEco.getSelectionModel().getSelectedCells().get(0);
+            int index = pos.getRow();
+            String selected = TbVFiresEco.getItems().get(index).toString();
+            id = Integer.parseInt(selected.substring(1, selected.indexOf(",")));
+
+            EconomiaDAOImplement ecoDAOImpl = new EconomiaDAOImplement();
+
+            ecoDAOImpl.findbyParams(connection, txtEmpresaSearch.getText(), id, TbVEconomia);
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+            TbVEconomia.getItems().clear();
+            TbVEconomia.getColumns().clear();
+        }
     }
 }

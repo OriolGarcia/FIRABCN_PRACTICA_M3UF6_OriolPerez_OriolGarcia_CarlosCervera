@@ -1,5 +1,7 @@
 package MainPackage.DAOs;
 
+import javafx.scene.control.TableView;
+
 import java.sql.Connection;
 import java.util.Date;
 
@@ -10,4 +12,5 @@ public interface EconomiaDAO {
     public boolean AddEconomia(int firaID, Date data, int numVisitants, Float recaptació);
     public boolean UpdateEconomia();
     public boolean DeleteEconomia();
+    public void findbyParams(Connection conn, String TitolSearch,int id, TableView tableView);
 }

@@ -3,6 +3,8 @@ package MainPackage.DAOsImplements;
 import MainPackage.Accessor.BDAccessor;
 import MainPackage.DAOs.EconomiaDAO;
 import MainPackage.Utils;
+import javafx.scene.control.TableView;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,5 +26,9 @@ public class EconomiaDAOImplement implements EconomiaDAO {
 
     public boolean DeleteEconomia() {
         return false;
+    }
+
+    public void findbyParams(Connection conn, String TitolSearch, int id, TableView tableView) {
+
     }
 }
