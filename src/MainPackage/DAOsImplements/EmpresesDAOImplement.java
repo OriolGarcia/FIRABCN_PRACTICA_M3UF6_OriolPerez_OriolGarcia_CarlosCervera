@@ -178,6 +178,7 @@ public class EmpresesDAOImplement implements EmpresesDAO {
             }
         }
     }
+
     public void omplirComboBox (Connection conn, ComboBox comboBox){
         try {
             String cadenaSQL = "SELECT EmpresaID, Nom from Empreses";
