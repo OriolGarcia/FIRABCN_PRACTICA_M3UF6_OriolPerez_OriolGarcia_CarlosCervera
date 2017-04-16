@@ -76,8 +76,12 @@ SELECT Username, Password FROM Usuaris;
 
 INSERT INTO TipusEmpresa VALUES (NULL,'Informatica','Informatica');
 
-ALTER TABLE Empreses ADD Fira INT;
-ALTER TABLE Empreses ADD CONSTRAINT FOREIGN KEY(Fira) REFERENCES Fires(`FiraID`);
+ALTER TABLE Estands ADD Fira INT;
+ALTER TABLE Estands ADD CONSTRAINT FOREIGN KEY(Fira) REFERENCES Fires(`FiraID`);
 
 ALTER TABLE Estands ADD Empresa INT;
 ALTER TABLE Estands ADD CONSTRAINT FOREIGN KEY(Empresa) REFERENCES Empreses(`EmpresaID`);
+use Fira_db;
+ALTER TABLE Fires ADD `Preu Entrada` Decimal after `Superficie Fira`;
+
+

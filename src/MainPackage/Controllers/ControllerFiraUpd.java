@@ -33,6 +33,8 @@ public class ControllerFiraUpd {
     private DatePicker dtDataFi;
     @FXML
     private Label lbErrorUpdFira;
+    @FXML
+    private TextField   txtPreuEntrada;
     FiresDAOImplement firesDAOImpl;
 
 
@@ -50,20 +52,29 @@ public class ControllerFiraUpd {
                 }
             }
         });
-        firesDAOImpl.omplirCamps(conn,id,txtTitol,txtUbicacio,txtSuperficie,dtDataInici,dtDataFi);
+        txtPreuEntrada.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    txtSuperficie.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
+        firesDAOImpl.omplirCamps(conn,id,txtTitol,txtUbicacio,txtSuperficie,txtPreuEntrada,dtDataInici,dtDataFi);
     }
 
     public void UpdFiraEvent(ActionEvent event){
 
         try {
             Float superficie = Float.parseFloat(txtSuperficie.getText());
+            Float preuEntrada = Float.parseFloat(txtPreuEntrada.getText());
             LocalDate localDate1 = dtDataInici.getValue();
             Instant instant = Instant.from(localDate1.atStartOfDay(ZoneId.systemDefault()));
             Date dateInici = Date.from(instant);
             LocalDate localDate2 = dtDataInici.getValue();
             Instant instant2 = Instant.from(localDate2.atStartOfDay(ZoneId.systemDefault()));
             Date dateFi = Date.from(instant2);
-            firesDAOImpl.UpdateFira(connection, id, txtTitol.getText(), txtUbicacio.getText(), superficie, dateInici, dateFi);
+            firesDAOImpl.UpdateFira(connection, id, txtTitol.getText(), txtUbicacio.getText(), superficie,preuEntrada, dateInici, dateFi);
             final Node source = (Node) event.getSource();
             Stage stage = (Stage) source.getScene().getWindow();
             stage.getOnCloseRequest().handle(null);

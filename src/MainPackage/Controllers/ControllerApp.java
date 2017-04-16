@@ -632,7 +632,7 @@ public class ControllerApp {
 
         FiresDAOImplement FiresDAOImpl = new FiresDAOImplement();
 
-        FiresDAOImpl.findbyParams(connection, txtFiraSearch.getText(), TbVFiresEco);
+        FiresDAOImpl.findbyParams(connection, txtFiraEcoSearch.getText(), TbVFiresEco);
 
     }
 

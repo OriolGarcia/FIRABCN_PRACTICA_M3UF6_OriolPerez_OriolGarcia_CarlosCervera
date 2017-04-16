@@ -29,17 +29,18 @@ public class FiresDAOImplement implements FiresDAO {
     private static BDAccessor bd= null;
 
 
-    public boolean AddFira(Connection conn, String Titol,String Ubicació,float Superficie, Date DataInici, Date DataFi){
+    public boolean AddFira(Connection conn, String Titol,String Ubicació,float Superficie,float PreuEntrada, Date DataInici, Date DataFi){
 
         try {
-            String cadenaSQL = "INSERT INTO Fires(Titol,Ubicacio,`Superficie Fira`,DataInici,DataFi)"
-            +" VALUES(?,?,?,?,?);";
+            String cadenaSQL = "INSERT INTO Fires(Titol,Ubicacio,`Superficie Fira`,`Preu Entrada`,DataInici,DataFi)"
+            +" VALUES(?,?,?,?,?,?);";
             pstmt = conn.prepareStatement(cadenaSQL, PreparedStatement.RETURN_GENERATED_KEYS);
             pstmt.setString(1,Titol);
             pstmt.setString(2, Ubicació);
             pstmt.setFloat(3, Superficie);
-            pstmt.setDate(4, new java.sql.Date(DataInici.getTime()));
-            pstmt.setDate(5, new java.sql.Date(DataFi.getTime()));
+            pstmt.setFloat(4, PreuEntrada);
+            pstmt.setDate(5, new java.sql.Date(DataInici.getTime()));
+            pstmt.setDate(6, new java.sql.Date(DataFi.getTime()));
             int n = pstmt.executeUpdate();
             try (ResultSet rs = pstmt.getGeneratedKeys()) {
                 while (rs.next()) {
@@ -61,16 +62,17 @@ public class FiresDAOImplement implements FiresDAO {
         }
 
     }
-    public boolean UpdateFira(Connection conn,int id, String Titol,String Ubicació, float Superficie,Date DataInici,Date DataFi){
+    public boolean UpdateFira(Connection conn,int id, String Titol,String Ubicació, float Superficie,float PreuEntrada, Date DataInici,Date DataFi){
         try {
-            String cadenaSQL = "UPDATE Fires SET Titol=?,Ubicacio=?,`Superficie Fira`=?,DataInici=?,DataFi=? WHERE FiraID=?;";
+            String cadenaSQL = "UPDATE Fires SET Titol=?,Ubicacio=?,`Superficie Fira`=?,`Preu Entrada`=?,DataInici=?,DataFi=? WHERE FiraID=?;";
             pstmt = conn.prepareStatement(cadenaSQL, PreparedStatement.RETURN_GENERATED_KEYS);
             pstmt.setString(1,Titol);
             pstmt.setString(2, Ubicació);
             pstmt.setFloat(3, Superficie);
-            pstmt.setDate(4, new java.sql.Date(DataInici.getTime()));
-            pstmt.setDate(5, new java.sql.Date(DataFi.getTime()));
-            pstmt.setInt(6,id);
+            pstmt.setFloat(4, PreuEntrada);
+            pstmt.setDate(5, new java.sql.Date(DataInici.getTime()));
+            pstmt.setDate(6, new java.sql.Date(DataFi.getTime()));
+            pstmt.setInt(7,id);
             int n = pstmt.executeUpdate();
             try (ResultSet rs = pstmt.getGeneratedKeys()) {
                 while (rs.next()) {
@@ -147,10 +149,10 @@ public class FiresDAOImplement implements FiresDAO {
         }
 
     }
-    public void omplirCamps(Connection conn, int id, TextField txtFielTitolFira, TextField txtFieldUbicació, TextField txtFieldSuperificie, DatePicker DataInici, DatePicker DataFi){
+    public void omplirCamps(Connection conn, int id, TextField txtFielTitolFira, TextField txtFieldUbicació, TextField txtFieldSuperificie,TextField txtPreuEntrada, DatePicker DataInici, DatePicker DataFi){
 
         try {
-            String cadenaSQL= "SELECT Titol,Ubicacio,`Superficie Fira`,DataInici,DataFi FROM Fires WHERE FiraID = ?";
+            String cadenaSQL= "SELECT Titol,Ubicacio,`Superficie Fira`,`Preu Entrada`,DataInici,DataFi FROM Fires WHERE FiraID = ?";
             pstmt = conn.prepareStatement(cadenaSQL);
             pstmt.setInt(1,id);
 
@@ -161,8 +163,9 @@ public class FiresDAOImplement implements FiresDAO {
                     txtFielTitolFira.setText(resultat.getString(1));
                     txtFieldUbicació.setText(resultat.getString(2));
                     txtFieldSuperificie.setText(resultat.getString(3));
-                    DataInici.setValue(resultat.getDate(4).toLocalDate());
-                    DataFi.setValue(resultat.getDate(5).toLocalDate());
+                    txtPreuEntrada.setText(resultat.getString(4));
+                    DataInici.setValue(resultat.getDate(5).toLocalDate());
+                    DataFi.setValue(resultat.getDate(6).toLocalDate());
                 }
                 System.out.println("1");
             }
