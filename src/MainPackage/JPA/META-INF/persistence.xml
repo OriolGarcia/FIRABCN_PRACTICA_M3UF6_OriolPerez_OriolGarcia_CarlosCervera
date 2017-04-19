@@ -6,10 +6,10 @@
     <class>MainPackage.JPA.Empleat</class>
     <class>MainPackage.JPA.Departament</class>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/daw2"/>
-      <property name="javax.persistence.jdbc.password" value="root"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/Fira_DB"/>
+      <property name="javax.persistence.jdbc.password" value="Fira_Manager"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-      <property name="javax.persistence.jdbc.user" value="root"/>
+      <property name="javax.persistence.jdbc.user" value="Fira_Manager"/>
       <property name="eclipselink.ddl-generation" value="create-tables"/>
     </properties>
   </persistence-unit>

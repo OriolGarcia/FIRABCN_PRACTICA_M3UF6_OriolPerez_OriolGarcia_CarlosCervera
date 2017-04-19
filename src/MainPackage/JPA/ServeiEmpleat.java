@@ -43,7 +43,6 @@ public class ServeiEmpleat {
     public Empleat trobarEmpleat(int id) {
         return em.find(Empleat.class, id);
     }
-
     public List<Empleat> trobarTotsEmpleats() {
         TypedQuery<Empleat> query = em.createQuery(
                 "SELECT e FROM Empleat e", Empleat.class);
