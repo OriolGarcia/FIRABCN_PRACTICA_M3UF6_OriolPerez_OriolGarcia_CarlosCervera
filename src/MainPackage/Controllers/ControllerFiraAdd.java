@@ -71,7 +71,7 @@ public class ControllerFiraAdd {
             LocalDate localDate1 = dtDataInici.getValue();
             Instant instant = Instant.from(localDate1.atStartOfDay(ZoneId.systemDefault()));
             Date dateInici = Date.from(instant);
-            LocalDate localDate2 = dtDataInici.getValue();
+            LocalDate localDate2 = dtDataFi.getValue();
             Instant instant2 = Instant.from(localDate2.atStartOfDay(ZoneId.systemDefault()));
             Date dateFi = Date.from(instant2);
 

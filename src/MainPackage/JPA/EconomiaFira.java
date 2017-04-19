@@ -1,6 +1,6 @@
 package MainPackage.JPA;
 
-import org.eclipse.persistence.jpa.jpql.parser.DateTime;
+//import org.eclipse.persistence.jpa.jpql.parser.DateTime;
 
 import javax.persistence.*;
 import java.util.GregorianCalendar;

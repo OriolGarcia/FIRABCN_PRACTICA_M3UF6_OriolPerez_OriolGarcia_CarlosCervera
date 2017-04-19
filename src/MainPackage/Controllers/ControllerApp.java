@@ -647,7 +647,7 @@ public class ControllerApp {
 
             EconomiaDAOImplement ecoDAOImpl = new EconomiaDAOImplement();
 
-            ecoDAOImpl.findbyParams(connection, txtEmpresaSearch.getText(), id, TbVEconomia);
+            ecoDAOImpl.findbyParams(connection, txtEconomiaSearch.getText(), id, TbVEconomia);
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
             TbVEconomia.getItems().clear();
