@@ -67,6 +67,12 @@ public class ControllerApp {
     Button btEliminarEstand;
     @FXML
     Button btActualitzarEstand;
+    @FXML
+    Button btAfegirEconomia;
+    @FXML
+    Button btActualitzarEconomia;
+    @FXML
+    Button btEliminarEconomia;
 
     @FXML
     Pane AdminUsuaris;
@@ -652,6 +658,49 @@ public class ControllerApp {
             System.out.println("Error: " + e.getMessage());
             TbVEconomia.getItems().clear();
             TbVEconomia.getColumns().clear();
+        }
+    }
+
+    public void AfegirEconomia(ActionEvent event){
+        int id = 0;
+        boolean accs = true;
+        try {
+            TablePosition pos = (TablePosition) TbVFiresEco.getSelectionModel().getSelectedCells().get(0);
+            int index = pos.getRow();
+            String selected = TbVFiresEco.getItems().get(index).toString();
+            String ids = selected.substring(1, selected.indexOf(","));
+            id = Integer.parseInt(ids);
+            System.out.println("id: " + id);
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+            accs = false;
+        }
+        if (accs) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../Scenes/EconomiaAddScene.fxml"));
+                Parent root = loader.load();
+                Stage secondStage = new Stage();
+                secondStage.setScene(new Scene(root, 560, 276));
+                secondStage.show();
+                ControllerEconomiaAdd controller = loader.getController();
+                controller.init(connection, bdAccessor, id);
+                secondStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                    @Override
+                    public void handle(WindowEvent we) {
+                        System.out.println("S'ha tancat Add Economia");
+                        initiailizeTableViewEconomia();
+
+                    }
+                });
+            } catch (IOException ex) {
+                System.out.println("Error: " + ex.getMessage());
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Unselected");
+            alert.setHeaderText("Fira no seleccionada.");
+            alert.setContentText("Selecciona la fira on vols inserir el dia.");
+            alert.showAndWait();
         }
     }
 }

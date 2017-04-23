@@ -20,7 +20,7 @@ public class EconomiaDAOImplement implements EconomiaDAO {
     private static PreparedStatement pstmt;
     private static BDAccessor bd = null;
 
-    public boolean AddEconomia(int firaID, Date data, int numVisitants, Float recaptació){
+    public boolean AddEconomia(Connection conn, int firaID, Date data, int numVisitants, Float recaptació){
         return true;
     }
 

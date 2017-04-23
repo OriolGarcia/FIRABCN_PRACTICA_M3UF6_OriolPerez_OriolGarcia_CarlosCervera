@@ -81,7 +81,10 @@ ALTER TABLE Estands ADD CONSTRAINT FOREIGN KEY(Fira) REFERENCES Fires(`FiraID`);
 
 ALTER TABLE Estands ADD Empresa INT;
 ALTER TABLE Estands ADD CONSTRAINT FOREIGN KEY(Empresa) REFERENCES Empreses(`EmpresaID`);
+
 use Fira_db;
 ALTER TABLE Fires ADD `Preu Entrada` Decimal after `Superficie Fira`;
 
+SELECT SUM(QuotaEstand) FROM Estands WHERE Fira = 1;
 
+select * from ECONOMIAFIRA;
