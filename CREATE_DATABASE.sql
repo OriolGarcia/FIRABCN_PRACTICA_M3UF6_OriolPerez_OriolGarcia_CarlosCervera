@@ -86,5 +86,6 @@ use Fira_db;
 ALTER TABLE Fires ADD `Preu Entrada` Decimal after `Superficie Fira`;
 
 SELECT SUM(QuotaEstand) FROM Estands WHERE Fira = 1;
+SELECT `Preu Entrada` FROM Fires WHERE FiraID = 1;
 
 select * from ECONOMIAFIRA;

@@ -136,7 +136,7 @@ public class FiresDAOImplement implements FiresDAO {
 
             }
         }catch (SQLException ex){
-            System.out.println(ex.getErrorCode());
+            System.out.println("Error :" + ex.getErrorCode());
 
         }
         finally {
@@ -170,7 +170,7 @@ public class FiresDAOImplement implements FiresDAO {
                 System.out.println("1");
             }
         }catch (SQLException ex){
-            System.out.println(ex.getErrorCode());
+            System.out.println("Error :" + ex.getErrorCode());
 
         }
         finally {
@@ -201,7 +201,7 @@ public class FiresDAOImplement implements FiresDAO {
                comboBox.getItems().addAll(model);
                  }
         }catch (SQLException ex){
-            System.out.println(ex.getMessage());
+            System.out.println("Error :" + ex.getMessage());
 
         }
         finally {

@@ -70,7 +70,7 @@ public class ControllerEmpresaUpd {
                 }
             }
         });*/
-        empDAOImpl.omplirCamps(conn,id,txtNomEmpresa,txtCIF,txtPersonaContacte,txtTelefon/*,*/);
+        empDAOImpl.omplirCamps(conn,id,txtNomEmpresa,txtCIF,txtPersonaContacte,txtTelefon);
     }
 
     public void UpdEmpresaEvent(ActionEvent event){

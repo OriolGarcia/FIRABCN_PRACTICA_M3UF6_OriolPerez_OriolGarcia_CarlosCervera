@@ -18,6 +18,9 @@ import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by oriol on 30/03/2017.
@@ -664,6 +667,7 @@ public class ControllerApp {
     public void AfegirEconomia(ActionEvent event){
         int id = 0;
         boolean accs = true;
+
         try {
             TablePosition pos = (TablePosition) TbVFiresEco.getSelectionModel().getSelectedCells().get(0);
             int index = pos.getRow();
@@ -701,6 +705,85 @@ public class ControllerApp {
             alert.setHeaderText("Fira no seleccionada.");
             alert.setContentText("Selecciona la fira on vols inserir el dia.");
             alert.showAndWait();
+        }
+    }
+
+    public void ActualitzarEconomia (ActionEvent event){
+        int id = 0;
+        Date dateID = new Date();
+        boolean accs = true;
+
+        try {
+            TablePosition pos = (TablePosition) TbVEconomia.getSelectionModel().getSelectedCells().get(0);
+            int index = pos.getRow();
+            String selected = TbVEconomia.getItems().get(index).toString();
+            String ids = selected.substring(1, selected.indexOf(","));
+            id = Integer.parseInt(ids);
+            System.out.println("id: " + id);
+
+            ids = selected.substring(ordinalIndexOf(selected, ",", 1) + 2, ordinalIndexOf(selected, ",", 2));
+            DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            dateID = formatter.parse(ids);
+            System.out.println("Date: " + formatter.format(dateID));
+
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+            accs = false;
+        }
+
+        if (accs) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../Scenes/EconomiaUpdScene.fxml"));
+                Parent root = loader.load();
+                Stage secondStage = new Stage();
+                secondStage.setScene(new Scene(root, 560, 276));
+                secondStage.show();
+                ControllerEconomiaUpd controller = loader.getController();
+                controller.init(connection, bdAccessor, id, dateID);
+                secondStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                    @Override
+                    public void handle(WindowEvent event) {
+                        System.out.println("S'ha tancat Update Economia");
+                        initiailizeTableViewEconomia();
+                    }
+                });
+            } catch (IOException ex) {
+                System.out.println("Error: " + ex.getMessage());
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Unselected");
+            alert.setHeaderText("Dia no seleccionat.");
+            alert.setContentText("Selecciona el dia que vols actualitzar.");
+            alert.showAndWait();
+        }
+    }
+
+    public void eliminarEconmia(ActionEvent event) {
+        int id = 0;
+        Date dateID = new Date();
+        boolean accs = true;
+
+        try {
+            TablePosition pos = (TablePosition) TbVEconomia.getSelectionModel().getSelectedCells().get(0);
+            int index = pos.getRow();
+            String selected = TbVEconomia.getItems().get(index).toString();
+            String ids = selected.substring(1, selected.indexOf(","));
+            id = Integer.parseInt(ids);
+            System.out.println("id: " + id);
+
+            ids = selected.substring(ordinalIndexOf(selected, ",", 1) + 2, ordinalIndexOf(selected, ",", 2));
+            DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            dateID = formatter.parse(ids);
+            System.out.println("Date: " + formatter.format(dateID));
+
+            EconomiaDAOImplement ecoDAOImpl = new EconomiaDAOImplement();
+            ecoDAOImpl.DeleteEconomia(connection, id, dateID);
+            initiailizeTableViewEconomia();
+
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+            accs = false;
         }
     }
 }
