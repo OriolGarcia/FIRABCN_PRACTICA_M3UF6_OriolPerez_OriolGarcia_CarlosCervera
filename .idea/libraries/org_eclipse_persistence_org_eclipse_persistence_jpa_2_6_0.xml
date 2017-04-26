@@ -1,0 +1,18 @@
+<component name="libraryTable">
+  <library name="org.eclipse.persistence:org.eclipse.persistence.jpa:2.6.0" type="repository">
+    <properties maven-id="org.eclipse.persistence:org.eclipse.persistence.jpa:2.6.0" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/org.eclipse.persistence.jpa-2.6.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/javax.persistence-2.1.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/org.eclipse.persistence.asm-2.6.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/org.eclipse.persistence.antlr-2.6.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/javax.json-1.0.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/org.eclipse.persistence.jpa.jpql-2.6.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/org.eclipse.persistence.core-2.6.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/lib/org.eclipse.persistence.jpa-2.6.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

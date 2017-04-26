@@ -2,6 +2,8 @@ package MainPackage.Controllers;
 
 import MainPackage.Accessor.BDAccessor;
 import MainPackage.DAOsImplements.*;
+import MainPackage.JPA.ServeiEconomiaFira;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
@@ -16,6 +18,9 @@ import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import javafx.stage.WindowEvent;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import java.io.IOException;
 import java.sql.Connection;
 import java.text.DateFormat;
@@ -79,7 +84,8 @@ public class ControllerApp {
 
     @FXML
     Pane AdminUsuaris;
-
+    @FXML
+    Label lbEconomiaFiraSeleccionada;
 
     Connection connection;
     BDAccessor bdAccessor;
@@ -173,6 +179,7 @@ public class ControllerApp {
         TbVFiresEco.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
                 initiailizeTableViewEconomia();
+
             }
         });
     }
@@ -286,6 +293,7 @@ public class ControllerApp {
                 public void handle(WindowEvent we) {
                     System.out.println("S'ha tancat Add Fira");
                     initiailizeTableViewFires();
+                    initiailizeTableViewFiresEconomia();
 
                 }
             });
@@ -321,8 +329,9 @@ public class ControllerApp {
                 secondStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
                     @Override
                     public void handle(WindowEvent event) {
-                        System.out.println("S'ha tancat Update User");
+                        System.out.println("S'ha tancat Update Fires");
                         initiailizeTableViewFires();
+                        initiailizeTableViewFiresEconomia();
                     }
                 });
             } catch (IOException ex) {
@@ -346,10 +355,11 @@ public class ControllerApp {
             int index = pos.getRow();
             String selected = TbVFires.getItems().get(index).toString();
             id = Integer.parseInt(selected.substring(1, selected.indexOf(",")));
-            System.out.println(selected);
+
             FiresDAOImplement firesDAOImpl = new FiresDAOImplement();
             firesDAOImpl.DeleteFira(connection, id);
             initiailizeTableViewFires();
+            initiailizeTableViewFiresEconomia();
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
             accs = false;
@@ -653,7 +663,10 @@ public class ControllerApp {
             int index = pos.getRow();
             String selected = TbVFiresEco.getItems().get(index).toString();
             id = Integer.parseInt(selected.substring(1, selected.indexOf(",")));
-
+          //  EntityManagerFactory emf =Persistence.createEntityManagerFactory("ServeiEconomiaFira");
+           // EntityManager em = emf.createEntityManager();
+          //  ServeiEconomiaFira se = new ServeiEconomiaFira(em);
+           // lbEconomiaFiraSeleccionada.setText(se.EconomiaFiraToString(id));
             EconomiaDAOImplement ecoDAOImpl = new EconomiaDAOImplement();
 
             ecoDAOImpl.findbyParams(connection, txtEconomiaSearch.getText(), id, TbVEconomia);

@@ -8,10 +8,7 @@ import javafx.beans.InvalidationListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -104,15 +101,27 @@ public class FiresDAOImplement implements FiresDAO {
             int n = pstmt.executeUpdate();
             try (ResultSet rs = pstmt.getGeneratedKeys()) {
                 while (rs.next()) {
-                    System.out.println("Codi generat per getGeneratedKeys():"
-                            + rs.getInt(1));
+
                 }
             }
-            conn.commit();
+            if(Utils.dialegConfirmacioEliminacio()) {
+                conn.commit();
+
+            }else{
+                conn.rollback();}
+
+
             if (n>0)return true;
             else return false;
         }catch (SQLException ex){
-            System.out.println(ex.getErrorCode());
+
+
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Error en eliminar");
+                alert.setContentText("Per eliminar aquest registre primer has d'eliminar el seu contingut!");
+
+
+
             return false;
         }finally {
             try {

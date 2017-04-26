@@ -6,15 +6,14 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 
 import java.sql.ResultSet;
 import java.sql.Types;
+import java.util.Optional;
 
 /**
  * Created by ogs10_000 on 02/04/2017.
@@ -87,4 +86,22 @@ public class Utils {
             System.out.println("Error on Building Data");
         }
     }
+
+    public static Boolean dialegConfirmacioEliminacio(){
+
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmació d'Eliminació");
+        alert.setHeaderText("Espera, confirma la teva decisió");
+        alert.setContentText("Segur que vols eliminar aquest registre?");
+        alert.getButtonTypes().setAll(ButtonType.YES,ButtonType.NO);
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.YES){
+           return true;
+        } else {
+            return false;
+        }
+    }
+
+
 }

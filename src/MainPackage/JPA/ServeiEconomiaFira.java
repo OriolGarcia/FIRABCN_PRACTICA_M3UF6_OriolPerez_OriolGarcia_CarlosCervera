@@ -20,22 +20,37 @@ public class ServeiEconomiaFira{
             return ef;
         }
 
-        public void esborrarAparcament(int id) {
-            Aparcament emp = trobarAparcament(id);
-            if (emp != null) {
-                em.remove(emp);
+        public void esborrarEconomiaFira(int EconomiaFiraId) {
+            EconomiaFira economiaFira = trobarEconomiaFira(EconomiaFiraId);
+            if (economiaFira != null) {
+                em.remove(economiaFira);
             }
         }
 
 
-        public Aparcament trobarAparcament(int id) {
-            return em.find(Aparcament.class, id);
+        public EconomiaFira trobarEconomiaFira(int EconomiaFiraId) {
+            return em.find(EconomiaFira.class, EconomiaFiraId);
         }
+    public String EconomiaFiraToString(int FiraID) {
+        List<EconomiaFira> economiesFira = trobarTotsEconomiaFira(FiraID);
+        if (economiesFira == null) {
+            System.out.println("No EconomiaFiras found . ");
+            return"";
+        } else {
 
-        public List<Aparcament> trobarTotsAparcaments() {
-            TypedQuery<Aparcament> query = em.createQuery(
-                    "SELECT e FROM Aparcament e", Aparcament.class);
-            return query.getResultList();
+            float Total = 0;
+            for (EconomiaFira economiaFira : economiesFira) {
+                Total += economiaFira.getRecaptació();
+            }
+
+            return "Total recaptat en tota la fira:"+Total;
         }
+    }
+    public List<EconomiaFira> trobarTotsEconomiaFira(int FiraID) {
+        TypedQuery<EconomiaFira> query = em.createQuery(
+                "SELECT e FROM EconomiaFira e where e.FiraID="+FiraID, EconomiaFira.class);
+        return query.getResultList();
+    }
+
 
 }

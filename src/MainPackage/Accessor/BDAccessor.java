@@ -14,9 +14,9 @@ import java.util.Properties;
 public class BDAccessor {
 
 
-    private String url = null;
-    private String usuari = null;
-    private String contrasenya = null;
+    private static String url = null;
+    private static String usuari = null;
+    private static String contrasenya = null;
 
     public BDAccessor() {
     }
@@ -29,7 +29,7 @@ public class BDAccessor {
      * @param contrasenya
      *
      */
-    public BDAccessor(String url, String usuari, String contrasenya) {
+    public  BDAccessor(String url, String usuari, String contrasenya) {
         this.url = url;
         this.usuari = usuari;
         this.contrasenya = contrasenya;
@@ -43,7 +43,7 @@ public class BDAccessor {
      * @throws SQLException Si no pot obtenir la connexiÃ³ a BD.
      * @throws ClassNotFoundException Si no troba la classe del driver de BD
      */
-    public Connection obtenirConnexio() throws SQLException, IOException, ClassNotFoundException {
+    public static Connection obtenirConnexio() throws SQLException, IOException, ClassNotFoundException {
         Connection conn = null;
         // Llegeix el fitxer de configuraciÃ³ de la BD o els paramÃ¨tres del constructor.
         try {
@@ -127,7 +127,7 @@ public class BDAccessor {
      *
      * @throws IOException Si no llegeix el fitxer de configuraciÃ³.
      */
-    private void assignarPropietatsBD() throws IOException {
+    private static void assignarPropietatsBD() throws IOException {
         // Obtenim la configuraciÃ³ de la base de dades
         Properties propietats = null;
         try {

@@ -3,6 +3,7 @@ package MainPackage.DAOsImplements;
 import MainPackage.Accessor.BDAccessor;
 import MainPackage.DAOs.EconomiaDAO;
 import MainPackage.Utils;
+import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -100,12 +101,18 @@ public class EconomiaDAOImplement implements EconomiaDAO {
                             + rs.getInt(1));
                 }
             }
-            conn.commit();
+            if(Utils.dialegConfirmacioEliminacio()) {
+                conn.commit();
+
+            }else{
+                conn.rollback();}
 
             if (n>0)return true;
             else return false;
         }catch (SQLException ex){
-            System.out.println(ex.getErrorCode());
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Error en eliminar");
+            alert.setContentText("Per eliminar aquest registre primer has d'eliminar el seu contingut!");
             return false;
         }finally {
             try {

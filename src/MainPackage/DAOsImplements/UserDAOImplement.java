@@ -156,7 +156,11 @@ public class UserDAOImplement implements UserDAO {
                             + rs.getInt(1));
                 }
             }
-            conn.commit();
+            if(Utils.dialegConfirmacioEliminacio()) {
+                conn.commit();
+
+            }else{
+                conn.rollback();}
             if (n>0)return true;
             else return false;
         }catch (SQLException ex){
