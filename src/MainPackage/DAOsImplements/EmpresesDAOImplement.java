@@ -235,7 +235,7 @@ public class EmpresesDAOImplement implements EmpresesDAO {
     }
 
     /**
-     * Per omplir el ComboBox
+     * Per omplir el ComboBox d'empreses
      * @param conn connexió a la BD
      * @param comboBox combobox
      */

@@ -241,7 +241,7 @@ public class FiresDAOImplement implements FiresDAO {
     }
 
     /**
-     * Per omplir comboBox
+     * Per omplir comboBox de fires
      * @param conn connexió a la BD
      * @param comboBox afegir combobox
      */

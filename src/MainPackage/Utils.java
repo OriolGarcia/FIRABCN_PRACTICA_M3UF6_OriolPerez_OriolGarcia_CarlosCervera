@@ -20,6 +20,11 @@ import java.util.Optional;
  */
 public class Utils {
 
+    /**
+     * Per omplir cadascuna de les taules de l'aplicació
+     * @param tableView taula a omplir
+     * @param rs ResusultSet obtingut als DAOs
+     */
     public  static void omplirTableView(TableView tableView, ResultSet rs){
         ObservableList<ObservableList> data;
         try{
@@ -87,6 +92,10 @@ public class Utils {
         }
     }
 
+    /**
+     * Per confirmar si es vol eliminar un element de la BD
+     * @return retorna true si l'usuari accepta
+     */
     public static Boolean dialegConfirmacioEliminacio(){
 
 
