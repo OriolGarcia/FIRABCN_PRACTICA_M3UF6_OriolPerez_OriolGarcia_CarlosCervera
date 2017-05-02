@@ -37,9 +37,9 @@ public class Tests {
         BDAccessor accessor = new BDAccessor();
         Connection connexio = accessor.obtenirConnexio();
         UserDAOImplement UserDAOImpl = new UserDAOImplement();
-       String usuari = "admin";String pass="admin";
-      assertTrue(UserDAOImpl.LoginUser(connexio, usuari, pass));
-         usuari = "FAKEUSER"; pass="FAKEPASS";
+        String usuari = "admin";String pass="admin";
+        assertTrue(UserDAOImpl.LoginUser(connexio, usuari, pass));
+        usuari = "FAKEUSER"; pass="FAKEPASS";
         assertFalse(UserDAOImpl.LoginUser(connexio, usuari, pass));
 
     }

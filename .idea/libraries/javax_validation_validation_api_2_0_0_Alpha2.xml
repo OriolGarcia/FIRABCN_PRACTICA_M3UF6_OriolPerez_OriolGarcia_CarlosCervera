@@ -3,11 +3,14 @@
     <properties maven-id="javax.validation:validation-api:2.0.0.Alpha2" />
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/lib/validation-api-2.0.0.Alpha2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/validation-api-2.0.0.Alpha2.jar!/" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$PROJECT_DIR$/lib/validation-api-2.0.0.Alpha2-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/validation-api-2.0.0.Alpha2-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
+      <root url="jar://$PROJECT_DIR$/lib/validation-api-2.0.0.Alpha2-sources.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/validation-api-2.0.0.Alpha2-sources.jar!/" />
     </SOURCES>
   </library>

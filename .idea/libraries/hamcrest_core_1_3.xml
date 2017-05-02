@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="hamcrest-core-1.3">
     <CLASSES>
-      <root url="jar://$USER_HOME$/Documents/LlibreriesJava/hamcrest-core-1.3.jar!/" />
-      <root url="jar://$USER_HOME$/Documents/LlibreriesJava/junit-4.12.jar!/" />
+      <root url="jar://$USER_HOME$/eclipse/java-mars/hamcrest-core-1.3.jar!/" />
+      <root url="jar://$USER_HOME$/eclipse/java-mars/junit-4.12.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
