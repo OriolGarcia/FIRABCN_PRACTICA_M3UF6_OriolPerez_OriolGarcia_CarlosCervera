@@ -48,6 +48,14 @@ public class ControllerEstandUpd {
 
     EstandsDAOImplement estDAOImpl;
 
+    /**
+     * Funció per actualitzar un estand
+     * @param conn connexió a la BD
+     * @param bdAccessor accès a la BD
+     * @param id identificador d'estand
+     * @param FiraID identificador de fira
+     * @param EmpresaID identificador d'empresa
+     */
     public void init(Connection conn, BDAccessor bdAccessor, int id,int FiraID, int EmpresaID) {
         connection = conn;
         this.bdAccessor = bdAccessor;
@@ -64,6 +72,10 @@ public class ControllerEstandUpd {
         estDAOImpl.omplirCamps(conn,id,txtNomEstand,txtSuperficie,txtQuota,dtDataInici,dtDataFi);
     }
 
+    /**
+     * Per actualitzar un estand
+     * @param event
+     */
     public void UpdEstandEvent(ActionEvent event) {
         try {
             EstandsDAOImplement estandsDAOImpl = new EstandsDAOImplement();

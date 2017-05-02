@@ -43,6 +43,13 @@ public class ControllerEconomiaUpd {
 
     EconomiaDAOImplement ecoDAOImp;
 
+    /**
+     * Funció per actualitzar un dia a ecnonomia
+     * @param conn connexió a la BD
+     * @param bdAccessor per accedir a la BD
+     * @param id identificador de Fira
+     * @param dateID dia a actualitzar
+     */
     public void init(Connection conn, BDAccessor bdAccessor,int id, Date dateID) {
         connection = conn;
         this.bdAccessor = bdAccessor;
@@ -67,6 +74,10 @@ public class ControllerEconomiaUpd {
 
     }
 
+    /**
+     * Per actualitzar el dia a economia
+     * @param event
+     */
     public void UpdEconomiaEvent(ActionEvent event) {
         float quotaTotal;
         float preuEntrada;

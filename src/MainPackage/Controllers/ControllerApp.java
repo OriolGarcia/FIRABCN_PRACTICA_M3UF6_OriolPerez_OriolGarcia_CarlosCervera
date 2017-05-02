@@ -89,8 +89,14 @@ public class ControllerApp {
 
     Connection connection;
     BDAccessor bdAccessor;
-    //int idFira;
 
+    /**
+     * Funció que inicia la app principal
+     * @param conn connexió amb la bd
+     * @param bdAccessor paràmetre d'accès a la bd
+     * @param usuari usuari actual
+     * @param pass contrasenya de l'usuari
+     */
     public void init(Connection conn, BDAccessor bdAccessor, String usuari, String pass) {
         connection = conn;
         this.bdAccessor = bdAccessor;
@@ -184,6 +190,9 @@ public class ControllerApp {
         });
     }
 
+    /**
+     * Inicia la taula d'usuaris
+     */
     private void initiailizeTableViewUsers() {
 
         UserDAOImplement UserDAOImpl = new UserDAOImplement();
@@ -192,6 +201,10 @@ public class ControllerApp {
 
     }
 
+    /**
+     * Per afegir un usuari
+     * @param event
+     */
     public void afegirUsuari(ActionEvent event) {
 
         try {
@@ -213,6 +226,10 @@ public class ControllerApp {
         }
     }
 
+    /**
+     * Per eliminar un usuari
+     * @param event
+     */
     public void eliminarUsuari(ActionEvent event) {
         try {
             TablePosition pos = (TablePosition) TbVUsers.getSelectionModel().getSelectedCells().get(0);
@@ -228,9 +245,17 @@ public class ControllerApp {
         }
     }
 
+    /**
+     * Per generar la contrasenya
+     * @param event
+     */
     public void generarContrasenya(ActionEvent event) {
     }
 
+    /**
+     * Per canviar els permissos d'un usuari
+     * @param event
+     */
     public void canviarPermisos(ActionEvent event) {
         String id = "";
         boolean accs = true;
@@ -267,9 +292,16 @@ public class ControllerApp {
         }
     }
 
+    /**
+     * Per canviar la contrasenya
+     * @param event
+     */
     public void canviarContrasenya(ActionEvent event) {
     }
 
+    /**
+     * Per iniciar la taula de fires
+     */
     private void initiailizeTableViewFires() {
 
         FiresDAOImplement FiresDAOImpl = new FiresDAOImplement();
@@ -278,6 +310,10 @@ public class ControllerApp {
 
     }
 
+    /**
+     * Per afegir una fira
+     * @param event
+     */
     public void afegirFira(ActionEvent event) {
 
         try {
@@ -302,6 +338,10 @@ public class ControllerApp {
         }
     }
 
+    /**
+     * Per actualitzar una fira
+     * @param event
+     */
     public void actualitzarFira(ActionEvent event) {
         int id = 0;
         boolean accs = true;
@@ -346,6 +386,10 @@ public class ControllerApp {
         }
     }
 
+    /**
+     * Per eliminar una fira
+     * @param event
+     */
     public void eliminarFira(ActionEvent event) {
         int id = 0;
         boolean accs = true;
@@ -366,6 +410,9 @@ public class ControllerApp {
         }
     }
 
+    /**
+     * Per iniciar la taula Empreses
+     */
     private void initiailizeTableViewEmpreses() {
         int id = 0;
         boolean accs = true;
@@ -385,6 +432,10 @@ public class ControllerApp {
         }
     }
 
+    /**
+     * Per afegir una empresa
+     * @param event
+     */
     public void afegirEmpresa(ActionEvent event) {
         int id = 0;
         boolean accs = true;
@@ -428,6 +479,10 @@ public class ControllerApp {
         }
     }
 
+    /**
+     * Per actualitzar una empresa
+     * @param event
+     */
     public void actualitzarEmpresa(ActionEvent event) {
         int id = 0;
         boolean accs = true;
@@ -471,6 +526,10 @@ public class ControllerApp {
         }
     }
 
+    /**
+     * Per eliminar una empresa
+     * @param event
+     */
     public void eliminarEmpresa(ActionEvent event) {
         int id = 0;
         boolean accs = true;
@@ -489,6 +548,9 @@ public class ControllerApp {
         }
     }
 
+    /**
+     * Per iniciar la taula d'Estands
+     */
     private void initiailizeTableViewEstands() {
         int id = 0;
         boolean accs = true;
@@ -508,6 +570,10 @@ public class ControllerApp {
         }
     }
 
+    /**
+     * Per afegir un estand
+     * @param event
+     */
     public void afegirEstand(ActionEvent event) {
 
         int id = 0;
@@ -570,6 +636,10 @@ public class ControllerApp {
         }
     }
 
+    /**
+     * Per actualitzar un estand
+     * @param event
+     */
     public void actualitzarEstand(ActionEvent event) {
         int id = 0;
         int FiraID = 0;
@@ -622,6 +692,10 @@ public class ControllerApp {
         }
     }
 
+    /**
+     * Per eliminar un estand
+     * @param event
+     */
     public void eliminarEstand(ActionEvent event) {
         int id = 0;
         boolean accs = true;
@@ -640,6 +714,13 @@ public class ControllerApp {
         }
     }
 
+    /**
+     *
+     * @param str
+     * @param substr
+     * @param n
+     * @return
+     */
     public static int ordinalIndexOf(String str, String substr, int n) {
         int pos = str.indexOf(substr);
         while (--n > 0 && pos != -1)
@@ -647,6 +728,9 @@ public class ControllerApp {
         return pos;
     }
 
+    /**
+     * Per iniciar la taula de Fires a Economia
+     */
     private void initiailizeTableViewFiresEconomia() {
 
         FiresDAOImplement FiresDAOImpl = new FiresDAOImplement();
@@ -655,6 +739,9 @@ public class ControllerApp {
 
     }
 
+    /**
+     * Per iniciar la taula d'Economia
+     */
     private void initiailizeTableViewEconomia(){
         int id = 0;
         boolean accs = true;
@@ -677,6 +764,10 @@ public class ControllerApp {
         }
     }
 
+    /**
+     * Per afegir un dia a economia
+     * @param event
+     */
     public void AfegirEconomia(ActionEvent event){
         int id = 0;
         boolean accs = true;
@@ -721,6 +812,10 @@ public class ControllerApp {
         }
     }
 
+    /**
+     * Per actualitzar un dia a economia
+     * @param event
+     */
     public void ActualitzarEconomia (ActionEvent event){
         int id = 0;
         Date dateID = new Date();
@@ -772,6 +867,10 @@ public class ControllerApp {
         }
     }
 
+    /**
+     * Per eliminar un dia a economia
+     * @param event
+     */
     public void eliminarEconmia(ActionEvent event) {
         int id = 0;
         Date dateID = new Date();

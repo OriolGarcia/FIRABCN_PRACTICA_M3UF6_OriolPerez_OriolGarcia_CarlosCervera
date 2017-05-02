@@ -40,6 +40,12 @@ public class ControllerEconomiaAdd {
     @FXML
     private Label lbErrorAdd;
 
+    /**
+     * Funció que inicia afegir un dia a economia
+     * @param conn connexió a la BD
+     * @param bdAccessor paràmetre per accedir a la BD
+     * @param FiraID identificador de Fira
+     */
     public void init(Connection conn, BDAccessor bdAccessor, int FiraID) {
         connection = conn;
         this.bdAccessor = bdAccessor;
@@ -49,6 +55,10 @@ public class ControllerEconomiaAdd {
 
     }
 
+    /**
+     * Per afegir el dia a economia
+     * @param event
+     */
     public void AddEconomiaEvent(ActionEvent event) {
         float quotaTotal;
         float preuEntrada;

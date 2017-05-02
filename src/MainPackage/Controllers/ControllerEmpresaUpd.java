@@ -48,7 +48,12 @@ public class ControllerEmpresaUpd {
 
     EmpresesDAOImplement empDAOImpl;
 
-
+    /**
+     * Funció que inicia afegir estand
+     * @param conn connexió amb la BD
+     * @param bdAccessor accès a la BD
+     * @param id identificador de fira
+     */
     public void init(Connection conn, BDAccessor bdAccessor,int id) {
         connection = conn;
         this.bdAccessor = bdAccessor;
@@ -73,6 +78,10 @@ public class ControllerEmpresaUpd {
         empDAOImpl.omplirCamps(conn,id,txtNomEmpresa,txtCIF,txtPersonaContacte,txtTelefon);
     }
 
+    /**
+     * Per actualitzar una empresa
+     * @param event
+     */
     public void UpdEmpresaEvent(ActionEvent event){
 
         try {

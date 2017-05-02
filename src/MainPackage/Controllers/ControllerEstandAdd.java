@@ -45,6 +45,13 @@ public class ControllerEstandAdd {
     @FXML
     Label lbErrorAdd;
 
+    /**
+     * Funció que inicia afegir estand
+     * @param conn connexió a la BD
+     * @param bdAccessor accès a la BD
+     * @param EmpresaID identificador d'empresa
+     * @param FiraID identificador de fira
+     */
     public void init(Connection conn, BDAccessor bdAccessor, int EmpresaID,int FiraID) {
         connection = conn;
         this.bdAccessor = bdAccessor;
@@ -57,6 +64,10 @@ public class ControllerEstandAdd {
         ComBTipus.getSelectionModel().select(new Item(EmpresaID,""));
     }
 
+    /**
+     * Per afegir un estand
+     * @param event
+     */
     public void AddEstandEvent(ActionEvent event) {
         try {
             EstandsDAOImplement estandsDAOImpl = new EstandsDAOImplement();

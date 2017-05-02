@@ -45,6 +45,12 @@ public class ControllerEmpresaAdd {
     @FXML
     private Label lbErrorAdd;
 
+    /**
+     * Funció que inicia afegir empresa
+     * @param conn connexió a la BD
+     * @param bdAccessor per accedir a la BD
+     * @param FiraID identificador de fira
+     */
     public void init(Connection conn, BDAccessor bdAccessor, int FiraID) {
         connection = conn;
         this.bdAccessor = bdAccessor;
@@ -56,6 +62,10 @@ public class ControllerEmpresaAdd {
         ComBTipus.getSelectionModel().select(0);
     }
 
+    /**
+     * Per afegir una empresa
+     * @param event
+     */
     public void AddEmpresaEvent(ActionEvent event) {
 
         try {
