@@ -23,6 +23,15 @@ public class EconomiaDAOImplement implements EconomiaDAO {
     private static PreparedStatement pstmt;
     private static BDAccessor bd = null;
 
+    /**
+     * Afegir economia
+     * @param conn connexió a la BD
+     * @param firaID identificador de fira
+     * @param data data a afegir
+     * @param numVisitants número de visitants
+     * @param recaptació recaptació total
+     * @return retorna true si s'ha inserit correctament
+     */
     public boolean AddEconomia(Connection conn, int firaID, Date data, int numVisitants, Float recaptació){
         try {
             String cadenaSQL = "INSERT INTO ECONOMIAFIRA(FiraID,DATA,NumVisitants,Recaptació)"
@@ -54,6 +63,16 @@ public class EconomiaDAOImplement implements EconomiaDAO {
         }
     }
 
+    /**
+     * Actualitzar economia
+     * @param conn connexió a la BD
+     * @param id identificador de fira
+     * @param data nova data
+     * @param numVisitants número de visitants
+     * @param recaptacio recaptació total
+     * @param dataID data a actualitzar
+     * @return retorna true si s'ha modificat correctament
+     */
     public boolean UpdateEconomia(Connection conn, int id, Date data, int numVisitants, Float recaptacio, Date dataID) {
         try {
             String cadenaSQL = "UPDATE ECONOMIAFIRA SET DATA=?,NumVisitants=?,Recaptació=? WHERE FiraID=? AND DATA=?;";
@@ -86,6 +105,13 @@ public class EconomiaDAOImplement implements EconomiaDAO {
 
     }
 
+    /**
+     * Eliminar economia
+     * @param conn connexió a la BD
+     * @param firaID identificador de fira
+     * @param dateID data a eliminar
+     * @return retorna true si s'ha eliminat correctament
+     */
     public boolean DeleteEconomia(Connection conn, int firaID, Date dateID) {
         try {
             String cadenaSQL = "DELETE from ECONOMIAFIRA Where FiraID = ? AND DATA = ?;";
@@ -122,6 +148,13 @@ public class EconomiaDAOImplement implements EconomiaDAO {
 
     }
 
+    /**
+     * Per cercar a economia
+     * @param conn connexió a la BD
+     * @param TitolSearch text a cercar
+     * @param id identificador de fira
+     * @param tableView taula on cercar
+     */
     public void findbyParams(Connection conn, String TitolSearch, int id, TableView tableView) {
         try {
             String cadenaSQL= "SELECT ECONOMIAFIRA.FiraID,DATA,NumVisitants,Recaptació"
@@ -154,6 +187,14 @@ public class EconomiaDAOImplement implements EconomiaDAO {
 
     }
 
+    /**
+     * Per omplir els camps al actualitzar
+     * @param conn connexió a la BD
+     * @param id identificador de Fira
+     * @param dateID data identificadora
+     * @param numVisitants TextField del número de visitants
+     * @param dtDataActual DatePicker de la data
+     */
     public void omplirCamps(Connection conn, int id, Date dateID, TextField numVisitants, DatePicker dtDataActual){
         try {
             String cadenaSQL= "SELECT NumVisitants, DATA FROM ECONOMIAFIRA WHERE FiraID = ? AND DATA = ?";
@@ -186,6 +227,12 @@ public class EconomiaDAOImplement implements EconomiaDAO {
 
     }
 
+    /**
+     * Per obtenir la quota total dels estands d'una fira
+     * @param conn connexió a la BD
+     * @param firaID identificador de fira
+     * @return retorna la quota total dels estands en float
+     */
     public float getQuotaEstands(Connection conn, int firaID){
         float quotaTotal = 0;
 
