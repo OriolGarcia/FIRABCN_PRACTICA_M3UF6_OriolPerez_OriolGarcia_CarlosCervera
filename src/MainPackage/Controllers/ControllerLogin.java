@@ -26,7 +26,9 @@ public class ControllerLogin {
     @FXML
     private PasswordField txtPassword;
 
-
+    /**
+     * Funció per iniciar el login
+     */
     public void init() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Missatge d'error");
@@ -50,6 +52,10 @@ public class ControllerLogin {
         }
     }
 
+    /**
+     * Funció per loguejar-se
+     * @param event
+     */
     public void Login(ActionEvent event) {
         UserDAOImplement UserDAOImpl = new UserDAOImplement();
         usuari = txtUser.getText();pass = txtPassword.getText();
@@ -74,6 +80,11 @@ public class ControllerLogin {
         }
 
     }
+
+    /**
+     * Funció per quan s'està loguejat
+     * @param event
+     */
     private void Logged(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../Scenes/AppScene.fxml"));

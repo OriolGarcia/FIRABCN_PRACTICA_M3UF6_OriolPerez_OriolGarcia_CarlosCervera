@@ -37,7 +37,12 @@ public class ControllerFiraUpd {
     private TextField   txtPreuEntrada;
     FiresDAOImplement firesDAOImpl;
 
-
+    /**
+     * Funció per iniciar actualitzar fira
+     * @param conn connexió a la BD
+     * @param bdAccessor accès a la BD
+     * @param id identificador de fira
+     */
     public void init(Connection conn, BDAccessor bdAccessor,int id) {
         connection = conn;
         this.bdAccessor = bdAccessor;
@@ -63,6 +68,10 @@ public class ControllerFiraUpd {
         firesDAOImpl.omplirCamps(conn,id,txtTitol,txtUbicacio,txtSuperficie,txtPreuEntrada,dtDataInici,dtDataFi);
     }
 
+    /**
+     * Per actulitzar fira
+     * @param event
+     */
     public void UpdFiraEvent(ActionEvent event){
 
         try {

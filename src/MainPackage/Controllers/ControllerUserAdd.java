@@ -33,11 +33,20 @@ public class ControllerUserAdd {
     @FXML
     private CheckBox checkBActiu;
 
+    /**
+     * Funció per iniciar afegir usuari
+     * @param conn connexió a la BD
+     * @param bdAccessor accès a la BD
+     */
     public void init(Connection conn, BDAccessor bdAccessor) {
         connection=conn;
         this.bdAccessor= bdAccessor;
     }
 
+    /**
+     * Per afegir un nou usuari
+     * @param event
+     */
     public void AddUserEvent(ActionEvent event) {
         if(!txtUser.getText().isEmpty()&&!txtPassword.getText().isEmpty()&&!txtPasswordRepeat.getText().isEmpty())
         if(txtPassword.getText().equals(txtPasswordRepeat.getText())){

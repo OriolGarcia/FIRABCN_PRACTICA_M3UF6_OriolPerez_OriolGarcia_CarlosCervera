@@ -39,6 +39,12 @@ public class ControllerFiraAdd {
     private Label lbErrorAddFira;
     @FXML
     private TextField   txtPreuEntrada;
+
+    /**
+     * Funció per iniciar afegir fira
+     * @param conn connexió a la BD
+     * @param bdAccessor accès a la BD
+     */
     public void init(Connection conn, BDAccessor bdAccessor) {
         connection=conn;
         this.bdAccessor= bdAccessor;
@@ -61,6 +67,10 @@ public class ControllerFiraAdd {
         });
     }
 
+    /**
+     * Per afegir una fira
+     * @param event
+     */
     public void AddFiraEvent(ActionEvent event) {
 
         try {

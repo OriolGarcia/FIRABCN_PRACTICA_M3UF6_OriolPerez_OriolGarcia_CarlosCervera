@@ -26,6 +26,12 @@ public class ControllerPermisos {
     private Label lbusuari;
     UserDAOImplement UserDAOImpl;
 
+    /**
+     * Funció per iniciar el control de permissos
+     * @param conn connexió a la BD
+     * @param bdAccessor accès a la BD
+     * @param Username nom de l'usuari
+     */
     public void init(Connection conn, BDAccessor bdAccessor, String Username) {
         connection = conn;
         this.bdAccessor = bdAccessor;
@@ -37,6 +43,10 @@ public class ControllerPermisos {
         checkBActiu.setSelected(!resultats[1]);
     }
 
+    /**
+     * Per modificar els permissos d'un usuari
+     * @param event
+     */
     public void ModPermisosEvent(ActionEvent event) {
 
         UserDAOImplement UserDAOImpl = new UserDAOImplement();
