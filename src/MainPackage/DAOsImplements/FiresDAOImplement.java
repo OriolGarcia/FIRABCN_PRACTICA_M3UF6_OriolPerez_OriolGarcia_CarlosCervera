@@ -25,7 +25,17 @@ public class FiresDAOImplement implements FiresDAO {
     private static PreparedStatement pstmt;
     private static BDAccessor bd= null;
 
-
+    /**
+     * Afegir Fira
+     * @param conn connexió a la BD
+     * @param Titol titol fira
+     * @param Ubicació ubicacio fira
+     * @param Superficie superficie fira
+     * @param PreuEntrada preu entrada fira
+     * @param DataInici data inici fira
+     * @param DataFi data fi fira
+     * @return retorna true si s'ha inserit correctament
+     */
     public boolean AddFira(Connection conn, String Titol,String Ubicació,float Superficie,float PreuEntrada, Date DataInici, Date DataFi){
 
         try {
@@ -59,6 +69,19 @@ public class FiresDAOImplement implements FiresDAO {
         }
 
     }
+
+    /**
+     * Actualizar fira
+     * @param conn connexió a la BD
+     * @param id identificador de fira
+     * @param Titol titol fira
+     * @param Ubicació ubicacio fira
+     * @param Superficie superficie fira
+     * @param PreuEntrada preu entrada fira
+     * @param DataInici data inici fira
+     * @param DataFi data fi fira
+     * @return retorna true si s'ha modificat correctament
+     */
     public boolean UpdateFira(Connection conn,int id, String Titol,String Ubicació, float Superficie,float PreuEntrada, Date DataInici,Date DataFi){
         try {
             String cadenaSQL = "UPDATE Fires SET Titol=?,Ubicacio=?,`Superficie Fira`=?,`Preu Entrada`=?,DataInici=?,DataFi=? WHERE FiraID=?;";
@@ -91,6 +114,12 @@ public class FiresDAOImplement implements FiresDAO {
 
     }
 
+    /**
+     * Eliminar fira
+     * @param conn connexió a la BD
+     * @param id identificador de fira
+     * @return retorna true si s'ha eliminat correctament
+     */
     public boolean DeleteFira(Connection conn, int id){
         try {
             String cadenaSQL = "DELETE from Fires Where FiraID = ?;";
@@ -131,6 +160,12 @@ public class FiresDAOImplement implements FiresDAO {
 
     }
 
+    /**
+     * Per cercar a fira
+     * @param conn connexió a la BD
+     * @param TitolSearch text a cercar
+     * @param tableView taular on cercar
+     */
     public void findbyParams(Connection conn,String TitolSearch,TableView tableView){
 
         try {
@@ -158,6 +193,18 @@ public class FiresDAOImplement implements FiresDAO {
         }
 
     }
+
+    /**
+     * Per omplir els camps al actualitzar
+     * @param conn connexió a la BD
+     * @param id identificador Fira
+     * @param txtFielTitolFira camp de text titol fira
+     * @param txtFieldUbicació camp de text ubicacio
+     * @param txtFieldSuperificie camp de text superficie
+     * @param txtPreuEntrada camp de text preu entrada
+     * @param DataInici data inici fira
+     * @param DataFi data fi fira
+     */
     public void omplirCamps(Connection conn, int id, TextField txtFielTitolFira, TextField txtFieldUbicació, TextField txtFieldSuperificie,TextField txtPreuEntrada, DatePicker DataInici, DatePicker DataFi){
 
         try {
@@ -193,6 +240,11 @@ public class FiresDAOImplement implements FiresDAO {
 
     }
 
+    /**
+     * Per omplir comboBox
+     * @param conn connexió a la BD
+     * @param comboBox afegir combobox
+     */
     public void omplirComboBox(Connection conn, ComboBox comboBox){
 
         try {

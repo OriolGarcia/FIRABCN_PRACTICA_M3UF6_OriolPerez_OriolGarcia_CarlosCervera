@@ -66,6 +66,19 @@ public class EmpresesDAOImplement implements EmpresesDAO {
             }catch (SQLException ex){}
         }
     }
+
+    /**
+     * Actualitzar empresa
+     * @param conn connexió a la BD
+     * @param id identificador de empresa
+     * @param Nom Nom de la empresa
+     * @param CIF CIF de la empresa
+     * @param PersonaContacte Persona de contacte de la empresa
+     * @param Telefon Telèfon de la empresa
+     * @param Tipus Tipus d'empresa
+     * @param Fira Fira a la que pertany
+     * @return retorna true si s'ha modificat correctament
+     */
     public boolean UpdateEmpresa(Connection conn, int id, String Nom, String CIF, String PersonaContacte, String Telefon, int Tipus, int Fira){
         try {
             String cadenaSQL = "UPDATE Empreses SET Nom=?,CIF=?,`Persona de contacte`=?,Telefon=?,Tipus=?,Fira=? WHERE EmpresaID=?;";
@@ -98,6 +111,12 @@ public class EmpresesDAOImplement implements EmpresesDAO {
 
     }
 
+    /**
+     * Eliminar empresa
+     * @param conn connexió a la BD
+     * @param id identificador de empresa
+     * @return retorna true si s'ha eliminat correctament
+     */
     public boolean DeleteEmpresa(Connection conn, int id){
         try {
             String cadenaSQL = "DELETE from Empreses Where EmpresaID = ?;";
@@ -134,6 +153,13 @@ public class EmpresesDAOImplement implements EmpresesDAO {
 
     }
 
+    /**
+     * Per cercar a empresa
+     * @param conn connexió a la BD
+     * @param NomSearch nom a cercar
+     * @param Fira fira
+     * @param tableView taula on cercar
+     */
     public void findbyParams(Connection conn, String NomSearch, int Fira, TableView tableView){
         try {
             String cadenaSQL= "SELECT EmpresaID,Nom,CIF,`Persona de contacte`,Telefon,Fires.Titol, TipusEmpresa.TitolTipus as `Tipus de empresa` "
@@ -166,6 +192,16 @@ public class EmpresesDAOImplement implements EmpresesDAO {
         }
 
     }
+
+    /**
+     * Per omplir els camps al actualitzar
+     * @param conn connexió a la BD
+     * @param id identificador de Fira
+     * @param txtFielNomEmpresa camp text nom empresa
+     * @param txtFieldCIF camp text CIF
+     * @param txtPersonaContacte camp text contacte
+     * @param txtTelefon camp text telefon
+     */
     public void omplirCamps(Connection conn, int id, TextField txtFielNomEmpresa, TextField txtFieldCIF, TextField txtPersonaContacte, TextField txtTelefon){
         try {
             String cadenaSQL= "SELECT Nom,CIF,`Persona de contacte`,Telefon,Tipus FROM Empreses WHERE EmpresaID = ?";
@@ -198,6 +234,11 @@ public class EmpresesDAOImplement implements EmpresesDAO {
         }
     }
 
+    /**
+     * Per omplir el ComboBox
+     * @param conn connexió a la BD
+     * @param comboBox combobox
+     */
     public void omplirComboBox (Connection conn, ComboBox comboBox){
         try {
             String cadenaSQL = "SELECT EmpresaID, Nom from Empreses";

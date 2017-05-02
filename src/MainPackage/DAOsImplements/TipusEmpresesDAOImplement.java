@@ -25,46 +25,23 @@ public class TipusEmpresesDAOImplement implements TipusEmpresesDAO {
 
     public boolean AddTipusEmpreses(Connection conn, String Username, String Password, Boolean permissions, Boolean Active) {
 
-/*
-            try {
-                String cadenaSQL = "INSERT INTO TipusEmpreses";
-                pstmt = conn.prepareStatement(cadenaSQL, PreparedStatement.RETURN_GENERATED_KEYS);
-                pstmt.setString(1, Username);
-                pstmt.setString(2, Password);
-                pstmt.setBoolean(3, permissions);
-                pstmt.setBoolean(4, Active);
-
-                int n = pstmt.executeUpdate();
-                try (ResultSet rs = pstmt.getGeneratedKeys()) {
-                    while (rs.next()) {
-                        System.out.println("Codi generat per getGeneratedKeys():"
-                                + rs.getInt(1));
-                    }
-                }
-
-                conn.commit();
-                System.out.println("S'ha afegit " + n + " items");
-                if (n>0)return true;
-                else return false;
-            } catch (SQLException ex) {
-                System.out.println(ex);
-                return false;
-            } finally {
-                try {
-                    pstmt.clearParameters();
-                } catch (SQLException ex) {
-                }
-            }*/
         return false;
     }
 
     public boolean UpdateTipusEmpreses(Connection conn, String Username, String Password, Boolean Permissions, Boolean Active){
         return true;
     }
+
+
     public boolean DeleteTipusEmpreses(Connection conn, String Username){
         return true;
     }
 
+    /**
+     * Per omplir el comboBox
+     * @param conn connexió a la BD
+     * @param comboBox combobox
+     */
     public void omplirComboBox(Connection conn, ComboBox comboBox) {
 
         try {
