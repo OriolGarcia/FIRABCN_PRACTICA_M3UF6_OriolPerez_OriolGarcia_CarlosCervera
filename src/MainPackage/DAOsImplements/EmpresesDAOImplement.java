@@ -105,7 +105,8 @@ public class EmpresesDAOImplement implements EmpresesDAO {
                 conn.commit();
 
             }else{
-                conn.rollback();}
+                conn.rollback();
+            }
 
             if (n>0)return true;
             else return false;
