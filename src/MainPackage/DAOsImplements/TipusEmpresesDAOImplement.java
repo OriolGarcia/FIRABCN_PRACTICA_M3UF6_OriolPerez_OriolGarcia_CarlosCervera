@@ -38,7 +38,7 @@ public class TipusEmpresesDAOImplement implements TipusEmpresesDAO {
     }
 
     /**
-     * Per omplir el comboBox
+     * Per omplir el comboBox de tipus d'emprees
      * @param conn connexió a la BD
      * @param comboBox combobox
      */

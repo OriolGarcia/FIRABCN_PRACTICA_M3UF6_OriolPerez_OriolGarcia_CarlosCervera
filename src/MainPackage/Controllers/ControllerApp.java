@@ -715,11 +715,11 @@ public class ControllerApp {
     }
 
     /**
-     *
-     * @param str
-     * @param substr
-     * @param n
-     * @return
+     * Per obtenir la posició d'un substring segons un index d'aparició
+     * @param str string a analitzar
+     * @param substr substring per analitzar
+     * @param n index de substring
+     * @return retorna la posició de la substring en int
      */
     public static int ordinalIndexOf(String str, String substr, int n) {
         int pos = str.indexOf(substr);

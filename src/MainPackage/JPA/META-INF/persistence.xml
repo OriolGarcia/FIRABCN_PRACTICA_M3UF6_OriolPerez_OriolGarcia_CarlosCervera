@@ -3,9 +3,6 @@
   <persistence-unit name="ServeiEconomiaFira" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>MainPackage.JPA.EconomiaFira</class>
-    <class>MainPackage.JPA.Aparcament</class>
-    <class>MainPackage.JPA.Empleat</class>
-    <class>MainPackage.JPA.Departament</class>
       <class>MainPackage.JPA.Fires</class>
 
     <properties>
