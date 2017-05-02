@@ -27,7 +27,18 @@ public class EstandsDAOImplement implements EstandsDAO {
     private static PreparedStatement pstmt;
     private static BDAccessor bd = null;
 
-
+    /**
+     * Afegir Estand
+     * @param conn connexió a la BD
+     * @param Nom Nom del estand
+     * @param Superficie superficie
+     * @param Quota quota estand
+     * @param DataInici data inici estand
+     * @param DataFi data fi estand
+     * @param Fira Fira a la qual pertany
+     * @param Empresa Empresa a la que pertany
+     * @return retorna true si s'ha afegit correctament
+     */
     public boolean AddEstand(Connection conn, String Nom, Float Superficie, Float Quota, Date DataInici, Date DataFi, int Fira, int Empresa){
         try {
             System.out.println("e4");
@@ -66,6 +77,19 @@ public class EstandsDAOImplement implements EstandsDAO {
         }
     }
 
+    /**
+     * Actualitzar estand
+     * @param conn connexió a la BD
+     * @param id identificador de estand
+     * @param Nom Nom de la empresa
+     * @param Superficie superficie
+     * @param Quota quota estand
+     * @param DataInici data inici estand
+     * @param DataFi data fi estand
+     * @param Fira Fira a la cual pertany
+     * @param Empresa empresa del estand
+     * @return retorna true si s'ha modificat correctament
+     */
     public boolean UpdateEstand(Connection conn, int id, String Nom, Float Superficie, Float Quota, Date DataInici, Date DataFi, int Fira, int Empresa) {
         try {
             String cadenaSQL = "UPDATE Estands SET Nom=?,SuperficieEstand=?,QuotaEstand=?,DataInici=?,DataFi=?,Fira=?,Empresa=? WHERE EstandID=?;";
@@ -98,6 +122,12 @@ public class EstandsDAOImplement implements EstandsDAO {
         }
     }
 
+    /**
+     * Eliminar estand
+     * @param conn connexió a la BD
+     * @param id identificador estand
+     * @return retorna true si s'ha eliminat correctament
+     */
     public boolean DeleteEstand(Connection conn, int id){
         try {
             String cadenaSQL = "DELETE from Estands Where EstandID = ?;";
@@ -132,6 +162,13 @@ public class EstandsDAOImplement implements EstandsDAO {
 
     }
 
+    /**
+     * Per cercar estand
+     * @param conn connexió a la BD
+     * @param NomSearch nom a cercar
+     * @param Fira fira
+     * @param tableView taula on cercar
+     */
 
     public void findbyParams(Connection conn, String NomSearch, int Fira, TableView tableView){
         try {
@@ -166,6 +203,16 @@ public class EstandsDAOImplement implements EstandsDAO {
 
     }
 
+    /**
+     * Per omplir els camps al actualitzar
+     * @param conn connexió a la BD
+     * @param id identificador de la fira
+     * @param txtFieldNomEstand camp text nom estand
+     * @param txtFieldSuperficie camp text superficie
+     * @param txtFieldQuota camp text quota
+     * @param txtFieldDtInici camp text data inici
+     * @param txtFieldDtFi camp data fi
+     */
     public void omplirCamps(Connection conn, int id, TextField txtFieldNomEstand, TextField txtFieldSuperficie, TextField txtFieldQuota, DatePicker txtFieldDtInici, DatePicker txtFieldDtFi) {
         try {
             String cadenaSQL= "SELECT Nom,SuperficieEstand,QuotaEstand,DataInici,DataFi,Fira,Empresa FROM Estands WHERE EstandID = ?";

@@ -20,6 +20,15 @@ public class UserDAOImplement implements UserDAO {
     private static PreparedStatement pstmt;
     private static BDAccessor bd= null;
 
+    /**
+     * Afegir usuari
+     * @param conn
+     * @param Username username usuari
+     * @param Password password usuari
+     * @param permissions permisos usuari
+     * @param Active
+     * @return retorna true si s'ha inserit correctament
+     */
     public boolean AddUser(Connection conn, String Username,String Password,Boolean permissions, Boolean Active){
         try {
             String cadenaSQL = "INSERT INTO Usuaris(Username,Password,PermisosAdmin,Actiu) VALUES(?,MD5(?),?,?);";
@@ -50,6 +59,16 @@ public class UserDAOImplement implements UserDAO {
         }
 
     }
+
+    /**
+     * Actualitzar User
+     * @param conn connexió a la BD
+     * @param Username username usuari
+     * @param Password password usuari
+     * @param permissions permisos usuari
+     * @param Active
+     * @return retorna true si s'ha modificat correctament
+     */
     public boolean UpdateUser(Connection conn, String Username,String Password,Boolean permissions, Boolean Active){
         try {
             String cadenaSQL = "UPDATE Usuaris SET Username=?,Password= MD5(?),PermisosAdmin=?,Actiu=? WHERE Username=?;";
@@ -81,6 +100,12 @@ public class UserDAOImplement implements UserDAO {
 
     }
 
+    /**
+     * Per seleccionar el permisos del usuari a crear
+     * @param conn connexió a la BD
+     * @param User usuari
+     * @return retorna true si s'ha afegit correctament
+     */
     public boolean[] SelectPermisionsActiveFromUser(Connection conn, String User){
         try {
             String cadenaSQL= "SELECT PermisosAdmin,Actiu FROM Usuaris WHERE Username = ?";
@@ -112,6 +137,14 @@ public class UserDAOImplement implements UserDAO {
 
     }
 
+    /**
+     * Actualizar usuari
+     * @param conn connexió a la BD
+     * @param Username username usuari
+     * @param permissions permisos usuari
+     * @param Active
+     * @return retorna true si s'ha modificat correctament
+     */
     public boolean UpdateUserPermissions(Connection conn, String Username,Boolean permissions, Boolean Active){
         try {
             String cadenaSQL = "UPDATE Usuaris SET Username=?,PermisosAdmin=?,Actiu=? WHERE Username=?;";
@@ -142,6 +175,12 @@ public class UserDAOImplement implements UserDAO {
 
     }
 
+    /**
+     * Eliminar usuari
+     * @param conn connexió a la BD
+     * @param Username username usuari
+     * @return retorna true si s'ha eliminat correctament
+     */
     public boolean DeleteUser(Connection conn, String Username){
         try {
             String cadenaSQL = "DELETE from Usuaris Where Username=?;";
@@ -174,6 +213,13 @@ public class UserDAOImplement implements UserDAO {
 
     }
 
+    /**
+     * Per fer el login del usuari
+     * @param conn connexió a la BD
+     * @param User user del usuari
+     * @param password password del usuari
+     * @return retorna true si s'ha fet el login correctament
+     */
     public boolean LoginUser(Connection conn, String User, String password){
         try {
             String cadenaSQL= "SELECT count(Username), MD5(?),Password FROM Usuaris WHERE Username = ?";
@@ -207,6 +253,12 @@ public class UserDAOImplement implements UserDAO {
         }
     }
 
+    /**
+     * Per cercar usuari
+     * @param conn connexió a la BD
+     * @param UsernameSearch cercar usuari
+     * @param tableView taula on cercar
+     */
     public void findbyUsername(Connection conn,String UsernameSearch,TableView tableView){
         try {
             String cadenaSQL= "SELECT *  FROM Usuaris WHERE (LENGTH(?) <1 or Username like ?)";
@@ -232,6 +284,13 @@ public class UserDAOImplement implements UserDAO {
         }
 
     }
+
+    /**
+     * Per obtenir permisos
+     * @param conn connexió a la BD
+     * @param UsernameSearch cercar usuari
+     * @return retorna true si s'ha obtingut la informacio correctament
+     */
     public Boolean getPermissions(Connection conn,String UsernameSearch){
         try {
             String cadenaSQL= "SELECT PermisosAdmin  FROM Usuaris WHERE  Username = ?";
@@ -257,6 +316,13 @@ public class UserDAOImplement implements UserDAO {
         }
 
     }
+
+    /**
+     * Per obtenir si l'usuari esta actiu
+     * @param conn connexió a la BD
+     * @param Username nom usuari
+     * @return retorna true si s'ha obtingut la informacio correctament
+     */
     public Boolean getActiu(Connection conn,String Username){
         try {
             String cadenaSQL= "SELECT Actiu  FROM Usuaris WHERE  Username = ?";
