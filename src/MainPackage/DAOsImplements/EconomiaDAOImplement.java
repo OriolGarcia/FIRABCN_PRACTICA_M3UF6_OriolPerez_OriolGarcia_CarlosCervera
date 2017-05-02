@@ -266,6 +266,12 @@ public class EconomiaDAOImplement implements EconomiaDAO {
         return quotaTotal;
     }
 
+    /**
+     * Per obtenir el preu de la entrada d'una fira
+     * @param conn connexió a la BD
+     * @param firaID identificador de fira
+     * @return retorna el preu de la entrada d'una fira com a float
+     */
     public float getPreuEntrada(Connection conn, int firaID){
         float preuEntrada = 0;
 

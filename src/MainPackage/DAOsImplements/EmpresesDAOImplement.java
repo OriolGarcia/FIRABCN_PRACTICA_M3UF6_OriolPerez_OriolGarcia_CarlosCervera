@@ -24,6 +24,17 @@ public class EmpresesDAOImplement implements EmpresesDAO {
     private static PreparedStatement pstmt;
     private static BDAccessor bd = null;
 
+    /**
+     * Afegir Empresa
+     * @param conn connexió a la BD
+     * @param Nom Nom de la empresa
+     * @param CIF CIF de la empresa
+     * @param PersonaContacte Persona de contacte de la empresa
+     * @param Telefon Telèfon de la empresa
+     * @param Tipus Tipus d'empresa
+     * @param Fira Fira a la que pertany
+     * @return retorna true si s'ha afegit correctament
+     */
     public boolean AddEmpresa(Connection conn, String Nom, String CIF, String PersonaContacte, String Telefon, int Tipus, int Fira){
         try {
             String cadenaSQL = "INSERT INTO Empreses(Nom,CIF,`Persona de contacte`,Telefon,Tipus,Fira)"
