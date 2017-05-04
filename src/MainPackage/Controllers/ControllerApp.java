@@ -91,11 +91,11 @@ public class ControllerApp {
     BDAccessor bdAccessor;
 
     /**
-     * Funció que inicia la app principal
-     * @param conn connexió amb la bd
-     * @param bdAccessor paràmetre d'accès a la bd
+     * Funcio que inicia la app principal
+     * @param conn connexio amb la bd
+     * @param bdAccessor parametre de acces a la bd
      * @param usuari usuari actual
-     * @param pass contrasenya de l'usuari
+     * @param pass contrasenya del usuari
      */
     public void init(Connection conn, BDAccessor bdAccessor, String usuari, String pass) {
         connection = conn;

@@ -18,8 +18,6 @@ import java.sql.SQLException;
  */
 public class Tests {
 
-///
-
 
     @Test
     public void testConnection() throws Exception {
@@ -31,6 +29,7 @@ public class Tests {
         accessor.tancarConnexio(connexio);
         assertTrue(connexio.isClosed());
     }
+
     @Test
     public void testLogin()throws Exception {
 
@@ -43,4 +42,4 @@ public class Tests {
         assertFalse(UserDAOImpl.LoginUser(connexio, usuari, pass));
 
     }
-    }
+}

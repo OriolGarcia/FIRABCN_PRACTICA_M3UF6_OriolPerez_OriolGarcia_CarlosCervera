@@ -25,14 +25,14 @@ public class EconomiaDAOImplement implements EconomiaDAO {
 
     /**
      * Afegir economia
-     * @param conn connexió a la BD
+     * @param conn connexio a la BD
      * @param firaID identificador de fira
      * @param data data a afegir
-     * @param numVisitants número de visitants
-     * @param recaptació recaptació total
+     * @param numVisitants numero de visitants
+     * @param recaptacio recaptacio total
      * @return retorna true si s'ha inserit correctament
      */
-    public boolean AddEconomia(Connection conn, int firaID, Date data, int numVisitants, Float recaptació){
+    public boolean AddEconomia(Connection conn, int firaID, Date data, int numVisitants, Float recaptacio){
         try {
             String cadenaSQL = "INSERT INTO ECONOMIAFIRA(FiraID,DATA,NumVisitants,Recaptació)"
                     +" VALUES(?,?,?,?);";
@@ -40,7 +40,7 @@ public class EconomiaDAOImplement implements EconomiaDAO {
             pstmt.setInt(1, firaID);
             pstmt.setDate(2, new java.sql.Date(data.getTime()));
             pstmt.setInt(3, numVisitants);
-            pstmt.setFloat(4, recaptació);
+            pstmt.setFloat(4, recaptacio);
 
             int n = pstmt.executeUpdate();
             try (ResultSet rs = pstmt.getGeneratedKeys()) {

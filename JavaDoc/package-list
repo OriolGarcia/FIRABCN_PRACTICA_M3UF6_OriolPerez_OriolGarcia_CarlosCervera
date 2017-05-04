@@ -1,0 +1,6 @@
+MainPackage
+MainPackage.Accessor
+MainPackage.Controllers
+MainPackage.DAOs
+MainPackage.DAOsImplements
+MainPackage.JPA
